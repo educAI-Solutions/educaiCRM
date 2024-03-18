@@ -13,6 +13,17 @@
   }
 }
 
+.star {
+  cursor: pointer;
+  color: #ddd;
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.star.filled {
+  color: gold;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
