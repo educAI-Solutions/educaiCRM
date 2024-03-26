@@ -34,22 +34,28 @@ function Navbar() {
             Home
           </Link>
           <Link
-            to="/acerca"
+            to="/contact"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
-            About Us
+            Contact
           </Link>
           <Link
-            to="/Login"
+            to="/login"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
             Log In
           </Link>
           <Link
-            to="/registrarse"
+            to="/register"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
             Sign Up
+          </Link>
+          <Link
+            to="/logout"
+            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+          >
+            Log Out
           </Link>
         </div>
         <div className="burguer">

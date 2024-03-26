@@ -1,9 +1,9 @@
 import React from "react";
 
-const Contacto = ({ isLoggedIn }) => {
+const Contact = ({ isLoggedIn }) => {
   return (
     <div>
-      <h2>Contacto</h2>
+      <h2>Contact</h2>
       <p>Contact us for any inquiries.</p>
 
       {isLoggedIn && (
@@ -16,4 +16,4 @@ const Contacto = ({ isLoggedIn }) => {
   );
 };
 
-export default Contacto;
+export default Contact;

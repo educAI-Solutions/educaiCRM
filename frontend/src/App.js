@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import Registrarse from "./pages/Registrarse";
-import Contacto from "./pages/Contacto";
+import Register from "./pages/Register";
+import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import NavBar2 from "./components/NavBar2";
 import Footer from "./components/Footer";
@@ -32,21 +32,14 @@ function App() {
         <Routes>
           <Route path="/" element={<></>}></Route>
           <Route
-            path="/contacto"
+            path="/contact"
             element={
               <>
-                <Contacto isLoggedIn={isLoggedIn} />
+                <Contact isLoggedIn={isLoggedIn} />
               </>
             }
           ></Route>
-          <Route
-            path="/registrarse"
-            element={
-              <>
-                <Registrarse />
-              </>
-            }
-          ></Route>
+          <Route path="/register" element={<Register />} />
           <Route
             path="/login"
             element={
