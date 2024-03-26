@@ -5,7 +5,6 @@ import Logout from "./pages/Logout";
 import Registrarse from "./pages/Registrarse";
 import Contacto from "./pages/Contacto";
 import PageNotFound from "./pages/PageNotFound";
-import BasicHome from "./pages/BasicHome";
 import NavBar2 from "./components/NavBar2";
 import Footer from "./components/Footer";
 
@@ -15,14 +14,7 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <NavBar2 />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <BasicHome />
-              </>
-            }
-          ></Route>
+          <Route path="/" element={<></>}></Route>
           <Route
             path="/contacto"
             element={
