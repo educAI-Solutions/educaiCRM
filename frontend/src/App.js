@@ -21,6 +21,7 @@ function App() {
     setIsLoggedIn(false);
     localStorage.removeItem("token"); // Remove token from local storage
     localStorage.removeItem("username"); // Remove username from local storage
+    localStorage.removeItem("role"); // Remove role from local storage (if applicable)
     console.log("Logged out successfully");
   };
 

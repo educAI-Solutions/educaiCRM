@@ -17,9 +17,10 @@ const Login = ({ onLogin }) => {
         "http://127.0.0.1:5050/api/auth/login",
         { username, password }
       ); // Make POST request to backend login endpoint
-      const { token } = response.data; // Assuming backend sends back a token upon successful login
+      const { token, role } = response.data; // Assuming backend sends back a token upon successful login
       localStorage.setItem("token", token); // Store token in local storage
       localStorage.setItem("username", username); // Store username in local storage
+      localStorage.setItem("role", role); // Store role in local storage (if applicable)
       setIsSubmitted(true);
       setError("");
       onLogin(); // Call onLogin function to update authentication state

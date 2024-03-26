@@ -7,16 +7,18 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const [clicked, setClicked] = useState(false);
   const [username, setUsername] = useState(null);
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username"); // Get username from local storage
+    const storedRole = localStorage.getItem("role"); // Get role from local storage
     if (storedUsername) {
       setUsername(storedUsername); // Set username if it exists in local storage
+      setRole(storedRole); // Set role if it exists in local storage
     }
   }, []);
 
   const handleClick = () => {
-    //cuando esta true lo pasa a false y vice versa
     setClicked(!clicked);
   };
   return (
@@ -43,7 +45,7 @@ function Navbar() {
             Home
           </Link>
           <Link
-            to="/about"
+            to="/profile"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
             {username && (
@@ -55,6 +57,22 @@ function Navbar() {
                 }}
               >
                 {username} {/* display the username */}
+              </span>
+            )}
+          </Link>
+          <Link
+            to="/role"
+            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+          >
+            {role && (
+              <span
+                style={{
+                  color: "#FFFFFF",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                }}
+              >
+                {role} {/* display the username */}
               </span>
             )}
           </Link>
