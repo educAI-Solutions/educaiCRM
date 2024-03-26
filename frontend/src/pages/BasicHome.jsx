@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./BasicHome.css"; // Archivo para estilos
+import "bootstrap/dist/css/bootstrap.min.css"; // Importar estilos de Bootstrap
 
 const BasicHome = () => {
   const [formData, setFormData] = useState({
@@ -32,55 +32,66 @@ const BasicHome = () => {
 
   return (
     <div className="container">
-      <div className="form-wrapper">
-        <h1>Welcome to the Basic Home Page!</h1>
-        <p>This is a basic homepage for your website.</p>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="account">Account:</label>
-            <input
-              type="text"
-              id="account"
-              name="account"
-              value={formData.account}
-              onChange={handleChange}
-            />
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card border-primary mt-5">
+            <div className="card-header bg-primary text-white">Registro</div>
+            <div className="card-body">
+              <h5 className="card-title">Welcome to the Basic Home Page!</h5>
+              <p className="card-text">This is a basic homepage for your website.</p>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="account" className="form-label">Cuenta:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="account"
+                    name="account"
+                    value={formData.account}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Correo electrónico:</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Contraseña:</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="role" className="form-label">Rol:</label>
+                  <select
+                    className="form-select"
+                    id="role"
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                  >
+                    <option value="">Selecciona un rol</option>
+                    <option value="admin">Administrador</option>
+                    <option value="user">Usuario</option>
+                  </select>
+                </div>
+                <button type="submit" className="btn btn-primary">Enviar</button>
+              </form>
+            </div>
           </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="role">Rol:</label>
-            <select
-              id="role"
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-            >
-              <option value="">Selecciona un rol</option>
-              <option value="admin">Administrador</option>
-              <option value="user">Usuario</option>
-            </select>
-          </div>
-          <button type="submit">Enviar</button>
-        </form>
+        </div>
       </div>
     </div>
   );

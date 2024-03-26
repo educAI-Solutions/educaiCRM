@@ -18,7 +18,7 @@ function Navbar() {
             src={Logo}
             className="w-[60px]"
             alt="Logo"
-            style={{ marginLeft: "0px" }}
+            style={{ marginLeft: "15px" }}
             width={70}
             height={60}
           />
@@ -32,30 +32,6 @@ function Navbar() {
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
             Home
-          </Link>
-          <Link
-            to="/peliculas"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Films
-          </Link>
-          <Link
-            to="/series"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Series
-          </Link>
-          <Link
-            to="/ranking"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Ranking
-          </Link>
-          <Link
-            to="/contacto"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Contact
           </Link>
           <Link
             to="/acerca"
