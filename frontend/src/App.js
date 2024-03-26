@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -9,6 +9,22 @@ import NavBar2 from "./components/NavBar2";
 import Footer from "./components/Footer";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const onLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const onLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("token"); // Remove token from local storage
+  };
+
+  // Check if user is already logged in by inspecting local storage
+  if (!isLoggedIn && localStorage.getItem("token")) {
+    setIsLoggedIn(true);
+  }
+
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
@@ -19,7 +35,7 @@ function App() {
             path="/contacto"
             element={
               <>
-                <Contacto />
+                <Contacto isLoggedIn={isLoggedIn} />
               </>
             }
           ></Route>
@@ -35,7 +51,7 @@ function App() {
             path="/login"
             element={
               <>
-                <Login />
+                <Login onLogin={onLogin} />
               </>
             }
           ></Route>
@@ -43,7 +59,7 @@ function App() {
             path="/logout"
             element={
               <>
-                <Logout />
+                <Logout onLogout={onLogout} />
               </>
             }
           ></Route>

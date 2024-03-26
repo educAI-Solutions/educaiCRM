@@ -1,24 +1,44 @@
-// LoginForm.js
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import axios from "axios"; // Import Axios for making HTTP requests
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Call onLogin function with username and password
-    onLogin({ username, password });
-    setIsSubmitted(true);
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:5050/api/auth/login",
+        { username, password }
+      ); // Make POST request to backend login endpoint
+      const { token } = response.data; // Assuming backend sends back a token upon successful login
+      localStorage.setItem("token", token); // Store token in local storage
+      console.log("Login successful:", response.data);
+      setIsSubmitted(true);
+      setError("");
+      onLogin(); // Call onLogin function to update authentication state
+      navigate("/"); // Redirect to the home page after successful login
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Invalid username or password"); // Handle login error
+    }
   };
 
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-6 mt-3">
-          <div className={`card border-primary mt-5 ${isSubmitted ? "border-success" : ""}`}>
+          <div
+            className={`card border-primary mt-5 ${
+              isSubmitted ? "border-success" : ""
+            }`}
+          >
             <div className="card-header bg-primary text-white">Log In</div>
             <div className="card-body">
               <Form onSubmit={handleSubmit}>
@@ -41,6 +61,8 @@ const Login = ({ onLogin }) => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>
+
+                {error && <p className="text-danger">{error}</p>}
 
                 <Button variant="primary" type="submit" className="mt-3">
                   Login
