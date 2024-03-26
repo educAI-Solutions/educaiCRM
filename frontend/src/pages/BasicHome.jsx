@@ -33,9 +33,9 @@ const BasicHome = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card border-primary mt-5">
-            <div className="card-header bg-primary text-white">Registro</div>
+        <div className="col-md-6 mt-4">
+          <div className="card border-primary">
+            <div className="card-header bg-primary text-white">Sign Up</div>
             <div className="card-body">
               <h5 className="card-title">Welcome to the Basic Home Page!</h5>
               <p className="card-text">This is a basic homepage for your website.</p>
