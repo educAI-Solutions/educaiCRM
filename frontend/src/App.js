@@ -5,7 +5,7 @@ import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
-import NavBar2 from "./components/NavBar2";
+import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
-        <NavBar2 />
+        <NavBar />
         <Routes>
           <Route path="/" element={<></>}></Route>
           <Route

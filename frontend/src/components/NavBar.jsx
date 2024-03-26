@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
 import Logo from "../img/download.png";
@@ -6,6 +6,15 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username"); // Get username from local storage
+    if (storedUsername) {
+      setUsername(storedUsername); // Set username if it exists in local storage
+    }
+  }, []);
+
   const handleClick = () => {
     //cuando esta true lo pasa a false y vice versa
     setClicked(!clicked);
@@ -32,6 +41,22 @@ function Navbar() {
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
             Home
+          </Link>
+          <Link
+            to="/about"
+            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+          >
+            {username && (
+              <span
+                style={{
+                  color: "#FFFFFF",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                }}
+              >
+                {username} {/* display the username */}
+              </span>
+            )}
           </Link>
           <Link
             to="/contact"
