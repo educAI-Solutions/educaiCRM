@@ -19,7 +19,7 @@ const Login = ({ onLogin }) => {
       ); // Make POST request to backend login endpoint
       const { token } = response.data; // Assuming backend sends back a token upon successful login
       localStorage.setItem("token", token); // Store token in local storage
-      console.log("Login successful:", response.data);
+      localStorage.setItem("username", username); // Store username in local storage
       setIsSubmitted(true);
       setError("");
       onLogin(); // Call onLogin function to update authentication state

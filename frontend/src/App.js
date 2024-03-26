@@ -13,11 +13,15 @@ function App() {
 
   const onLogin = () => {
     setIsLoggedIn(true);
+    let username = localStorage.getItem("username"); // Get username from local storage
+    console.log("Logged in successfully as", username);
   };
 
   const onLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("token"); // Remove token from local storage
+    localStorage.removeItem("username"); // Remove username from local storage
+    console.log("Logged out successfully");
   };
 
   // Check if user is already logged in by inspecting local storage
