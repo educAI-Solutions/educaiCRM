@@ -15,11 +15,17 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hash = await window.crypto.subtle.digest("SHA-256", data);
+      const base64Hash = btoa(String.fromCharCode(...new Uint8Array(hash)));
+
       const response = await axios.post(
         "http://127.0.0.1:5050/api/auth/register",
-        { username, password, email, role }
+        { username, password: base64Hash, email, role }
       );
-      console.log("Registration successful:", response.data);
+
+      console.log("Registration response:", response.data);
       setIsSubmitted(true);
       setError("");
       navigate("/login"); // Redirect to the login page after successful registration

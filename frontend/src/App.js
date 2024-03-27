@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -14,11 +14,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
+  const [expDate, setExpDate] = useState("");
 
-  const onLogin = (token, username, role) => {
+  const onLogin = (token, username, role, exp) => {
     setIsLoggedIn(true);
     setUsername(username);
     setRole(role);
+    setExpDate(exp);
     console.log("Logged in successfully as", username);
   };
 
@@ -29,10 +31,15 @@ function App() {
     console.log("Logged out successfully");
   };
 
-  // Check if user is already logged in by inspecting local storage
-  if (!isLoggedIn && localStorage.getItem("token")) {
-    setIsLoggedIn(true);
-  }
+  // Check if user's token has expired on page load with expiration date in seconds
+  useEffect(() => {
+    if (expDate) {
+      const now = new Date().getTime() / 1000;
+      if (now > expDate) {
+        onLogout();
+      }
+    }
+  }, [expDate]);
 
   return (
     <UserContext.Provider
