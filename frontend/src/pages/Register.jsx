@@ -17,7 +17,7 @@ const Register = () => {
     try {
       const response = await axios.post(
         "http://127.0.0.1:5050/api/auth/register",
-        { email, username, password, role }
+        { username, password, email, role }
       );
       console.log("Registration successful:", response.data);
       setIsSubmitted(true);

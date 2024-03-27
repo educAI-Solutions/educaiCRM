@@ -55,7 +55,7 @@ function Navbar() {
             to="/role"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
-            {role && (
+            {isLoggedIn && (
               <span
                 style={{
                   color: "#FFFFFF",
@@ -73,24 +73,30 @@ function Navbar() {
           >
             Contact
           </Link>
-          <Link
-            to="/login"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Log In
-          </Link>
-          <Link
-            to="/register"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Sign Up
-          </Link>
-          <Link
-            to="/logout"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Log Out
-          </Link>
+          {!isLoggedIn && (
+            <Link
+              to="/login"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Log In
+            </Link>
+          )}
+          {!isLoggedIn && (
+            <Link
+              to="/register"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Sign Up
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link
+              to="/logout"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Log Out
+            </Link>
+          )}
         </div>
         <div className="burguer">
           <BurguerButton clicked={clicked} handleClick={handleClick} />

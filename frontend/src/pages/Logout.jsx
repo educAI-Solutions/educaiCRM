@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Container, Row, Col } from "react-bootstrap";
 
 const Logout = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -11,10 +12,19 @@ const Logout = ({ onLogout }) => {
   };
 
   return (
-    <div>
-      <p>Are you sure you want to logout?</p>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ height: "30vh" }}
+    >
+      <Row>
+        <Col className="text-center">
+          <p>Are you sure you want to logout?</p>
+          <Button variant="primary" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
