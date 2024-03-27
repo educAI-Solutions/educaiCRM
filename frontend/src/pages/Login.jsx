@@ -18,12 +18,9 @@ const Login = ({ onLogin }) => {
         { username, password }
       ); // Make POST request to backend login endpoint
       const { token, role } = response.data; // Assuming backend sends back a token upon successful login
-      localStorage.setItem("token", token); // Store token in local storage
-      localStorage.setItem("username", username); // Store username in local storage
-      localStorage.setItem("role", role); // Store role in local storage (if applicable)
       setIsSubmitted(true);
       setError("");
-      onLogin(); // Call onLogin function to update authentication state
+      onLogin(token, username, role); // Call onLogin function to update authentication state
       navigate("/"); // Redirect to the home page after successful login
     } catch (error) {
       console.error("Login error:", error);

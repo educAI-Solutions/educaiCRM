@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -8,20 +8,24 @@ import PageNotFound from "./pages/PageNotFound";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
+export const UserContext = createContext();
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
 
-  const onLogin = () => {
+  const onLogin = (token, username, role) => {
     setIsLoggedIn(true);
-    let username = localStorage.getItem("username"); // Get username from local storage
+    setUsername(username);
+    setRole(role);
     console.log("Logged in successfully as", username);
   };
 
   const onLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem("token"); // Remove token from local storage
-    localStorage.removeItem("username"); // Remove username from local storage
-    localStorage.removeItem("role"); // Remove role from local storage (if applicable)
+    setUsername("");
+    setRole("");
     console.log("Logged out successfully");
   };
 
@@ -31,42 +35,46 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <div className="flex flex-col min-h-screen">
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<></>}></Route>
-          <Route
-            path="/contact"
-            element={
-              <>
-                <Contact isLoggedIn={isLoggedIn} />
-              </>
-            }
-          ></Route>
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/login"
-            element={
-              <>
-                <Login onLogin={onLogin} />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/logout"
-            element={
-              <>
-                <Logout onLogout={onLogout} />
-              </>
-            }
-          ></Route>
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+    <UserContext.Provider
+      value={{ isLoggedIn, onLogin, onLogout, username, role }}
+    >
+      <BrowserRouter>
+        <div className="flex flex-col min-h-screen">
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<></>}></Route>
+            <Route
+              path="/contact"
+              element={
+                <>
+                  <Contact isLoggedIn={isLoggedIn} />
+                </>
+              }
+            ></Route>
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={
+                <>
+                  <Login onLogin={onLogin} />
+                </>
+              }
+            ></Route>
+            <Route
+              path="/logout"
+              element={
+                <>
+                  <Logout onLogout={onLogout} />
+                </>
+              }
+            ></Route>
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
 
-        <Footer />
-      </div>
-    </BrowserRouter>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
 import Logo from "../img/download.png";
 import { Link } from "react-router-dom";
+import { UserContext } from "../App";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
-  const [username, setUsername] = useState(null);
-  const [role, setRole] = useState(null);
-
-  useEffect(() => {
-    const storedUsername = localStorage.getItem("username"); // Get username from local storage
-    const storedRole = localStorage.getItem("role"); // Get role from local storage
-    if (storedUsername) {
-      setUsername(storedUsername); // Set username if it exists in local storage
-      setRole(storedRole); // Set role if it exists in local storage
-    }
-  }, []);
+  const { username, role, isLoggedIn } = useContext(UserContext);
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -48,7 +39,7 @@ function Navbar() {
             to="/profile"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
-            {username && (
+            {isLoggedIn && (
               <span
                 style={{
                   color: "#FFFFFF",
