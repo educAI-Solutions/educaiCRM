@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
 import Logo from "../img/download.png";
 import { Link } from "react-router-dom";
+import { UserContext } from "../App";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
+  const { username, role, isLoggedIn } = useContext(UserContext);
+
   const handleClick = () => {
-    //cuando esta true lo pasa a false y vice versa
     setClicked(!clicked);
   };
   return (
@@ -34,23 +36,67 @@ function Navbar() {
             Home
           </Link>
           <Link
-            to="/acerca"
+            to="/profile"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
-            About Us
+            {isLoggedIn && (
+              <span
+                style={{
+                  color: "#FFFFFF",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                }}
+              >
+                {username} {/* display the username */}
+              </span>
+            )}
           </Link>
           <Link
-            to="/Login"
+            to="/role"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
-            Log In
+            {isLoggedIn && (
+              <span
+                style={{
+                  color: "#FFFFFF",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                }}
+              >
+                {role} {/* display the username */}
+              </span>
+            )}
           </Link>
           <Link
-            to="/registrarse"
+            to="/contact"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
-            Sign Up
+            Contact
           </Link>
+          {!isLoggedIn && (
+            <Link
+              to="/login"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Log In
+            </Link>
+          )}
+          {!isLoggedIn && (
+            <Link
+              to="/register"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Sign Up
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link
+              to="/logout"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Log Out
+            </Link>
+          )}
         </div>
         <div className="burguer">
           <BurguerButton clicked={clicked} handleClick={handleClick} />

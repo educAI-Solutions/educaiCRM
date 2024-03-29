@@ -1,58 +1,87 @@
-import React from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import Registrarse from "./pages/Registrarse";
-import Contacto from "./pages/Contacto";
+import Register from "./pages/Register";
+import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
-import NavBar2 from "./components/NavBar2";
+import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="flex flex-col min-h-screen">
-        <NavBar2 />
-        <Routes>
-          <Route path="/" element={<></>}></Route>
-          <Route
-            path="/contacto"
-            element={
-              <>
-                <Contacto />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/registrarse"
-            element={
-              <>
-                <Registrarse />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/login"
-            element={
-              <>
-                <Login />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/logout"
-            element={
-              <>
-                <Logout />
-              </>
-            }
-          ></Route>
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+export const UserContext = createContext();
 
-        <Footer />
-      </div>
-    </BrowserRouter>
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
+  const [expDate, setExpDate] = useState("");
+
+  const onLogin = (token, username, role, exp) => {
+    setIsLoggedIn(true);
+    setUsername(username);
+    setRole(role);
+    setExpDate(exp);
+    console.log("Logged in successfully as", username);
+  };
+
+  const onLogout = () => {
+    setIsLoggedIn(false);
+    setUsername("");
+    setRole("");
+    console.log("Logged out successfully");
+  };
+
+  // Check if user's token has expired on page load with expiration date in seconds
+  useEffect(() => {
+    if (expDate) {
+      const now = new Date().getTime() / 1000;
+      if (now > expDate) {
+        onLogout();
+      }
+    }
+  }, [expDate]);
+
+  return (
+    <UserContext.Provider
+      value={{ isLoggedIn, onLogin, onLogout, username, role }}
+    >
+      <BrowserRouter>
+        <div className="flex flex-col min-h-screen">
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<></>}></Route>
+            <Route
+              path="/contact"
+              element={
+                <>
+                  <Contact isLoggedIn={isLoggedIn} />
+                </>
+              }
+            ></Route>
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={
+                <>
+                  <Login onLogin={onLogin} />
+                </>
+              }
+            ></Route>
+            <Route
+              path="/logout"
+              element={
+                <>
+                  <Logout onLogout={onLogout} />
+                </>
+              }
+            ></Route>
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 
