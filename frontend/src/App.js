@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import HomeOne from "./pages/homeone";
 
 export const UserContext = createContext();
 
@@ -49,7 +50,7 @@ function App() {
         <div className="flex flex-col min-h-screen">
           <NavBar />
           <Routes>
-            <Route path="/" element={<></>}></Route>
+            <Route path="/" element={< HomeOne/>}></Route>
             <Route
               path="/contact"
               element={
