@@ -8,8 +8,13 @@ import PageNotFound from "./pages/PageNotFound";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
-import StudentAssistance from "./pages/StudentAssistance";
-import Justifications from "./pages/Justifications";
+import StudentDashboard from "./pages/student/StudentDashboard";
+import StudentAssistance from "./pages/student/StudentAssistance";
+import StudentJustifications from "./pages/student/StudentJustifications";
+import AdminJustifications from "./pages/admin/AdminJustifications";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import TeacherDashboard from "./pages/teacher/TeacherDashboard";
+import TeacherAssistance from "./pages/teacher/TeacherAssistance";
 import Notifications from "./pages/Notifications";
 import FAQ from "./pages/FAQ";
 
@@ -77,7 +82,27 @@ function App() {
               path="/studentassistance"
               element={<StudentAssistance />}
             ></Route>
-            <Route path="/justifications" element={<Justifications />}></Route>
+            <Route
+              path="/teacherassistance"
+              element={<TeacherAssistance />}
+            ></Route>
+            <Route
+              path="/teacherdashboard"
+              element={<TeacherDashboard />}
+            ></Route>
+            <Route path="/admindashboard" element={<AdminDashboard />}></Route>
+            <Route
+              path="/studentdashboard"
+              element={<StudentDashboard />}
+            ></Route>
+            <Route
+              path="/studentjustifications"
+              element={<StudentJustifications />}
+            ></Route>
+            <Route
+              path="/adminjustifications"
+              element={<AdminJustifications />}
+            ></Route>
             <Route path="/notifications" element={<Notifications />}></Route>
             <Route path="/faq" element={<FAQ />}></Route>
             <Route
