@@ -17,6 +17,7 @@ import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import TeacherAssistance from "./pages/teacher/TeacherAssistance";
 import Notifications from "./pages/Notifications";
 import FAQ from "./pages/FAQ";
+import Home from "./pages/Home";
 
 export const UserContext = createContext();
 
@@ -59,7 +60,7 @@ function App() {
         <div className="flex flex-col min-h-screen">
           <NavBar />
           <Routes>
-            <Route path="/" element={<></>}></Route>
+            <Route path="/" element={<Home />}></Route>
             <Route
               path="/contact"
               element={
