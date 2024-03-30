@@ -9,12 +9,12 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
 import StudentDashboard from "./pages/student/StudentDashboard";
-import StudentAssistance from "./pages/student/StudentAssistance";
+import StudentAttendance from "./pages/student/StudentAttendance";
 import StudentJustifications from "./pages/student/StudentJustifications";
 import AdminJustifications from "./pages/admin/AdminJustifications";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
-import TeacherAssistance from "./pages/teacher/TeacherAssistance";
+import TeacherAttendance from "./pages/teacher/TeacherAttendance";
 import Notifications from "./pages/Notifications";
 import FAQ from "./pages/FAQ";
 import Home from "./pages/Home";
@@ -80,28 +80,28 @@ function App() {
             ></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route
-              path="/studentassistance"
-              element={<StudentAssistance />}
+              path="/student/attendance"
+              element={<StudentAttendance />}
             ></Route>
             <Route
-              path="/teacherassistance"
-              element={<TeacherAssistance />}
+              path="/teacher/attendance"
+              element={<TeacherAttendance />}
             ></Route>
             <Route
-              path="/teacherdashboard"
+              path="/teacher/dashboard"
               element={<TeacherDashboard />}
             ></Route>
-            <Route path="/admindashboard" element={<AdminDashboard />}></Route>
+            <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
             <Route
-              path="/studentdashboard"
+              path="/student/dashboard"
               element={<StudentDashboard />}
             ></Route>
             <Route
-              path="/studentjustifications"
+              path="/student/justifications"
               element={<StudentJustifications />}
             ></Route>
             <Route
-              path="/adminjustifications"
+              path="/admin/justifications"
               element={<AdminJustifications />}
             ></Route>
             <Route path="/notifications" element={<Notifications />}></Route>

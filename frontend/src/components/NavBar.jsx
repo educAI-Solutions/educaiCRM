@@ -32,7 +32,7 @@ function Navbar() {
           {isLoggedIn && (
             <Link
               // Send to /roleDashboard based on the role
-              to={`/${role}dashboard`}
+              to={`/${role}/dashboard`}
               style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
             >
               Dashboard
@@ -72,15 +72,15 @@ function Navbar() {
           </Link>
           {isLoggedIn && (role === "student" || role === "teacher") && (
             <Link
-              to={`/${role}assistance`}
+              to={`/${role}/attendance`}
               style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
             >
-              Assistance
+              Attendance
             </Link>
           )}
           {isLoggedIn && (role === "student" || role === "admin") && (
             <Link
-              to={`/${role}justifications`}
+              to={`/${role}/justifications`}
               style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
             >
               Justifications

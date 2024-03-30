@@ -1,12 +1,12 @@
 import React from "react";
 
-function TeacherAssistance() {
+function TeacherAttendance() {
   return (
     <div>
-      <h2>Teacher Assistance Page</h2>
+      <h2>Teacher Attendance Page</h2>
       {/* Add teacher assistance information here */}
     </div>
   );
 }
 
-export default TeacherAssistance;
+export default TeacherAttendance;
