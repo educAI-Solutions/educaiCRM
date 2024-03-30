@@ -7,6 +7,11 @@ import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import Profile from "./pages/Profile";
+import StudentAssistance from "./pages/StudentAssistance";
+import Justifications from "./pages/Justifications";
+import Notifications from "./pages/Notifications";
+import FAQ from "./pages/FAQ";
 
 export const UserContext = createContext();
 
@@ -67,6 +72,14 @@ function App() {
                 </>
               }
             ></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route
+              path="/studentassistance"
+              element={<StudentAssistance />}
+            ></Route>
+            <Route path="/justifications" element={<Justifications />}></Route>
+            <Route path="/notifications" element={<Notifications />}></Route>
+            <Route path="/faq" element={<FAQ />}></Route>
             <Route
               path="/logout"
               element={

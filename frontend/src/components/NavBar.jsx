@@ -52,7 +52,7 @@ function Navbar() {
             )}
           </Link>
           <Link
-            to="/role"
+            to="#"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
             {isLoggedIn && (
@@ -73,6 +73,38 @@ function Navbar() {
           >
             Contact
           </Link>
+          {isLoggedIn && (role === "student" || role === "teacher") && (
+            <Link
+              to="/faq"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              FAQ
+            </Link>
+          )}
+          {isLoggedIn && role === "student" && (
+            <Link
+              to="/studentassistance"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Assistance
+            </Link>
+          )}
+          {isLoggedIn && role === "student" && (
+            <Link
+              to="/justifications"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Justifications
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link
+              to="/notifications"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Notifications
+            </Link>
+          )}
           {!isLoggedIn && (
             <Link
               to="/login"
