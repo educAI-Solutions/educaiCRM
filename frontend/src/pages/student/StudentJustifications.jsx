@@ -1,12 +1,12 @@
 import React from "react";
 
-function Justifications() {
+function StudentJustifications() {
   return (
     <div>
-      <h2>Justification Page</h2>
-      {/* Add justification form and logic here */}
+      <h2>Student Justifications Page</h2>
+      {/* Add student justifications information here */}
     </div>
   );
 }
 
-export default Justifications;
+export default StudentJustifications;

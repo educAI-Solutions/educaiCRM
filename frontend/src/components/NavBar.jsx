@@ -29,12 +29,15 @@ function Navbar() {
           className={`links ${clicked ? "active" : ""}`}
           style={{ marginRight: "20px" }}
         >
-          <Link
-            to="/"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Home
-          </Link>
+          {isLoggedIn && (
+            <Link
+              // Send to /roleDashboard based on the role
+              to={`/${role}dashboard`}
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Dashboard
+            </Link>
+          )}
           <Link
             to="/profile"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
@@ -63,35 +66,21 @@ function Navbar() {
                   fontSize: "1rem",
                 }}
               >
-                {role} {/* display the username */}
+                {role} {/* display the role */}
               </span>
             )}
           </Link>
-          <Link
-            to="/contact"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Contact
-          </Link>
           {isLoggedIn && (role === "student" || role === "teacher") && (
             <Link
-              to="/faq"
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              FAQ
-            </Link>
-          )}
-          {isLoggedIn && role === "student" && (
-            <Link
-              to="/studentassistance"
+              to={`/${role}assistance`}
               style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
             >
               Assistance
             </Link>
           )}
-          {isLoggedIn && role === "student" && (
+          {isLoggedIn && (role === "student" || role === "admin") && (
             <Link
-              to="/justifications"
+              to={`/${role}justifications`}
               style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
             >
               Justifications
@@ -103,6 +92,20 @@ function Navbar() {
               style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
             >
               Notifications
+            </Link>
+          )}
+          <Link
+            to="/contact"
+            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+          >
+            Contact
+          </Link>
+          {isLoggedIn && (
+            <Link
+              to="/faq"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              FAQ
             </Link>
           )}
           {!isLoggedIn && (
