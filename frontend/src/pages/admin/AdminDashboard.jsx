@@ -50,7 +50,7 @@ function AdminDashboard() {
               src="https://bibliotecas.uai.cl/wp-content/uploads/2021/03/fondo-biblioteca-pregrado-santiago.jpg"
               alt="Banner"
               className="img-fluid"
-              style={{ maxHeight: "150px", objectFit: "cover" }}
+              style={{ maxHeight: "170px", objectFit: "cover" }}
             />
             <div
               style={{
@@ -160,7 +160,7 @@ function AdminDashboard() {
         </Col>
       </Row>
       <Row className="justify-content-center">
-        <Col md={10} className="py-4">
+        <Col md={12} className="py-2">
           {renderComponent()}
         </Col>
       </Row>

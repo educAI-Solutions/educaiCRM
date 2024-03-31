@@ -1,72 +1,43 @@
 import React from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Table,
-  Form,
-  Button,
-  Card,
-} from "react-bootstrap";
-import Register from "../Register"; // Adjust the path according to your project structure
+import { Container, Row, Col, Card } from "react-bootstrap";
+import RegisterUser from "./usermanagement/RegisterUser";
+import SearchUser from "./usermanagement/SearchUser";
+import RecentUsers from "./usermanagement/RecentUsers";
 
 function AdminUsers() {
   return (
     <Container>
-      <h2>User Management</h2>
+      <Row className="text-center">
+        <h1>User Management</h1>
+      </Row>
       <Row>
-        <Col md={6}>
+        <Col md={12}>
           <Card className="mb-3">
             <Card.Body>
-              <h3>Create User</h3>
-              <Register />
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={6}>
-          <Card className="mb-3">
-            <Card.Body>
-              <h3>Edit User</h3>
-              {/* Edit user form */}
+              <h3>Recent Users</h3>
+              <RecentUsers />
             </Card.Body>
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col md={6}>
-          <Card className="mb-3">
-            <Card.Body>
-              <h3>Delete User</h3>
-              {/* Delete user form */}
-            </Card.Body>
-          </Card>
-        </Col>
         <Col md={6}>
           <Card className="mb-3">
             <Card.Body>
               <h3>Search User</h3>
-              <Form>
-                <Form.Group controlId="searchUser">
-                  <Form.Control type="text" placeholder="Search user" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                  Search
-                </Button>
-              </Form>
+              <SearchUser />
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={6}>
+          <Card className="mb-3">
+            <Card.Body>
+              <h3>Create User</h3>
+              <RegisterUser />
             </Card.Body>
           </Card>
         </Col>
       </Row>
-      <Table striped bordered hover className="mt-3">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>{/* Map over users and create a row for each user */}</tbody>
-      </Table>
     </Container>
   );
 }

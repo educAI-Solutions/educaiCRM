@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import Register from "./pages/Register";
+import RegisterUser from "./pages/admin/usermanagement/RegisterUser";
 import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import NavBar from "./components/NavBar";
@@ -92,7 +92,7 @@ function App() {
                 </>
               }
             ></Route>
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<RegisterUser />} />
             <Route
               path="/login"
               element={
