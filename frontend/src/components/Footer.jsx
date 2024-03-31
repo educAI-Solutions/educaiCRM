@@ -30,7 +30,7 @@ const Footer = () => {
             href="https://www.linkedin.com/"
             target="_blank"
             rel="noreferrer"
-            className="m-2"
+            className="m-2 text-white"
           >
             <FontAwesomeIcon icon={faLinkedin} size="2x" />
           </a>
@@ -38,7 +38,7 @@ const Footer = () => {
             href="https://wa.me/1234567890"
             target="_blank"
             rel="noreferrer"
-            className="m-2"
+            className="m-2 text-white"
           >
             <FontAwesomeIcon icon={faWhatsapp} size="2x" />
           </a>
@@ -46,7 +46,7 @@ const Footer = () => {
             href="https://github.com/"
             target="_blank"
             rel="noreferrer"
-            className="m-2"
+            className="m-2 text-white"
           >
             <FontAwesomeIcon icon={faGithub} size="2x" />
           </a>
