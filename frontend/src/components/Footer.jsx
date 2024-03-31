@@ -13,17 +13,11 @@ const Footer = () => {
       style={{
         background:
           "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
+        fontFamily: "Montserrat, sans-serif",
       }}
     >
       {/* First row */}
-      <div className="flex items-start w-full mb-2 justify-between">
-        <div>
-          <p className="font-bold">Follow Us On Our Social Media!</p>
-        </div>
-      </div>
-
-      {/* Second row */}
-      <div className="flex items-start w-full mt-2 justify-between">
+      <div className="flex items-start w-full mt-2 justify-center text-center">
         <div className="flex gap-2">
           {/* LinkedIn, WhatsApp, and GitHub logos */}
           <a
@@ -52,6 +46,10 @@ const Footer = () => {
           </a>
         </div>
       </div>
+      <p className="text-center mt-4">
+        &copy; {new Date().getFullYear()} All rights reserved to EducAI
+        Solutions
+      </p>
     </div>
   );
 };

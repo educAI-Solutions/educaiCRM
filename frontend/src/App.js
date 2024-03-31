@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
@@ -32,6 +33,7 @@ function App() {
     setUsername(username);
     setRole(role);
     setExpDate(exp);
+    localStorage.setItem("token", token);
     console.log("Logged in successfully as", username);
   };
 
@@ -39,14 +41,32 @@ function App() {
     setIsLoggedIn(false);
     setUsername("");
     setRole("");
+    localStorage.removeItem("token");
     console.log("Logged out successfully");
   };
 
-  // Check if user's token has expired on page load with expiration date in seconds
+  // Check if there's a token in local storage
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const { username, role, exp } = decodedToken;
+      if (Date.now() >= exp * 1000) {
+        console.log("Token expired");
+        onLogout();
+      } else {
+        console.log("Token still valid");
+        onLogin(token, username, role, exp);
+      }
+    }
+  }, []);
+
+  // Check if the token has expired
   useEffect(() => {
     if (expDate) {
-      const now = new Date().getTime() / 1000;
-      if (now > expDate) {
+      const currentTime = Date.now();
+      if (currentTime >= expDate * 1000) {
+        console.log("Token expired");
         onLogout();
       }
     }
@@ -57,7 +77,10 @@ function App() {
       value={{ isLoggedIn, onLogin, onLogout, username, role }}
     >
       <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
+        <div
+          className="flex flex-col min-h-screen"
+          style={{ fontFamily: "Montserrat, sans-serif" }}
+        >
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />}></Route>

@@ -1,85 +1,167 @@
 import React, { useState } from "react";
-import { Container, Row, Col, ListGroup } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import {
   FaUsers,
   FaBookOpen,
   FaBell,
   FaFileAlt,
-  FaUserCheck,
-  FaChartLine,
+  FaChartPie,
+  FaQuestionCircle,
 } from "react-icons/fa";
 import AdminJustifications from "./AdminJustifications";
-import AdminAttendance from "./AdminAttendance";
-import AdminInsights from "./AdminInsights";
 import Notifications from "../Notifications";
 import AdminUsers from "./AdminUsers";
 import AdminCourses from "./AdminCourses";
+import AdminInsights from "./AdminInsights";
 
 function AdminDashboard() {
   const [selectedItem, setSelectedItem] = useState("");
 
+  const renderComponent = () => {
+    switch (selectedItem) {
+      case "users":
+        return <AdminUsers />;
+      case "courses":
+        return <AdminCourses />;
+      case "notifications":
+        return <Notifications />;
+      case "justifications":
+        return <AdminJustifications />;
+      case "insights":
+        return <AdminInsights />;
+      case "faq":
+        return <></>;
+      default:
+        return <></>;
+    }
+  };
+
   return (
-    <Container fluid style={{ fontFamily: "Montserrat, sans-serif" }}>
-      <Row>
-        <Col md={2} className="border-right py-4">
-          <Row className="text-center">
-            <h3 className="mt-4">Admin Menu</h3>
-          </Row>
-          <ListGroup className="mt-3">
-            <ListGroup.Item action onClick={() => setSelectedItem("users")}>
-              <FaUsers className="m-2" />
-              Users
-            </ListGroup.Item>
-            <ListGroup.Item action onClick={() => setSelectedItem("courses")}>
-              <FaBookOpen className="m-2" />
-              Courses
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              onClick={() => setSelectedItem("notifications")}
+    <Container
+      fluid
+      className="p-0"
+      style={{ fontFamily: "Montserrat, sans-serif" }}
+    >
+      <Row className="mb-3">
+        <Col>
+          <Card className="position-relative">
+            <Card.Img
+              variant="top"
+              src="https://bibliotecas.uai.cl/wp-content/uploads/2021/03/fondo-biblioteca-pregrado-santiago.jpg"
+              alt="Banner"
+              className="img-fluid"
+              style={{ maxHeight: "150px", objectFit: "cover" }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              }}
+            />
+            <Card.ImgOverlay
+              style={{
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "white",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+              }}
             >
-              <FaBell className="m-2" />
-              Notifications
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              onClick={() => setSelectedItem("justifications")}
-            >
-              <FaFileAlt className="m-2" />
-              Justifications
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              onClick={() => setSelectedItem("attendance")}
-            >
-              <FaUserCheck className="m-2" />
-              Attendance
-            </ListGroup.Item>
-            <ListGroup.Item action onClick={() => setSelectedItem("insights")}>
-              <FaChartLine className="m-2" />
-              Insights
-            </ListGroup.Item>
-          </ListGroup>
+              <Card.Title
+                style={{
+                  textAlign: "center",
+                  fontSize: "2rem",
+                  fontWeight: "bold",
+                }}
+              >
+                Administrator Dashboard
+              </Card.Title>
+            </Card.ImgOverlay>
+          </Card>
         </Col>
-        <Col md={10}>
-          {selectedItem === "notifications" ? (
-            <Notifications />
-          ) : selectedItem === "justifications" ? (
-            <AdminJustifications />
-          ) : selectedItem === "attendance" ? (
-            <AdminAttendance />
-          ) : selectedItem === "insights" ? (
-            <AdminInsights />
-          ) : selectedItem === "users" ? (
-            <AdminUsers />
-          ) : selectedItem === "courses" ? (
-            <AdminCourses />
-          ) : (
-            <>
-              <h2 className="mt-4">Welcome to the Admin Dashboard</h2>
-              <p>Choose an item from the sidebar to view more details.</p>
-            </>
-          )}
+      </Row>
+      <Row className="justify-content-center m-2">
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-3 ${
+              selectedItem === "users" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("users")}
+          >
+            <Card.Body>
+              <FaUsers className="m-2" /> Users
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-3 ${
+              selectedItem === "courses" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("courses")}
+          >
+            <Card.Body>
+              <FaBookOpen className="m-2" /> Courses
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-3 ${
+              selectedItem === "notifications" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("notifications")}
+          >
+            <Card.Body>
+              <FaBell className="m-2" /> Notifications
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row className="justify-content-center m-2">
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-3 ${
+              selectedItem === "justifications" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("justifications")}
+          >
+            <Card.Body>
+              <FaFileAlt className="m-2" /> Justifications
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-3 ${
+              selectedItem === "insights" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("insights")}
+          >
+            <Card.Body>
+              <FaChartPie className="m-2" /> Insights
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-3 ${
+              selectedItem === "faq" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("faq")}
+          >
+            <Card.Body>
+              <FaQuestionCircle className="m-2" /> FAQ
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col md={10} className="py-4">
+          {renderComponent()}
         </Col>
       </Row>
     </Container>

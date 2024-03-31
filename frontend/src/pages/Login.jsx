@@ -43,9 +43,9 @@ const Login = ({ onLogin }) => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-6 mt-3">
+        <div className="col-md-6 mt-3 mb-3">
           <div
-            className={`card border-primary mt-5 ${
+            className={`card border-primary ${
               isSubmitted ? "border-success" : ""
             }`}
           >
