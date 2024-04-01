@@ -37,7 +37,6 @@ function SearchUser() {
 
   return (
     <div>
-      <h2>Search User Page</h2>
       <Form onSubmit={handleSearch}>
         <InputGroup className="mb-3">
           <FormControl

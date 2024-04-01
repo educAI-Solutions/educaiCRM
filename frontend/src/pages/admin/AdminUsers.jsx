@@ -12,7 +12,7 @@ function AdminUsers() {
       </Row>
       <Row>
         <Col md={12}>
-          <Card className="mb-3">
+          <Card className="mb-3 shadow">
             <Card.Body>
               <h3>Recent Users</h3>
               <RecentUsers />
@@ -22,7 +22,7 @@ function AdminUsers() {
       </Row>
       <Row>
         <Col md={6}>
-          <Card className="mb-3">
+          <Card className="mb-3 shadow">
             <Card.Body>
               <h3>Search User</h3>
               <SearchUser />
@@ -30,7 +30,7 @@ function AdminUsers() {
           </Card>
         </Col>
         <Col md={6}>
-          <Card className="mb-3">
+          <Card className="mb-3 shadow">
             <Card.Body>
               <h3>Create User</h3>
               <RegisterUser />
