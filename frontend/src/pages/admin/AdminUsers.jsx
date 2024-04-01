@@ -7,7 +7,7 @@ import RecentUsers from "./usermanagement/RecentUsers";
 function AdminUsers() {
   return (
     <Container>
-      <Row className="text-center">
+      <Row className="text-center mb-3">
         <h1>User Management</h1>
       </Row>
       <Row>

@@ -38,7 +38,7 @@ function SearchUser() {
   return (
     <div>
       <Form onSubmit={handleSearch}>
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-3 mt-2">
           <FormControl
             placeholder="Search user by username or email"
             aria-label="Search user by username or email"
@@ -56,6 +56,7 @@ function SearchUser() {
             <tr>
               <th>#</th>
               <th>Username</th>
+              <th>Email</th>
               <th>Role</th>
               <th>Actions</th>
             </tr>
@@ -64,6 +65,7 @@ function SearchUser() {
             <tr>
               <td>1</td>
               <td>{user.username}</td>
+              <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
                 <Button variant="danger" onClick={() => deleteUser(user.id)}>
