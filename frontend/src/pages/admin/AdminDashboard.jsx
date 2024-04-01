@@ -3,17 +3,17 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import {
   FaUsers,
   FaBookOpen,
-  FaBell,
   FaFileAlt,
   FaChartPie,
-  FaQuestionCircle,
+  FaChalkboardTeacher,
+  FaUserCheck,
 } from "react-icons/fa";
 import AdminJustifications from "./AdminJustifications";
-import Notifications from "../Notifications";
 import AdminUsers from "./AdminUsers";
 import AdminCourses from "./AdminCourses";
 import AdminInsights from "./AdminInsights";
 import AdminAttendance from "./AdminAttendance";
+import AdminClasses from "./AdminClasses";
 
 function AdminDashboard() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -24,8 +24,8 @@ function AdminDashboard() {
         return <AdminUsers />;
       case "courses":
         return <AdminCourses />;
-      case "notifications":
-        return <Notifications />;
+      case "classes":
+        return <AdminClasses />;
       case "justifications":
         return <AdminJustifications />;
       case "insights":
@@ -112,12 +112,12 @@ function AdminDashboard() {
         <Col md={3} lg={2}>
           <Card
             className={`mb-3 ${
-              selectedItem === "notifications" ? "bg-primary text-white" : ""
+              selectedItem === "classes" ? "bg-primary text-white" : ""
             }`}
-            onClick={() => setSelectedItem("notifications")}
+            onClick={() => setSelectedItem("classes")}
           >
             <Card.Body>
-              <FaBell className="m-2" /> Notifications
+              <FaChalkboardTeacher className="m-2" /> Classes
             </Card.Body>
           </Card>
         </Col>
@@ -155,7 +155,7 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("attendance")}
           >
             <Card.Body>
-              <FaQuestionCircle className="m-2" /> Attendance
+              <FaUserCheck className="m-2" /> Attendance
             </Card.Body>
           </Card>
         </Col>

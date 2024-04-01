@@ -16,6 +16,7 @@ function AdminCourses() {
   const [courseForm, setCourseForm] = useState({
     courseName: "",
     courseCode: "",
+    section: "",
     instructors: [],
     participants: [],
     startDate: "",
@@ -104,6 +105,16 @@ function AdminCourses() {
                       type="text"
                       name="courseCode"
                       value={courseForm.courseCode}
+                      onChange={handleFormChange}
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Course Section</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="section"
+                      value={courseForm.section}
                       onChange={handleFormChange}
                     />
                   </Form.Group>
