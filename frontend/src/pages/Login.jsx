@@ -105,7 +105,6 @@ const Login = ({ onLogin }) => {
       <br />
       <br />
       <br />
-      <br />
     </div>
   );
 };

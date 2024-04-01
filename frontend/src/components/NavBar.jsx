@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
-import Logo from "../img/download.png";
+import Logo from "../img/logotipo1.png";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 
@@ -21,20 +21,23 @@ function Navbar() {
             className="w-[60px]"
             alt="Logo"
             style={{ marginLeft: "15px" }}
-            width={70}
-            height={60}
+            width={90}
+            height={80}
           />
         </Link>
         <div
           className={`links ${clicked ? "active" : ""}`}
           style={{ marginRight: "20px" }}
         >
-          <Link
-            to="/"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Home
-          </Link>
+          {isLoggedIn && (
+            <Link
+              // Send to /roleDashboard based on the role
+              to={`/${role}/dashboard`}
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Dashboard
+            </Link>
+          )}
           <Link
             to="/profile"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
@@ -52,7 +55,7 @@ function Navbar() {
             )}
           </Link>
           <Link
-            to="/role"
+            to="#"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
             {isLoggedIn && (
@@ -63,16 +66,48 @@ function Navbar() {
                   fontSize: "1rem",
                 }}
               >
-                {role} {/* display the username */}
+                {role} {/* display the role */}
               </span>
             )}
           </Link>
+          {isLoggedIn && (role === "student" || role === "teacher") && (
+            <Link
+              to={`/${role}/attendance`}
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Attendance
+            </Link>
+          )}
+          {isLoggedIn && (role === "student" || role === "admin") && (
+            <Link
+              to={`/${role}/justifications`}
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Justifications
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link
+              to="/notifications"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              Notifications
+            </Link>
+          )}
           <Link
             to="/contact"
             style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
           >
             Contact
           </Link>
+          {isLoggedIn && (
+            <Link
+              to="/faq"
+              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
+            >
+              FAQ
+            </Link>
+          )}
           {!isLoggedIn && (
             <Link
               to="/login"
