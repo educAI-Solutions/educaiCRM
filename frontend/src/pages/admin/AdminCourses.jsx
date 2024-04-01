@@ -173,6 +173,7 @@ function AdminCourses() {
               <tr>
                 <th>Course Name</th>
                 <th>Course Code</th>
+                <th>Section</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -181,6 +182,7 @@ function AdminCourses() {
                 <tr key={course._id}>
                   <td>{course.courseName}</td>
                   <td>{course.courseCode}</td>
+                  <td>{course.section}</td>
                   <td>
                     <Button onClick={() => handleSelectCourse(course)}>
                       Edit
