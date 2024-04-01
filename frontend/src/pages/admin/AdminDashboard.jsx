@@ -13,6 +13,7 @@ import Notifications from "../Notifications";
 import AdminUsers from "./AdminUsers";
 import AdminCourses from "./AdminCourses";
 import AdminInsights from "./AdminInsights";
+import AdminAttendance from "./AdminAttendance";
 
 function AdminDashboard() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -29,8 +30,8 @@ function AdminDashboard() {
         return <AdminJustifications />;
       case "insights":
         return <AdminInsights />;
-      case "faq":
-        return <></>;
+      case "attendance":
+        return <AdminAttendance />;
       default:
         return <></>;
     }
@@ -149,12 +150,12 @@ function AdminDashboard() {
         <Col md={3} lg={2}>
           <Card
             className={`mb-3 ${
-              selectedItem === "faq" ? "bg-primary text-white" : ""
+              selectedItem === "attendance" ? "bg-primary text-white" : ""
             }`}
-            onClick={() => setSelectedItem("faq")}
+            onClick={() => setSelectedItem("attendance")}
           >
             <Card.Body>
-              <FaQuestionCircle className="m-2" /> FAQ
+              <FaQuestionCircle className="m-2" /> Attendance
             </Card.Body>
           </Card>
         </Col>

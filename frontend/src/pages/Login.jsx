@@ -25,6 +25,7 @@ const Login = ({ onLogin }) => {
         { identifier, password: base64Hash }
       ); // Make POST request to backend login endpoint
       const { token } = response.data; // Assuming backend sends back a token upon successful login
+      console.log("Login response:", response.data);
 
       // Decoded token brings username, role, iat and exp
       const decodedToken = jwtDecode(token);
