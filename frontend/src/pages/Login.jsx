@@ -78,6 +78,15 @@ const Login = ({ onLogin }) => {
                   Login
                 </Button>
               </Form>
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-md-6 text-center">
+                    <p>
+                      Don't have an account? <a href="/register">Register</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
