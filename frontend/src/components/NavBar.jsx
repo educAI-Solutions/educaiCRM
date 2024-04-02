@@ -108,14 +108,6 @@ function Navbar() {
               Log In
             </Link>
           )}
-          {!isLoggedIn && (
-            <Link
-              to="/register"
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              Sign Up
-            </Link>
-          )}
           {isLoggedIn && (
             <Link
               to="/logout"
