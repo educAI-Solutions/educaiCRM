@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, Button, Row } from "react-bootstrap";
+import { Table, Form, Button, Row, Container } from "react-bootstrap";
 
 function AdminAttendance() {
   const [courses, setCourses] = useState([]);
@@ -15,7 +15,7 @@ function AdminAttendance() {
   };
 
   return (
-    <div className="m-2">
+    <Container className="m-2">
       <Row className="mb-3 text-center">
         <h1>Attendance Visualizer</h1>
       </Row>
@@ -58,7 +58,7 @@ function AdminAttendance() {
           ))}
         </tbody>
       </Table>
-    </div>
+    </Container>
   );
 }
 
