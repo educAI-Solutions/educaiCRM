@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Register = () => {
+const RegisterUser = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,9 +20,17 @@ const Register = () => {
       const hash = await window.crypto.subtle.digest("SHA-256", data);
       const base64Hash = btoa(String.fromCharCode(...new Uint8Array(hash)));
 
+      // Send as headers the jwt token as auth header
+      const token = localStorage.getItem("token");
+
       const response = await axios.post(
-        "http://127.0.0.1:5050/api/auth/register",
-        { username, password: base64Hash, email, role }
+        "http://127.0.0.1:5050/api/auth/register", // Make POST request to backend register endpoint
+        { email, username, password: base64Hash, role },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       console.log("Registration response:", response.data);
@@ -38,9 +46,9 @@ const Register = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-6 mt-3">
+        <div className="col-md-6 mt-3 mb-3">
           <div
-            className={`card border-primary mt-5 ${
+            className={`card border-primary ${
               isSubmitted ? "border-success" : ""
             }`}
           >
@@ -105,4 +113,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterUser;
