@@ -7,6 +7,7 @@ import {
   FaChartPie,
   FaChalkboardTeacher,
   FaUserCheck,
+  FaCog,
 } from "react-icons/fa";
 import AdminJustifications from "./AdminJustifications";
 import AdminUsers from "./AdminUsers";
@@ -14,6 +15,7 @@ import AdminCourses from "./AdminCourses";
 import AdminInsights from "./AdminInsights";
 import AdminAttendance from "./AdminAttendance";
 import AdminClasses from "./AdminClasses";
+import AdminConfiguration from "./AdminConfiguration";
 
 function AdminDashboard() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -32,6 +34,8 @@ function AdminDashboard() {
         return <AdminInsights />;
       case "attendance":
         return <AdminAttendance />;
+      case "configuration":
+        return <AdminConfiguration />;
       default:
         return <></>;
     }
@@ -156,6 +160,18 @@ function AdminDashboard() {
           >
             <Card.Body>
               <FaUserCheck className="m-2" /> Attendance
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-3 ${
+              selectedItem === "configuration" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("configuration")}
+          >
+            <Card.Body>
+              <FaCog className="m-2" /> Configuration
             </Card.Body>
           </Card>
         </Col>

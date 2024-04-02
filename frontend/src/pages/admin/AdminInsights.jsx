@@ -39,7 +39,7 @@ function AdminInsights() {
   return (
     <Container>
       <Row className="mb-3 text-center">
-        <h2>Insights</h2>
+        <h1>Insights</h1>
       </Row>
       <Row>
         <Col>

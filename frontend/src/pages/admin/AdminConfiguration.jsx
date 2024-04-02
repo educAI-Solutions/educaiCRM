@@ -1,15 +1,15 @@
 import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
 
-function StudentConfiguration() {
+function AdminConfiguration() {
   return (
     <div
       className="d-flex justify-content-center align-items-center"
-      style={{ height: "70vh" }}
+      style={{ height: "60vh" }}
     >
       <Card style={{ width: "30rem" }} className="shadow">
         <Card.Body>
-          <h2>Student Preferences</h2>
+          <h2>Admin Preferences</h2>
           <Form>
             <Form.Group controlId="formBasicCheckbox1" className="mb-3">
               <Form.Check type="checkbox" label="Receive email notifications" />
@@ -49,4 +49,4 @@ function StudentConfiguration() {
   );
 }
 
-export default StudentConfiguration;
+export default AdminConfiguration;
