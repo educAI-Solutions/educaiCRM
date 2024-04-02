@@ -17,12 +17,14 @@ import AdminJustifications from "./pages/admin/AdminJustifications";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import TeacherAttendance from "./pages/teacher/TeacherAttendance";
+import TeacherFAQ from "./pages/teacher/TeacherFAQ";
 import Notifications from "./pages/Notifications";
-import FAQ from "./pages/FAQ";
+import StudentFAQ from "./pages/student/StudentFAQ";
 import Home from "./pages/Home";
 import StudentUpcomingClasses from "./pages/student/StudentUpcomingClasses";
 import StudentCourses from "./pages/student/StudentCourses";
 import StudentWeekly from "./pages/student/StudentWeekly";
+import StudentConfiguration from "./pages/student/StudentConfiguration";
 
 export const UserContext = createContext();
 
@@ -106,9 +108,19 @@ function App() {
               }
             ></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/notifications" element={<Notifications />}></Route>
             <Route
-              path="/student/attendance"
-              element={<StudentAttendance />}
+              path="/logout"
+              element={
+                <>
+                  <Logout onLogout={onLogout} />
+                </>
+              }
+            ></Route>
+            <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+            <Route
+              path="/admin/justifications"
+              element={<AdminJustifications />}
             ></Route>
             <Route
               path="/teacher/attendance"
@@ -118,7 +130,11 @@ function App() {
               path="/teacher/dashboard"
               element={<TeacherDashboard />}
             ></Route>
-            <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+            <Route path="/teacher/faq" element={<TeacherFAQ />}></Route>
+            <Route
+              path="/student/attendance"
+              element={<StudentAttendance />}
+            ></Route>
             <Route
               path="/student/dashboard"
               element={<StudentDashboard />}
@@ -141,21 +157,11 @@ function App() {
               path="/student/justificationsreview"
               element={<StudentJustificationsReview />}
             ></Route>
-
             <Route
-              path="/admin/justifications"
-              element={<AdminJustifications />}
-            ></Route>
-            <Route path="/notifications" element={<Notifications />}></Route>
-            <Route path="/faq" element={<FAQ />}></Route>
-            <Route
-              path="/logout"
-              element={
-                <>
-                  <Logout onLogout={onLogout} />
-                </>
-              }
-            ></Route>
+              path="/student/configuration"
+              element={<StudentConfiguration />}
+            />
+            <Route path="/student/faq" element={<StudentFAQ />}></Route>
             <Route path="*" element={<PageNotFound />} />
           </Routes>
 

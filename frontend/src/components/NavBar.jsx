@@ -100,14 +100,6 @@ function Navbar() {
           >
             Contact
           </Link>
-          {isLoggedIn && (
-            <Link
-              to="/faq"
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              FAQ
-            </Link>
-          )}
           {!isLoggedIn && (
             <Link
               to="/login"

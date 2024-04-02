@@ -6,9 +6,9 @@ import {
   FaUserCheck,
   FaChalkboardTeacher,
   FaSearch,
-  FaUser,
+  FaQuestionCircle,
   FaCalendarWeek,
-  FaBell,
+  FaCog,
 } from "react-icons/fa";
 
 function StudentDashboard() {
@@ -132,11 +132,11 @@ function StudentDashboard() {
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
           <Card className="text-center shadow mb-3 h-100">
-            <Link to="/profile" className="text-decoration-none text-dark">
+            <Link to="/student/faq" className="text-decoration-none text-dark">
               <Card.Body>
-                <FaUser className="dashboard-icon" />
-                <Card.Title className="mt-3">Profile</Card.Title>
-                <Card.Text>View your profile</Card.Text>
+                <FaQuestionCircle className="dashboard-icon" />
+                <Card.Title className="mt-3">FAQ</Card.Title>
+                <Card.Text>Frequently Asked Questions</Card.Text>
               </Card.Body>
             </Link>
           </Card>
@@ -158,13 +158,13 @@ function StudentDashboard() {
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
           <Card className="text-center shadow mb-3 h-100">
             <Link
-              to="/notifications"
+              to="/student/configuration"
               className="text-decoration-none text-dark"
             >
               <Card.Body>
-                <FaBell className="dashboard-icon" />
-                <Card.Title className="mt-3">Notifications</Card.Title>
-                <Card.Text>View your notifications</Card.Text>
+                <FaCog className="dashboard-icon" />
+                <Card.Title className="mt-3">Configuration</Card.Title>
+                <Card.Text>Configure your settings</Card.Text>
               </Card.Body>
             </Link>
           </Card>
