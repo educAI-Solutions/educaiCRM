@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, Button, Row } from "react-bootstrap";
+import { Table, Form, Button, Row, Alert } from "react-bootstrap";
 
 function StudentAttendance() {
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [attendance, setAttendance] = useState([]);
+  const [attendancePercentage, setAttendancePercentage] = useState(0);
 
   useEffect(() => {
     // Fetch the courses from your API here and set the courses state
@@ -14,6 +15,14 @@ function StudentAttendance() {
   const handleCheckAttendance = async () => {
     // Fetch the attendance data from your API here based on the selectedCourse and set the attendance state
     // Make sure to fetch only the attendance data of the student
+
+    // Calculate the attendance percentage
+    const attendedClasses = attendance.filter(
+      (record) => record.status === "Present"
+    ).length;
+    const totalClasses = attendance.length;
+    const percentage = (attendedClasses / totalClasses) * 100;
+    setAttendancePercentage(percentage);
   };
 
   return (
@@ -40,6 +49,9 @@ function StudentAttendance() {
           Check Attendance
         </Button>
       </Form>
+      <Alert variant="info">
+        Attendance Percentage: {attendancePercentage}%
+      </Alert>
       <Table striped bordered hover>
         <thead>
           <tr>
