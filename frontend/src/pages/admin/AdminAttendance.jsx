@@ -15,7 +15,7 @@ function AdminAttendance() {
   };
 
   return (
-    <Container className="m-2">
+    <Container className=" justify-content-center">
       <Row className="mb-3 text-center">
         <h1>Attendance Visualizer</h1>
       </Row>
