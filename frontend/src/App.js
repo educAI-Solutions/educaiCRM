@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentAttendance from "./pages/student/StudentAttendance";
 import StudentJustifications from "./pages/student/StudentJustifications";
+import StudentJustificationsReview from "./pages/student/StudentJustificationsReview";
 import AdminJustifications from "./pages/admin/AdminJustifications";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
@@ -19,6 +20,9 @@ import TeacherAttendance from "./pages/teacher/TeacherAttendance";
 import Notifications from "./pages/Notifications";
 import FAQ from "./pages/FAQ";
 import Home from "./pages/Home";
+import StudentUpcomingClasses from "./pages/student/StudentUpcomingClasses";
+import StudentCourses from "./pages/student/StudentCourses";
+import StudentWeekly from "./pages/student/StudentWeekly";
 
 export const UserContext = createContext();
 
@@ -123,6 +127,21 @@ function App() {
               path="/student/justifications"
               element={<StudentJustifications />}
             ></Route>
+            <Route
+              path="/student/justificationsreview"
+              element={<StudentJustificationsReview />}
+            ></Route>
+            <Route path="/student/courses" element={<StudentCourses />}></Route>
+            <Route path="/student/weekly" element={<StudentWeekly />}></Route>
+            <Route
+              path="/student/upcomingclasses"
+              element={<StudentUpcomingClasses />}
+            ></Route>
+            <Route
+              path="/student/justificationsreview"
+              element={<StudentJustificationsReview />}
+            ></Route>
+
             <Route
               path="/admin/justifications"
               element={<AdminJustifications />}
