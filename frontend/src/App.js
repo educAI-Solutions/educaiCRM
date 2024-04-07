@@ -18,6 +18,8 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import TeacherAttendance from "./pages/teacher/TeacherAttendance";
 import TeacherFAQ from "./pages/teacher/TeacherFAQ";
+import TeacherWeekly from "./pages/teacher/TeacherWeekly";
+import TeacherUpload from "./pages/teacher/TeacherUpload";
 import Notifications from "./pages/Notifications";
 import StudentFAQ from "./pages/student/StudentFAQ";
 import Home from "./pages/Home";
@@ -126,6 +128,7 @@ function App() {
               path="/teacher/attendance"
               element={<TeacherAttendance />}
             ></Route>
+            <Route path="/teacher/weekly" element={<TeacherWeekly />}></Route>
             <Route
               path="/teacher/dashboard"
               element={<TeacherDashboard />}
@@ -135,6 +138,8 @@ function App() {
               path="/student/attendance"
               element={<StudentAttendance />}
             ></Route>
+            <Route path="/teacher/upload" element={<TeacherUpload />}></Route>
+            <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
             <Route
               path="/student/dashboard"
               element={<StudentDashboard />}

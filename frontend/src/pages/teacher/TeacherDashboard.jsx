@@ -63,7 +63,7 @@ function TeacherDashboard() {
           <Col xs={12} sm={6} md={4} lg={3}>
             <Card className="text-center shadow mb-3 h-100">
               <Link
-                to="/student/justifications"
+                to="/teacher/weekly"
                 className="text-decoration-none text-dark"
               >
                 <Card.Body>
@@ -78,7 +78,10 @@ function TeacherDashboard() {
           </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
             <Card className="text-center shadow mb-3 h-100">
-              <Link to="#" className="text-decoration-none text-dark">
+              <Link
+                to="/teacher/upload"
+                className="text-decoration-none text-dark"
+              >
                 <Card.Body>
                   <FaFileUpload className="dashboard-icon" />
                   <Card.Title className="mt-3">Upload Material</Card.Title>
