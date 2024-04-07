@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { UserContext } from "../App";
-import DownloadButton from "../components/DownloadButton";
-// import download from "../components/DownloadButton";
 
 const Home = () => {
   const { username, role, isLoggedIn } = useContext(UserContext);
@@ -67,7 +65,6 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-      <DownloadButton />
     </div>
   );
 };
