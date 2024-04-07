@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 
-const Register = () => {
+const RegisterUser = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    setSuccessMessage("");
+    setError("");
+  }, [email, username, password, role]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,15 +24,23 @@ const Register = () => {
       const hash = await window.crypto.subtle.digest("SHA-256", data);
       const base64Hash = btoa(String.fromCharCode(...new Uint8Array(hash)));
 
+      // Send as headers the jwt token as auth header
+      const token = localStorage.getItem("token");
+
       const response = await axios.post(
-        "http://127.0.0.1:5050/api/auth/register",
-        { username, password: base64Hash, email, role }
+        "http://127.0.0.1:5050/api/auth/register", // Make POST request to backend register endpoint
+        { email, username, password: base64Hash, role },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       console.log("Registration response:", response.data);
       setIsSubmitted(true);
       setError("");
-      navigate("/login"); // Redirect to the login page after successful registration
+      setSuccessMessage(`User ${username} registered successfully.`);
     } catch (error) {
       console.error("Registration error:", error);
       setError("Registration failed. Please try again."); // Handle registration error
@@ -38,16 +50,19 @@ const Register = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-6 mt-3">
+        <div className="col-md-6 mt-3 mb-3">
           <div
-            className={`card border-primary mt-5 ${
-              isSubmitted ? "border-success" : ""
-            }`}
+            className={`card border-primary ${
+              successMessage ? "border-success" : ""
+            }${error ? "border-danger" : ""}`}
           >
-            <div className="card-header bg-primary text-white">Register</div>
             <div className="card-body">
+              {successMessage && (
+                <Alert variant="success">{successMessage}</Alert>
+              )}
+              {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formBasicEmail" className="mb-2">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="email"
@@ -57,7 +72,7 @@ const Register = () => {
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicUsername">
+                <Form.Group controlId="formBasicUsername" className="mb-2">
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="text"
@@ -67,7 +82,7 @@ const Register = () => {
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group controlId="formBasicPassword" className="mb-2">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
@@ -77,7 +92,7 @@ const Register = () => {
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formBasicRole">
+                <Form.Group controlId="formBasicRole" className="mb-2">
                   <Form.Label>Role</Form.Label>
                   <Form.Control
                     as="select"
@@ -91,8 +106,6 @@ const Register = () => {
                   </Form.Control>
                 </Form.Group>
 
-                {error && <p className="text-danger">{error}</p>}
-
                 <Button variant="primary" type="submit" className="mt-3">
                   Register
                 </Button>
@@ -105,4 +118,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterUser;

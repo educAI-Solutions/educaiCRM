@@ -25,6 +25,7 @@ const Login = ({ onLogin }) => {
         { identifier, password: base64Hash }
       ); // Make POST request to backend login endpoint
       const { token } = response.data; // Assuming backend sends back a token upon successful login
+      console.log("Login response:", response.data);
 
       // Decoded token brings username, role, iat and exp
       const decodedToken = jwtDecode(token);
@@ -43,9 +44,9 @@ const Login = ({ onLogin }) => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-6 mt-3">
+        <div className="col-md-6 mt-3 mb-3">
           <div
-            className={`card border-primary mt-5 ${
+            className={`card border-primary ${
               isSubmitted ? "border-success" : ""
             }`}
           >

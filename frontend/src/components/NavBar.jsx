@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
-import Logo from "../img/download.png";
+import Logo from "../img/logotipo1.png";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 
@@ -21,8 +21,8 @@ function Navbar() {
             className="w-[60px]"
             alt="Logo"
             style={{ marginLeft: "15px" }}
-            width={70}
-            height={60}
+            width={90}
+            height={80}
           />
         </Link>
         <div
@@ -100,28 +100,12 @@ function Navbar() {
           >
             Contact
           </Link>
-          {isLoggedIn && (
-            <Link
-              to="/faq"
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              FAQ
-            </Link>
-          )}
           {!isLoggedIn && (
             <Link
               to="/login"
               style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
             >
               Log In
-            </Link>
-          )}
-          {!isLoggedIn && (
-            <Link
-              to="/register"
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              Sign Up
             </Link>
           )}
           {isLoggedIn && (

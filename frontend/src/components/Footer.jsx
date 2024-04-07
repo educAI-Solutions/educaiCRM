@@ -4,81 +4,52 @@ import {
   faLinkedin,
   faWhatsapp,
   faGithub,
-  faNode,
-  faDiscord,
-  faReact,
 } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col items-center p-4 bg-gray-900 text-white relative w-full">
-      {/* Primera "fila" */}
-      <div className="flex items-start w-full mb-2 justify-between">
-        <div>
-          <p className="font-bold">Follow Us On Our Social Media!</p>
-        </div>
-        <div>
-          <p className="font-bold">Special Thanks</p>
-        </div>
-      </div>
-
-      {/* Segunda "fila" */}
-      <div className="flex items-start w-full mt-2 justify-between">
+    <div
+      className="flex flex-col items-center p-4 text-white relative w-full"
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
+        fontFamily: "Montserrat, sans-serif",
+      }}
+    >
+      {/* First row */}
+      <div className="flex items-start w-full mt-2 justify-center text-center">
         <div className="flex gap-2">
-          {/* Logos de LinkedIn, WhatsApp y GitHub */}
+          {/* LinkedIn, WhatsApp, and GitHub logos */}
           <a
             href="https://www.linkedin.com/"
             target="_blank"
-            rel="noopener noreferrer"
-            className="icon-linkedin"
+            rel="noreferrer"
+            className="m-2 text-white"
           >
             <FontAwesomeIcon icon={faLinkedin} size="2x" />
           </a>
           <a
-            href="https://web.whatsapp.com/"
+            href="https://wa.me/1234567890"
             target="_blank"
-            rel="noopener noreferrer"
-            className="icon-whatsapp"
+            rel="noreferrer"
+            className="m-2 text-white"
           >
             <FontAwesomeIcon icon={faWhatsapp} size="2x" />
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/"
             target="_blank"
-            rel="noopener noreferrer"
-            className="icon-github"
+            rel="noreferrer"
+            className="m-2 text-white"
           >
             <FontAwesomeIcon icon={faGithub} size="2x" />
           </a>
         </div>
-        <div className="flex gap-2">
-          {/* Logos de React, Node y Discord */}
-          <a
-            href="https://es.react.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="icon-red"
-          >
-            <FontAwesomeIcon icon={faReact} size="2x" />
-          </a>
-          <a
-            href="https://nodejs.org/en"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="icon-red"
-          >
-            <FontAwesomeIcon icon={faNode} size="2x" />
-          </a>
-          <a
-            href="https://discord.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="icon-red"
-          >
-            <FontAwesomeIcon icon={faDiscord} size="2x" />
-          </a>
-        </div>
       </div>
+      <p className="text-center mt-4">
+        &copy; {new Date().getFullYear()} All rights reserved to EducAI
+        Solutions
+      </p>
     </div>
   );
 };
