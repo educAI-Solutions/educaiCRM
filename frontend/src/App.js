@@ -27,6 +27,7 @@ import StudentUpcomingClasses from "./pages/student/StudentUpcomingClasses";
 import StudentCourses from "./pages/student/StudentCourses";
 import StudentWeekly from "./pages/student/StudentWeekly";
 import StudentConfiguration from "./pages/student/StudentConfiguration";
+import Studenteditprofile from "./pages/student/Studenteditprofile";
 
 export const UserContext = createContext();
 
@@ -165,6 +166,10 @@ function App() {
             <Route
               path="/student/configuration"
               element={<StudentConfiguration />}
+            />
+            <Route
+              path="/student/editprofile"
+              element={<Studenteditprofile />}
             />
             <Route path="/student/faq" element={<StudentFAQ />}></Route>
             <Route path="*" element={<PageNotFound />} />
