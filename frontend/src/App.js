@@ -19,7 +19,8 @@ import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import TeacherAttendance from "./pages/teacher/TeacherAttendance";
 import TeacherFAQ from "./pages/teacher/TeacherFAQ";
 import TeacherWeekly from "./pages/teacher/TeacherWeekly";
-import TeacherUpload from "./pages/teacher/TeacherUpload";
+import TeacherClasses from "./pages/teacher/TeacherClasses";
+import TeacherCourses from "./pages/teacher/TeacherCourses";
 import Notifications from "./pages/Notifications";
 import StudentFAQ from "./pages/student/StudentFAQ";
 import Home from "./pages/Home";
@@ -136,12 +137,12 @@ function App() {
               element={<TeacherDashboard />}
             ></Route>
             <Route path="/teacher/faq" element={<TeacherFAQ />}></Route>
+            <Route path="/teacher/courses" element={<TeacherCourses />}></Route>
+            <Route path="/teacher/classes" element={<TeacherClasses />}></Route>
             <Route
               path="/student/attendance"
               element={<StudentAttendance />}
             ></Route>
-            <Route path="/teacher/upload" element={<TeacherUpload />}></Route>
-            <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
             <Route
               path="/student/dashboard"
               element={<StudentDashboard />}

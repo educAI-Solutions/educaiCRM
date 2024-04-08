@@ -8,6 +8,7 @@ import {
   FaChalkboardTeacher,
   FaUserCheck,
   FaCog,
+  FaListAlt,
 } from "react-icons/fa";
 import AdminJustifications from "./AdminJustifications";
 import AdminUsers from "./AdminUsers";
@@ -16,6 +17,7 @@ import AdminInsights from "./AdminInsights";
 import AdminAttendance from "./AdminAttendance";
 import AdminClasses from "./AdminClasses";
 import AdminConfiguration from "./AdminConfiguration";
+import AdminPrograms from "./AdminPrograms";
 
 function AdminDashboard() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -36,6 +38,8 @@ function AdminDashboard() {
         return <AdminAttendance />;
       case "configuration":
         return <AdminConfiguration />;
+      case "programs":
+        return <AdminPrograms />;
       default:
         return <></>;
     }
@@ -98,6 +102,18 @@ function AdminDashboard() {
           >
             <Card.Body>
               <FaUsers className="m-2" /> Users
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-3 ${
+              selectedItem === "programs" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("programs")}
+          >
+            <Card.Body>
+              <FaListAlt className="m-2" /> Programs
             </Card.Body>
           </Card>
         </Col>

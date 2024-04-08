@@ -79,13 +79,13 @@ function TeacherDashboard() {
           <Col xs={12} sm={6} md={4} lg={3}>
             <Card className="text-center shadow mb-3 h-100">
               <Link
-                to="/teacher/upload"
+                to="/teacher/classes"
                 className="text-decoration-none text-dark"
               >
                 <Card.Body>
                   <FaFileUpload className="dashboard-icon" />
-                  <Card.Title className="mt-3">Upload Material</Card.Title>
-                  <Card.Text>Upload the class material here</Card.Text>
+                  <Card.Title className="mt-3">Classes</Card.Title>
+                  <Card.Text>Manage current and future classes</Card.Text>
                 </Card.Body>
               </Link>
             </Card>
@@ -93,7 +93,7 @@ function TeacherDashboard() {
           <Col xs={12} sm={6} md={4} lg={3}>
             <Card className="text-center shadow mb-3 h-100">
               <Link
-                to="/student/attendance"
+                to="/teacher/attendance"
                 className="text-decoration-none text-dark"
               >
                 <Card.Body>
@@ -106,7 +106,10 @@ function TeacherDashboard() {
           </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
             <Card className="text-center shadow mb-3 h-100">
-              <Link to="#" className="text-decoration-none text-dark">
+              <Link
+                to="/teacher/courses"
+                className="text-decoration-none text-dark"
+              >
                 <Card.Body>
                   <FaBookOpen className="dashboard-icon" />
                   <Card.Title className="mt-3">Current courses</Card.Title>
