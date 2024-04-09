@@ -4,7 +4,6 @@ import axios from "axios";
 
 const AdminPrograms = () => {
   const [programs, setPrograms] = useState([]);
-  const [editingProgram, setEditingProgram] = useState(null);
   const [newProgram, setNewProgram] = useState({});
 
   useEffect(() => {
@@ -28,17 +27,21 @@ const AdminPrograms = () => {
     }
   };
 
-  const handleEdit = (program) => {
-    setEditingProgram(program);
-  };
-
   const handleNewProgramChange = (event) => {
-    setNewProgram({ ...newProgram, name: event.target.value });
+    setNewProgram({
+      ...newProgram,
+      name: event.target.value,
+      description: event.target.value,
+      courses: event.target.value,
+      participants: event.target.value,
+    });
   };
 
   const handleDelete = async (programId) => {
     try {
-      await axios.delete(`http://localhost:5050/api/programs/${programId}`);
+      await axios.delete(
+        `http://localhost:5050/api/programs/delete/${programId}`
+      );
       fetchPrograms();
     } catch (error) {
       console.error("Error deleting program:", error);
@@ -112,7 +115,7 @@ const AdminPrograms = () => {
             name="courses"
             value={newProgram.courses || ""}
             onChange={handleNewProgramChange}
-            placeholder="Courses Included"
+            placeholder="Courses"
           />
           <Form.Control
             name="participants"
