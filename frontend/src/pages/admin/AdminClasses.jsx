@@ -1,27 +1,72 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, Button, Card, Container, Row } from "react-bootstrap";
+import {
+  Table,
+  Form,
+  Button,
+  Card,
+  Container,
+  Row,
+  Pagination,
+} from "react-bootstrap";
+import Select from "react-select";
 import axios from "axios";
 
 function AdminClasses() {
   const [classes, setClasses] = useState([]);
-  const [selectedClass, setSelectedClass] = useState(null);
+  const [courses, setCourses] = useState([]);
   const [classForm, setClassForm] = useState({
-    className: "",
+    name: "",
+    date: "",
+    startTime: "",
+    endTime: "",
+    location: "",
     course: "",
-    startDate: "",
-    endDate: "",
+    instructors: [],
+    participants: [],
   });
+
+  // Pagination States
+  const [currentPage, setCurrentPage] = useState(1);
+  const classesPerPage = 2;
+  const indexOfLastClass = currentPage * classesPerPage;
+  const indexOfFirstClass = indexOfLastClass - classesPerPage;
+  const currentClasses = classes.slice(indexOfFirstClass, indexOfLastClass);
 
   useEffect(() => {
     fetchClasses();
+    fetchCourses();
   }, []);
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get("/api/classes");
+      const response = await axios.get(
+        "http://localhost:5050/api/classes/get-all"
+      );
+      if (!Array.isArray(response.data.data)) {
+        console.error("Error: received non-array response data");
+        setClasses([]);
+        return;
+      }
       setClasses(response.data.data);
     } catch (error) {
       console.error("Error fetching classes:", error);
+    }
+  };
+
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5050/api/courses/get-all"
+      );
+      if (Array.isArray(response.data.data)) {
+        setCourses(response.data.data);
+      } else {
+        console.error("Error: received non-array response data");
+        setCourses([]);
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      setCourses([]);
     }
   };
 
@@ -29,29 +74,34 @@ function AdminClasses() {
     setClassForm({ ...classForm, [event.target.name]: event.target.value });
   };
 
+  const handleCourseChange = (selectedCourse) => {
+    setClassForm({
+      ...classForm,
+      course: selectedCourse.value,
+    });
+  };
+
   const handleCreateClass = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/api/classes", classForm);
+      await axios.post("http://localhost:5050/api/classes/create", classForm);
       fetchClasses();
     } catch (error) {
       console.error("Error creating class:", error);
     }
   };
 
-  const handleUpdateClass = async (event) => {
-    event.preventDefault();
-    try {
-      await axios.put(`/api/classes/${selectedClass._id}`, classForm);
-      fetchClasses();
-    } catch (error) {
-      console.error("Error updating class:", error);
-    }
+  const handleEditClass = async (classId) => {
+    console.log("Updating class for id:", classId);
   };
 
-  const handleSelectClass = (classItem) => {
-    setSelectedClass(classItem);
-    setClassForm(classItem);
+  const handleDeleteClass = async (classId) => {
+    try {
+      await axios.delete(`http://localhost:5050/api/classes/delete/${classId}`);
+      fetchClasses();
+    } catch (error) {
+      console.error("Error deleting class:", error);
+    }
   };
 
   return (
@@ -59,86 +109,131 @@ function AdminClasses() {
       <Row className="mb-3 text-center">
         <h1>Class Management</h1>
       </Row>
-      <Card className="mb-4 shadow">
+      <Card className="shadow mb-3">
         <Card.Body>
-          <Form
-            onSubmit={selectedClass ? handleUpdateClass : handleCreateClass}
-          >
-            <Form.Group controlId="className">
-              <Form.Label>Class Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="className"
-                value={classForm.className}
-                onChange={handleFormChange}
-              />
-            </Form.Group>
-
-            <Form.Group controlId="course">
-              <Form.Label>Course</Form.Label>
-              <Form.Control
-                type="text"
-                name="course"
-                value={classForm.course}
-                onChange={handleFormChange}
-              />
-            </Form.Group>
-
-            <Form.Group controlId="startDate">
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="startDate"
-                value={classForm.startDate}
-                onChange={handleFormChange}
-              />
-            </Form.Group>
-
-            <Form.Group controlId="endDate">
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="endDate"
-                value={classForm.endDate}
-                onChange={handleFormChange}
-              />
-            </Form.Group>
-
-            <Button type="submit">
-              {selectedClass ? "Update Class" : "Create Class"}
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-
-      <Card className="shadow">
-        <Card.Body>
-          <Table>
+          <h2>Class List</h2>
+          <Table responsive>
             <thead>
               <tr>
                 <th>Class Name</th>
                 <th>Course</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>Location</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {classes.map((classItem) => (
+              {currentClasses.map((classItem) => (
                 <tr key={classItem._id}>
-                  <td>{classItem.className}</td>
-                  <td>{classItem.course}</td>
-                  <td>{classItem.startDate}</td>
-                  <td>{classItem.endDate}</td>
+                  <td>{classItem.name}</td>
+                  <td>{classItem.course.code}</td>
+                  <td>{classItem.date}</td>
+                  <td>{classItem.startTime}</td>
+                  <td>{classItem.location}</td>
                   <td>
-                    <Button onClick={() => handleSelectClass(classItem)}>
+                    <Button onClick={() => handleEditClass(classItem._id)}>
                       Edit
+                    </Button>
+                    <Button onClick={() => handleDeleteClass(classItem._id)}>
+                      Delete
                     </Button>
                   </td>
                 </tr>
               ))}
             </tbody>
+            <Pagination>
+              {[
+                ...Array(Math.ceil(classes.length / classesPerPage)).keys(),
+              ].map((number) => (
+                <Pagination.Item
+                  key={number}
+                  active={number + 1 === currentPage}
+                  onClick={() => setCurrentPage(number + 1)}
+                >
+                  {number + 1}
+                </Pagination.Item>
+              ))}
+            </Pagination>
           </Table>
+        </Card.Body>
+      </Card>
+      <Card className="mb-4 shadow">
+        <Card.Body>
+          <h2>Create New Class</h2>
+          <Form onSubmit={handleCreateClass}>
+            <Form.Group controlId="name">
+              <Form.Label>Class Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={classForm.name}
+                onChange={handleFormChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group controlId="course">
+              <Form.Label>Course</Form.Label>
+              <Select
+                name="course"
+                options={courses.map((course) => ({
+                  value: course._id,
+                  label: course.name,
+                }))}
+                className="basic-single-select"
+                classNamePrefix="select"
+                onChange={handleCourseChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group controlId="date">
+              <Form.Label>Date</Form.Label>
+              <Form.Control
+                type="date"
+                name="date"
+                value={classForm.date}
+                onChange={handleFormChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group controlId="startTime">
+              <Form.Label>Start Time</Form.Label>
+              <Form.Control
+                type="time"
+                name="startTime"
+                value={classForm.startTime}
+                onChange={handleFormChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group controlId="endTime">
+              <Form.Label>End Time</Form.Label>
+              <Form.Control
+                type="time"
+                name="endTime"
+                value={classForm.endTime}
+                onChange={handleFormChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group controlId="location">
+              <Form.Label>Location</Form.Label>
+              <Form.Control
+                type="text"
+                name="location"
+                value={classForm.location}
+                onChange={handleFormChange}
+                required
+              />
+            </Form.Group>
+
+            <Button type="submit">Create Class</Button>
+          </Form>
         </Card.Body>
       </Card>
     </Container>

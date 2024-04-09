@@ -7,32 +7,81 @@ import {
   Row,
   Col,
   Container,
+  Pagination,
 } from "react-bootstrap";
+import Select from "react-select";
 import axios from "axios";
 
 function AdminCourses() {
   const [courses, setCourses] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState(null);
   const [courseForm, setCourseForm] = useState({
-    courseName: "",
-    courseCode: "",
+    name: "",
+    code: "",
     section: "",
+    program: null,
     instructors: [],
     participants: [],
     startDate: "",
     endDate: "",
   });
+  const [programs, setPrograms] = useState([]);
+  const [instructors, setInstructors] = useState([]);
+
+  // Pagination States
+  const [currentPage, setCurrentPage] = useState(1);
+  const coursesPerPage = 2;
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = courses.slice(indexOfFirstCourse, indexOfLastCourse);
 
   useEffect(() => {
     fetchCourses();
+    fetchPrograms();
+    fetchInstructors();
   }, []);
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("/api/courses");
+      const response = await axios.get(
+        "http://localhost:5050/api/courses/get-all"
+      );
       setCourses(response.data.data);
     } catch (error) {
       console.error("Error fetching courses:", error);
+    }
+  };
+
+  const fetchPrograms = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5050/api/programs/get-all"
+      );
+      if (Array.isArray(response.data.data)) {
+        setPrograms(response.data.data);
+      } else {
+        console.error("Error: received non-array response data");
+        setPrograms([]);
+      }
+    } catch (error) {
+      console.error("Error fetching programs:", error);
+      setPrograms([]);
+    }
+  };
+
+  const fetchInstructors = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5050/api/user/get-teachers"
+      );
+      if (Array.isArray(response.data.data)) {
+        setInstructors(response.data.data);
+      } else {
+        console.error("Error: received non-array response data");
+        setInstructors([]);
+      }
+    } catch (error) {
+      console.error("Error fetching instructors:", error);
+      setInstructors([]);
     }
   };
 
@@ -40,38 +89,43 @@ function AdminCourses() {
     setCourseForm({ ...courseForm, [event.target.name]: event.target.value });
   };
 
+  const handleProgramChange = (selectedProgram) => {
+    setCourseForm({
+      ...courseForm,
+      program: selectedProgram.value,
+    });
+  };
+
+  const handleInstructorsChange = (selectedInstructors) => {
+    setCourseForm({
+      ...courseForm,
+      instructors: selectedInstructors.map((instructor) => instructor.value),
+    });
+  };
+
   const handleCreateCourse = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/api/courses", courseForm);
+      await axios.post("http://localhost:5050/api/courses/create", courseForm);
       fetchCourses();
     } catch (error) {
       console.error("Error creating course:", error);
     }
   };
 
-  const handleUpdateCourse = async (event) => {
-    event.preventDefault();
-    try {
-      await axios.put(`/api/courses/${selectedCourse._id}`, courseForm);
-      fetchCourses();
-    } catch (error) {
-      console.error("Error updating course:", error);
-    }
-  };
-
   const handleDeleteCourse = async (courseId) => {
     try {
-      await axios.delete(`/api/courses/${courseId}`);
+      await axios.delete(
+        `http://localhost:5050/api/courses/delete/${courseId}`
+      );
       fetchCourses();
     } catch (error) {
       console.error("Error deleting course:", error);
     }
   };
 
-  const handleSelectCourse = (course) => {
-    setSelectedCourse(course);
-    setCourseForm(course);
+  const handleEditCourse = async (courseId) => {
+    console.log("Edit course with id:", courseId);
   };
 
   return (
@@ -80,32 +134,84 @@ function AdminCourses() {
         <Row className="mb-3 text-center">
           <h1>Course Management</h1>
         </Row>
+        <Row className="justify-content-center mt-3 mb-3">
+          <Col md={8}>
+            <Card className="shadow">
+              <Card.Body>
+                <h2>Course List</h2>
+                <Table responsive>
+                  <thead>
+                    <tr>
+                      <th>Course Name</th>
+                      <th>Course Code</th>
+                      <th>Section</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentCourses.map((course) => (
+                      <tr key={course._id}>
+                        <td>{course.name}</td>
+                        <td>{course.code}</td>
+                        <td>{course.section}</td>
+                        <td>
+                          <Button onClick={() => handleEditCourse(course._id)}>
+                            Edit
+                          </Button>
+                          <Button
+                            onClick={() => handleDeleteCourse(course._id)}
+                          >
+                            Delete
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <Pagination>
+                    {[
+                      ...Array(
+                        Math.ceil(courses.length / coursesPerPage)
+                      ).keys(),
+                    ].map((number) => (
+                      <Pagination.Item
+                        key={number}
+                        active={number + 1 === currentPage}
+                        onClick={() => setCurrentPage(number + 1)}
+                      >
+                        {number + 1}
+                      </Pagination.Item>
+                    ))}
+                  </Pagination>
+                </Table>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
         <Row className="justify-content-center">
           <Col md={8}>
             <Card className="shadow">
               <Card.Body>
-                <Form
-                  onSubmit={
-                    selectedCourse ? handleUpdateCourse : handleCreateCourse
-                  }
-                >
-                  <Form.Group controlId="courseName">
+                <h2>Create a New Course</h2>
+                <Form onSubmit={handleCreateCourse}>
+                  <Form.Group controlId="name">
                     <Form.Label>Course Name</Form.Label>
                     <Form.Control
                       type="text"
-                      name="courseName"
-                      value={courseForm.courseName}
+                      name="name"
+                      value={courseForm.name}
                       onChange={handleFormChange}
+                      required
                     />
                   </Form.Group>
 
-                  <Form.Group controlId="courseCode">
+                  <Form.Group controlId="code">
                     <Form.Label>Course Code</Form.Label>
                     <Form.Control
                       type="text"
-                      name="courseCode"
-                      value={courseForm.courseCode}
+                      name="code"
+                      value={courseForm.code}
                       onChange={handleFormChange}
+                      required
                     />
                   </Form.Group>
 
@@ -116,26 +222,42 @@ function AdminCourses() {
                       name="section"
                       value={courseForm.section}
                       onChange={handleFormChange}
+                      required
                     />
                   </Form.Group>
 
-                  <Form.Group controlId="instructors">
+                  <Form.Group>
+                    <Form.Label>Programs</Form.Label>
+                    <Select
+                      name="programs"
+                      // show the options plus the none option
+                      options={[
+                        { value: null, label: "None" },
+                        ...programs.map((program) => ({
+                          value: program._id,
+                          label: program.name,
+                        })),
+                      ]}
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      onChange={handleProgramChange}
+                      required
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
                     <Form.Label>Instructors</Form.Label>
-                    <Form.Control
-                      type="text"
+                    <Select
+                      isMulti
                       name="instructors"
-                      value={courseForm.instructors}
-                      onChange={handleFormChange}
-                    />
-                  </Form.Group>
-
-                  <Form.Group controlId="participants">
-                    <Form.Label>Participants</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="participants"
-                      value={courseForm.participants}
-                      onChange={handleFormChange}
+                      options={instructors.map((instructor) => ({
+                        value: instructor._id,
+                        label: instructor.username,
+                      }))}
+                      className="basic-single-select"
+                      classNamePrefix="select"
+                      onChange={handleInstructorsChange}
+                      required
                     />
                   </Form.Group>
 
@@ -146,6 +268,7 @@ function AdminCourses() {
                       name="startDate"
                       value={courseForm.startDate}
                       onChange={handleFormChange}
+                      required
                     />
                   </Form.Group>
 
@@ -156,45 +279,17 @@ function AdminCourses() {
                       name="endDate"
                       value={courseForm.endDate}
                       onChange={handleFormChange}
+                      required
                     />
                   </Form.Group>
 
                   <Button type="submit" className="mt-3">
-                    {selectedCourse ? "Update Course" : "Create Course"}
+                    Create Course
                   </Button>
                 </Form>
               </Card.Body>
             </Card>
           </Col>
-        </Row>
-        <Row className="justify-content-center mt-4">
-          <Table>
-            <thead>
-              <tr>
-                <th>Course Name</th>
-                <th>Course Code</th>
-                <th>Section</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {courses.map((course) => (
-                <tr key={course._id}>
-                  <td>{course.courseName}</td>
-                  <td>{course.courseCode}</td>
-                  <td>{course.section}</td>
-                  <td>
-                    <Button onClick={() => handleSelectCourse(course)}>
-                      Edit
-                    </Button>
-                    <Button onClick={() => handleDeleteCourse(course._id)}>
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
         </Row>
       </div>
     </Container>

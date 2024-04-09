@@ -10,24 +10,28 @@ function RecentUsers() {
     try {
       const fetchUsers = async () => {
         const response = await axios.get(
-          "http://127.0.0.1:5050/api/util/fetch-recent-users",
-          {
-            headers: {
-              authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
+          "http://127.0.0.1:5050/api/user/get-recent"
         );
         // setUsers with the response data, specifically the accounts key
-        setUsers(response.data.accounts);
+        setUsers(response.data.data);
       };
       fetchUsers();
     } catch (error) {
       console.error("Fetch users error:", error);
+      setUsers([]);
     }
   }, []);
 
-  const deleteUser = (userId) => {
-    // Delete the user with the given userId here and update the users state
+  const deleteUser = async (userId) => {
+    try {
+      // Make an API call to delete the user
+      await axios.delete(`http://localhost:5050/api/auth/delete/${userId}`);
+
+      // Update the users state by filtering out the deleted user
+      setUsers(users.filter((user) => user._id !== userId));
+    } catch (error) {
+      console.error("Delete user error:", error);
+    }
   };
 
   const editRole = (userId, newRole) => {
@@ -45,20 +49,29 @@ function RecentUsers() {
           <th>Actions</th>
         </tr>
       </thead>
+      {users.length === 0 && (
+        <tbody>
+          <tr>
+            <td colSpan="5" className="text-center">
+              No users found
+            </td>
+          </tr>
+        </tbody>
+      )}
       <tbody>
         {users.slice(0, 5).map((user, index) => (
-          <tr key={user.id}>
+          <tr key={user._id}>
             <td>{index + 1}</td>
             <td>{user.username}</td>
             <td>{user.email}</td>
             <td>{user.role}</td>
             <td>
-              <Button variant="danger" onClick={() => deleteUser(user.id)}>
+              <Button variant="danger" onClick={() => deleteUser(user._id)}>
                 Delete
               </Button>
               <Button
                 variant="primary"
-                onClick={() => editRole(user.id, "newRole")}
+                onClick={() => editRole(user._id, "newRole")}
               >
                 Edit Role
               </Button>

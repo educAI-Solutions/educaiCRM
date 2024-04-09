@@ -1,13 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Pagination,
+  Card,
+} from "react-bootstrap";
 import axios from "axios";
+import Select from "react-select";
 
 const AdminPrograms = () => {
   const [programs, setPrograms] = useState([]);
   const [newProgram, setNewProgram] = useState({});
+  const [courses, setCourses] = useState([]);
+  const [participants, setParticipants] = useState([]);
+
+  // Pagination States
+  const [currentPage, setCurrentPage] = useState(1);
+  const programsPerPage = 2;
+  const indexOfLastProgram = currentPage * programsPerPage;
+  const indexOfFirstProgram = indexOfLastProgram - programsPerPage;
+  const currentPrograms = programs.slice(
+    indexOfFirstProgram,
+    indexOfLastProgram
+  );
 
   useEffect(() => {
     fetchPrograms();
+    fetchCourses();
+    fetchParticipants();
   }, []);
 
   const fetchPrograms = async () => {
@@ -27,13 +50,67 @@ const AdminPrograms = () => {
     }
   };
 
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5050/api/courses/get-all"
+      );
+      if (Array.isArray(response.data.data)) {
+        setCourses(response.data.data);
+      } else {
+        console.error("Error: received non-array response data");
+        setCourses([]);
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      setCourses([]);
+    }
+  };
+
+  const fetchParticipants = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5050/api/user/get-students"
+      );
+      if (Array.isArray(response.data.data)) {
+        setParticipants(response.data.data);
+      } else {
+        console.error("Error: received non-array response data");
+        setParticipants([]);
+      }
+    } catch (error) {
+      console.error("Error fetching participants:", error);
+      setParticipants([]);
+    }
+  };
+
   const handleNewProgramChange = (event) => {
     setNewProgram({
       ...newProgram,
-      name: event.target.value,
-      description: event.target.value,
-      courses: event.target.value,
-      participants: event.target.value,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleCourseChange = (selectedCourses) => {
+    if (selectedCourses.some((course) => course.value === "none")) {
+      setNewProgram({
+        ...newProgram,
+        courses: [],
+      });
+    } else {
+      setNewProgram({
+        ...newProgram,
+        courses: selectedCourses.map((course) => course.value),
+      });
+    }
+  };
+
+  const handleParticipantChange = (selectedParticipants) => {
+    setNewProgram({
+      ...newProgram,
+      participants: selectedParticipants.map(
+        (participant) => participant.value
+      ),
     });
   };
 
@@ -68,69 +145,107 @@ const AdminPrograms = () => {
 
   return (
     <Container>
+      <Row className="mb-3 text-center">
+        <Col>
+          <h1>Program Management</h1>
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Card className="shadow">
+          <Card.Body>
+            {currentPrograms.map((program) => (
+              <Card className="justify-content-center">
+                <Card.Body>
+                  <h5>{program.name}</h5>
+                  <p>{program.description}</p>
+                  <Button
+                    variant="primary"
+                    onClick={() => handleEditCourses(program._id)}
+                  >
+                    Edit Courses
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => handleEditParticipants(program._id)}
+                  >
+                    Edit Participants
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDelete(program._id)}
+                  >
+                    Delete
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))}
+            <Pagination>
+              {[
+                ...Array(Math.ceil(programs.length / programsPerPage)).keys(),
+              ].map((number) => (
+                <Pagination.Item
+                  key={number}
+                  active={number + 1 === currentPage}
+                  onClick={() => setCurrentPage(number + 1)}
+                >
+                  {number + 1}
+                </Pagination.Item>
+              ))}
+            </Pagination>
+          </Card.Body>
+        </Card>
+      </Row>
       <Row className="my-3">
-        <Col>
-          <h2>Admin Programs Page</h2>
-        </Col>
-      </Row>
-      <Row>
-        {programs.map((program) => (
-          <Col key={program._id} xs={12} md={6} lg={4}>
-            <h5>{program.name}</h5>
-            <p>{program.description}</p>
-            <Button
-              variant="primary"
-              onClick={() => handleEditCourses(program._id)}
-            >
-              Edit Courses
+        <Card>
+          <Card.Body>
+            <h2>Create New Program</h2>
+            <Form.Control
+              name="name"
+              value={newProgram.name || ""}
+              onChange={handleNewProgramChange}
+              placeholder="New Program Name"
+              required
+            />
+            <Form.Control
+              name="description"
+              value={newProgram.description || ""}
+              onChange={handleNewProgramChange}
+              placeholder="Description"
+            />
+            <Select
+              isMulti
+              name="courses"
+              options={[
+                { value: "none", label: "None for now" },
+                ...courses.map((course) => ({
+                  value: course._id,
+                  label: `${course.name} - Section:${course.section}`,
+                })),
+              ]}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              onChange={handleCourseChange}
+              placeholder="Select courses..."
+              required
+            />
+            <Select
+              isMulti
+              name="participants"
+              options={participants.map((participant) => ({
+                value: participant._id,
+                label: participant.username,
+              }))}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              onChange={handleParticipantChange}
+              placeholder="Select students..."
+              required
+            />
+            <Button variant="primary" onClick={handleCreate}>
+              Create
             </Button>
-            <Button
-              variant="secondary"
-              onClick={() => handleEditParticipants(program._id)}
-            >
-              Edit Participants
-            </Button>
-            <Button variant="danger" onClick={() => handleDelete(program._id)}>
-              Delete
-            </Button>
-          </Col>
-        ))}
-      </Row>
-      <Row className="my-3">
-        <Col>
-          <h2>Create New Program</h2>
-          <Form.Control
-            name="name"
-            value={newProgram.name || ""}
-            onChange={handleNewProgramChange}
-            placeholder="New Program Name"
-          />
-          <Form.Control
-            name="description"
-            value={newProgram.description || ""}
-            onChange={handleNewProgramChange}
-            placeholder="Description"
-          />
-          <Form.Control
-            name="courses"
-            value={newProgram.courses || ""}
-            onChange={handleNewProgramChange}
-            placeholder="Courses"
-          />
-          <Form.Control
-            name="participants"
-            value={newProgram.participants || ""}
-            onChange={handleNewProgramChange}
-            placeholder="Participants"
-          />
-        </Col>
-      </Row>
-      <Row className="mt-3">
-        <Col>
-          <Button variant="primary" onClick={handleCreate}>
-            Create
-          </Button>
-        </Col>
+          </Card.Body>
+        </Card>
       </Row>
     </Container>
   );

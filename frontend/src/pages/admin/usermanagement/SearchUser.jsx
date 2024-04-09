@@ -5,21 +5,16 @@ import axios from "axios";
 function SearchUser() {
   const [searchTerm, setSearchTerm] = useState("");
   const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
 
   const handleSearch = async (event) => {
     event.preventDefault();
     // Fetch the users from your API here based on the searchTerm and set the users state
     try {
       const response = await axios.get(
-        `http://127.0.0.1:5050/api/util/fetch-user`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          params: { searchTerm },
-        }
+        `http://127.0.0.1:5050/api/user/get/${searchTerm}`
       );
-      setUser(response.data.account);
+      setUser(response.data.data);
     } catch (error) {
       console.error("Fetch users error:", error);
       // Display message if user not found
@@ -27,8 +22,16 @@ function SearchUser() {
     }
   };
 
-  const deleteUser = (userId) => {
-    // Delete the user with the given userId here and update the users state
+  const deleteUser = async (userId) => {
+    try {
+      // Make an API call to delete the user
+      await axios.delete(`http://localhost:5050/api/auth/delete/${userId}`);
+
+      // Update the users state by filtering out the deleted user
+      setUsers(users.filter((user) => user._id !== userId));
+    } catch (error) {
+      console.error("Delete user error:", error);
+    }
   };
 
   const editUser = (userId) => {
@@ -68,10 +71,10 @@ function SearchUser() {
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
-                <Button variant="danger" onClick={() => deleteUser(user.id)}>
+                <Button variant="danger" onClick={() => deleteUser(user._id)}>
                   Delete
                 </Button>
-                <Button variant="primary" onClick={() => editUser(user.id)}>
+                <Button variant="primary" onClick={() => editUser(user._id)}>
                   Edit User
                 </Button>
               </td>
