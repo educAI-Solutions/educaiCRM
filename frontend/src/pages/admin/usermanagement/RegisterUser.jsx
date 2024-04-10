@@ -7,7 +7,6 @@ const RegisterUser = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -38,7 +37,6 @@ const RegisterUser = () => {
       );
 
       console.log("Registration response:", response.data);
-      setIsSubmitted(true);
       setError("");
       setSuccessMessage(`User ${username} registered successfully.`);
     } catch (error) {

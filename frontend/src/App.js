@@ -28,9 +28,6 @@ import StudentUpcomingClasses from "./pages/student/StudentUpcomingClasses";
 import StudentCourses from "./pages/student/StudentCourses";
 import StudentWeekly from "./pages/student/StudentWeekly";
 import StudentConfiguration from "./pages/student/StudentConfiguration";
-import TestUpload from "./pages/TestUpload";
-import TestDownload from "./pages/TestDownload";
-import Studenteditprofile from "./pages/student/Studenteditprofile";
 
 export const UserContext = createContext();
 
@@ -170,13 +167,7 @@ function App() {
               path="/student/configuration"
               element={<StudentConfiguration />}
             />
-            <Route
-              path="/student/editprofile"
-              element={<Studenteditprofile />}
-            />
             <Route path="/student/faq" element={<StudentFAQ />}></Route>
-            <Route path="/test/upload" element={<TestUpload />}></Route>
-            <Route path="/test/download" element={<TestDownload />}></Route>
             <Route path="*" element={<PageNotFound />} />
           </Routes>
 

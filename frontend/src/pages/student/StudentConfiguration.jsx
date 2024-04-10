@@ -1,5 +1,4 @@
 import React from "react";
-import Logo1 from "../../img/fotoperfil.png";
 import { Form, Button, Card, Row, Col } from "react-bootstrap";
 
 function StudentConfiguration() {
