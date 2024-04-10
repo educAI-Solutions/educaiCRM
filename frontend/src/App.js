@@ -35,13 +35,15 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
+  const [id, setId] = useState("");
   const [expDate, setExpDate] = useState("");
 
-  const onLogin = (token, username, role, exp) => {
+  const onLogin = (token, username, role, id, exp) => {
     setIsLoggedIn(true);
     setUsername(username);
     setRole(role);
     setExpDate(exp);
+    setId(id);
     localStorage.setItem("token", token);
     console.log("Logged in successfully as", username);
   };
@@ -50,6 +52,7 @@ function App() {
     setIsLoggedIn(false);
     setUsername("");
     setRole("");
+    setId("");
     localStorage.removeItem("token");
     console.log("Logged out successfully");
   };
@@ -59,13 +62,13 @@ function App() {
     const token = localStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
-      const { username, role, exp } = decodedToken;
+      const { username, role, id, exp } = decodedToken;
       if (Date.now() >= exp * 1000) {
         console.log("Token expired");
         onLogout();
       } else {
         console.log("Token still valid");
-        onLogin(token, username, role, exp);
+        onLogin(token, username, role, id, exp);
       }
     }
   }, []);
@@ -83,7 +86,7 @@ function App() {
 
   return (
     <UserContext.Provider
-      value={{ isLoggedIn, onLogin, onLogout, username, role }}
+      value={{ isLoggedIn, onLogin, onLogout, username, role, id }}
     >
       <BrowserRouter>
         <div

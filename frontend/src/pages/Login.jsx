@@ -29,11 +29,11 @@ const Login = ({ onLogin }) => {
 
       // Decoded token brings username, role, iat and exp
       const decodedToken = jwtDecode(token);
-      const { username, role, exp } = decodedToken;
+      const { username, role, id, exp } = decodedToken;
       // Verify the token and decode it
       setIsSubmitted(true);
       setError("");
-      onLogin(token, username, role, exp); // Call onLogin function to update authentication state
+      onLogin(token, username, role, id, exp); // Call onLogin function to update authentication state
       navigate("/"); // Redirect to the home page after successful login
     } catch (error) {
       console.error("Login error:", error);
