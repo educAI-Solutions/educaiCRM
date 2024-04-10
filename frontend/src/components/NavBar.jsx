@@ -4,6 +4,16 @@ import BurguerButton from "./BurguerButton";
 import Logo from "../img/logotipo1.png";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
+import { Dropdown } from "react-bootstrap";
+import {
+  FaUserCheck,
+  FaChalkboard,
+  FaUserClock,
+  FaBell,
+  FaEnvelope,
+  FaSignOutAlt,
+  FaUserCircle,
+} from "react-icons/fa";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
@@ -30,90 +40,85 @@ function Navbar() {
           style={{ marginRight: "20px" }}
         >
           {isLoggedIn && (
-            <Link
-              // Send to /roleDashboard based on the role
-              to={`/${role}/dashboard`}
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              Dashboard
-            </Link>
-          )}
-          <Link
-            to="/profile"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            {isLoggedIn && (
-              <span
-                style={{
-                  color: "#FFFFFF",
-                  fontWeight: "bold",
-                  fontSize: "1rem",
-                }}
-              >
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <FaUserCheck
+                  style={{ marginRight: "2px", marginBottom: "1px" }}
+                  size="1.5em"
+                />
                 {username} {/* display the username */}
-              </span>
-            )}
-          </Link>
-          <Link
-            to="#"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            {isLoggedIn && (
-              <span
-                style={{
-                  color: "#FFFFFF",
-                  fontWeight: "bold",
-                  fontSize: "1rem",
-                }}
-              >
-                {role} {/* display the role */}
-              </span>
-            )}
-          </Link>
-          {isLoggedIn && (role === "student" || role === "teacher") && (
-            <Link
-              to={`/${role}/attendance`}
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              Attendance
-            </Link>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  style={{ color: "black" }}
+                  href={`/${role}/dashboard`}
+                  className="d-block"
+                >
+                  <FaChalkboard style={{ marginRight: "5px" }} />
+                  Dashboard
+                </Dropdown.Item>
+                {(role === "student" || role === "teacher") && (
+                  <Dropdown.Item
+                    style={{ color: "black" }}
+                    href={`/${role}/attendance`}
+                    className="d-block"
+                  >
+                    <FaUserClock style={{ marginRight: "5px" }} />
+                    Attendance
+                  </Dropdown.Item>
+                )}
+                {(role === "student" || role === "admin") && (
+                  <Dropdown.Item
+                    style={{ color: "black" }}
+                    href={`/${role}/justifications`}
+                    className="d-block"
+                  >
+                    <FaUserCheck style={{ marginRight: "5px" }} />
+                    Justifications
+                  </Dropdown.Item>
+                )}
+                <Dropdown.Item
+                  style={{ color: "black" }}
+                  href="/notifications"
+                  className="d-block"
+                >
+                  <FaBell style={{ marginRight: "5px" }} />
+                  Notifications
+                </Dropdown.Item>
+                <Dropdown.Item
+                  style={{ color: "black" }}
+                  href="/contact"
+                  className="d-block"
+                >
+                  <FaEnvelope style={{ marginRight: "5px" }} />
+                  Contact
+                </Dropdown.Item>
+                <Dropdown.Item
+                  style={{ color: "black" }}
+                  href="/logout"
+                  className="d-block"
+                >
+                  <FaSignOutAlt style={{ marginRight: "5px" }} />
+                  Log Out
+                </Dropdown.Item>
+                <Dropdown.Item
+                  style={{ color: "black" }}
+                  href="/profile"
+                  className="d-block"
+                >
+                  <FaUserCircle style={{ marginRight: "5px" }} />
+                  Profile
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           )}
-          {isLoggedIn && (role === "student" || role === "admin") && (
-            <Link
-              to={`/${role}/justifications`}
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              Justifications
-            </Link>
-          )}
-          {isLoggedIn && (
-            <Link
-              to="/notifications"
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              Notifications
-            </Link>
-          )}
-          <Link
-            to="/contact"
-            style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-          >
-            Contact
-          </Link>
           {!isLoggedIn && (
             <Link
               to="/login"
               style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
             >
               Log In
-            </Link>
-          )}
-          {isLoggedIn && (
-            <Link
-              to="/logout"
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              Log Out
             </Link>
           )}
         </div>
