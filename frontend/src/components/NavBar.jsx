@@ -53,12 +53,17 @@ function Navbar() {
                 <Dropdown.Item
                   style={{ color: "black" }}
                   href={`/${role}/dashboard`}
+                  className="d-block"
                 >
                   <FaChalkboard style={{ marginRight: "5px" }} />
                   Dashboard
                 </Dropdown.Item>
                 {(role === "student" || role === "teacher") && (
-                  <Dropdown.Item href={`/${role}/attendance`}>
+                  <Dropdown.Item
+                    style={{ color: "black" }}
+                    href={`/${role}/attendance`}
+                    className="d-block"
+                  >
                     <FaUserClock style={{ marginRight: "5px" }} />
                     Attendance
                   </Dropdown.Item>
