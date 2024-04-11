@@ -46,8 +46,9 @@ function TeacherAttendance() {
     formData.append("file", selectedFile);
 
     try {
-      const response = await axios.post(
-        "http://localhost:7070/storage/upload/attendance",
+      // First, send the file to the endpoint that parses the Excel data
+      const parseResponse = await axios.post(
+        `http://localhost:5050/api/attendance/upload/${selectedClass}`,
         formData,
         {
           headers: {
@@ -56,7 +57,23 @@ function TeacherAttendance() {
         }
       );
 
-      console.log(response.data);
+      // If the parsing is successful, upload the file
+      if (parseResponse.data.success) {
+        formData.append("classId", selectedClass);
+        const uploadResponse = await axios.post(
+          "http://localhost:7070/storage/upload/attendance",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        console.log(uploadResponse.data);
+      } else {
+        console.error("Parse error:", parseResponse.data.error);
+      }
     } catch (error) {
       console.error("Upload error:", error);
     }
@@ -70,15 +87,19 @@ function TeacherAttendance() {
 
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/attendance/generate/${selectedClass}`
+        `http://localhost:5050/api/attendance/generate/${selectedClass}`,
+        { responseType: "arraybuffer" }
       );
-
-      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const blob = new Blob([response.data], {
+        type: "application/vnd.excel",
+      });
+      const filename = "attendance.xlsx";
       const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "attendance.xlsx");
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute("download", filename);
       document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
     } catch (error) {
       console.error("Download error:", error);
     }
