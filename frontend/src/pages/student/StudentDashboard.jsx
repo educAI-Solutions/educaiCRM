@@ -64,8 +64,8 @@ function StudentDashboard() {
             >
               <Card.Body>
                 <FaBook className="dashboard-icon" />
-                <Card.Title className="mt-3">Justifications</Card.Title>
-                <Card.Text>Manage your justifications here</Card.Text>
+                <Card.Title className="mt-3">Upload Justifications</Card.Title>
+                <Card.Text>Upload a new justification here</Card.Text>
               </Card.Body>
             </Link>
           </Card>
@@ -79,7 +79,7 @@ function StudentDashboard() {
               <Card.Body>
                 <FaSearch className="dashboard-icon" />
                 <Card.Title className="mt-3">Review Justifications</Card.Title>
-                <Card.Text>Review your Justifications</Card.Text>
+                <Card.Text>Review all your Justifications</Card.Text>
               </Card.Body>
             </Link>
           </Card>
