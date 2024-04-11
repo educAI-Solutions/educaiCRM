@@ -1,74 +1,136 @@
-import React, { useState, useEffect } from "react";
-import { Table, Form, Button, Row, Alert } from "react-bootstrap";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { Table, Container, Row } from "react-bootstrap";
+import { UserContext } from "../../App";
+import Select from "react-select";
 
 function StudentAttendance() {
+  const [coursesAttendance, setCoursesAttendance] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState("");
-  const [attendance, setAttendance] = useState([]);
-  const [attendancePercentage, setAttendancePercentage] = useState(0);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [classes, setClasses] = useState([]);
+  const { id } = useContext(UserContext);
 
   useEffect(() => {
-    // Fetch the courses from your API here and set the courses state
-    // Make sure to fetch only the courses that the student is enrolled in
+    fetchCoursesAttendance();
+    fetchCourses();
   }, []);
 
-  const handleCheckAttendance = async () => {
-    // Fetch the attendance data from your API here based on the selectedCourse and set the attendance state
-    // Make sure to fetch only the attendance data of the student
+  const fetchCoursesAttendance = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5050/api/attendance/student/${id}`
+      );
+      setCoursesAttendance(response.data.data);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
 
-    // Calculate the attendance percentage
-    const attendedClasses = attendance.filter(
-      (record) => record.status === "Present"
-    ).length;
-    const totalClasses = attendance.length;
-    const percentage = (attendedClasses / totalClasses) * 100;
-    setAttendancePercentage(percentage);
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5050/api/courses/get/participant/${id}`
+      );
+      setCourses(response.data.data);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+
+  const handleCourseChange = async (selectedOption) => {
+    setSelectedCourse(selectedOption);
+    if (selectedOption) {
+      try {
+        const response = await axios.get(
+          `http://localhost:5050/api/courses/get/${selectedOption.value}`
+        );
+        setClasses(response.data.data.classes);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+        setClasses([]);
+      }
+    } else {
+      setClasses([]);
+    }
   };
 
   return (
-    <div className="m-2">
-      <Row className="mb-3 text-center">
-        <h1>My Attendance</h1>
+    <Container className="justify-content-center">
+      <Row className="text-center">
+        <h2>Student Attendance Page</h2>
       </Row>
-      <Form className="mb-3">
-        <Form.Group controlId="courseSelect">
-          <Form.Label>Select Course</Form.Label>
-          <Form.Control
-            as="select"
-            value={selectedCourse}
-            onChange={(e) => setSelectedCourse(e.target.value)}
-          >
-            {courses.map((course) => (
-              <option key={course.id} value={course.id}>
-                {course.name}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        <Button variant="primary" onClick={handleCheckAttendance}>
-          Check Attendance
-        </Button>
-      </Form>
-      <Alert variant="info">
-        Attendance Percentage: {attendancePercentage}%
-      </Alert>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {attendance.map((record) => (
-            <tr key={record.date}>
-              <td>{record.date}</td>
-              <td>{record.status}</td>
+      <Row>
+        <h4>Overall Attendance</h4>
+        <Table responsive striped bordered hover>
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Section</th>
+              <th>Program</th>
+              <th>Attendance Percentage</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+          </thead>
+          <tbody>
+            {coursesAttendance.map((course) => (
+              <tr key={course._id}>
+                <td>{course.name}</td>
+                <td>{course.section}</td>
+                <td>{course.program}</td>
+                <td
+                  style={{
+                    color: course.attendancePercentage < 50 ? "red" : "green",
+                  }}
+                >
+                  {course.attendancePercentage}%
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Row>
+      <Row>
+        <h4>Course Details</h4>
+        <Select
+          value={selectedCourse}
+          onChange={handleCourseChange}
+          options={courses.map((course) => ({
+            value: course._id,
+            label: course.name,
+          }))}
+          isClearable
+          placeholder="Select a course"
+        />
+        {selectedCourse && (
+          <Table responsive striped bordered hover>
+            <thead>
+              <tr>
+                <th>Class Name</th>
+                <th>Date</th>
+                <th>Attended</th>
+              </tr>
+            </thead>
+            <tbody>
+              {classes.map((cls) => {
+                // Find the participant in the class, participants is an array of objects where the key participant holds the student id
+                const participant = cls.participants.find(
+                  (p) => p.participant === id
+                );
+                return (
+                  <tr key={cls._id}>
+                    <td>{cls.name}</td>
+                    <td>{new Date(cls.date).toDateString()}</td>
+                    <td>
+                      {participant && participant.attended ? "Yes" : "No"}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        )}
+      </Row>
+    </Container>
   );
 }
 
