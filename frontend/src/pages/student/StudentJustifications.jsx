@@ -75,7 +75,6 @@ function StudentJustifications() {
       );
 
       if (response.status === 201) {
-        console.log("Justification created:", response.data);
         // store the justification id from the response
         const justificationId = response.data.data._id;
         // append it to the form data
@@ -83,7 +82,6 @@ function StudentJustifications() {
 
         try {
           // Send a POST request to the storage API
-          console.log("Uploading file:", formData);
           const storageResponse = await axios.post(
             "http://localhost:7070/storage/upload/justifications",
             formData,
@@ -93,7 +91,6 @@ function StudentJustifications() {
               },
             }
           );
-          console.log("Storage response:", storageResponse);
 
           if (storageResponse.status === 200) {
             console.log("Data stored:", storageResponse.data);
