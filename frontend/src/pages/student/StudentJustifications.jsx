@@ -61,6 +61,12 @@ function StudentJustifications() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // add to the formdata the fileExtension if it exists
+    if (formData.file) {
+      const fileExtension = formData.file.name.split(".").pop();
+      setFormData({ ...formData, fileExtension: fileExtension });
+    }
+
     try {
       // Send a POST request to create a new justification
       const response = await axios.post(
@@ -68,12 +74,26 @@ function StudentJustifications() {
         formData
       );
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         console.log("Justification created:", response.data);
+        // store the justification id from the response
+        const justificationId = response.data.data._id;
+        // append it to the form data
+        setFormData({ ...formData, justificationID: justificationId });
 
         try {
           // Send a POST request to the storage API
-          const storageResponse = await axios.post("/api/storage", formData);
+          console.log("Uploading file:", formData);
+          const storageResponse = await axios.post(
+            "http://localhost:7070/storage/upload/justifications",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          console.log("Storage response:", storageResponse);
 
           if (storageResponse.status === 200) {
             console.log("Data stored:", storageResponse.data);
