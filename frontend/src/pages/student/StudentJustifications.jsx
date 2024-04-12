@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import axios from "axios";
+import { UserContext } from "../../App";
 
 function StudentJustifications() {
+  const { id } = useContext(UserContext);
   const [formData, setFormData] = useState({
+    id: id,
     fullName: "",
     rut: "",
-    email: "",
     absenceDate: "",
     justification: "",
-    justificationFile: null,
+    file: null,
   });
 
   const handleChange = (e) => {
@@ -17,13 +20,40 @@ function StudentJustifications() {
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, justificationFile: e.target.files[0] });
+    setFormData({ ...formData, file: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you could perform actions with the form data, like sending it to a server
-    console.log(formData);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Send a POST request to create a new justification
+      const response = await axios.post("/api/justifications", formData);
+
+      if (response.status === 200) {
+        console.log("Justification created:", response.data);
+
+        try {
+          // Send a POST request to the storage API
+          const storageResponse = await axios.post("/api/storage", formData);
+
+          if (storageResponse.status === 200) {
+            console.log("Data stored:", storageResponse.data);
+          } else {
+            console.error("Error storing data:", storageResponse);
+          }
+        } catch (storageError) {
+          console.error(
+            "Error sending request to the storage API:",
+            storageError
+          );
+        }
+      } else {
+        console.error("Error creating justification:", response);
+      }
+    } catch (error) {
+      console.error("Error sending request to the API:", error);
+    }
   };
 
   return (
