@@ -1,4 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
+import "./i18n"; // Your i18n config file
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Login from "./pages/Login";
@@ -28,6 +29,7 @@ import StudentUpcomingClasses from "./pages/student/StudentUpcomingClasses";
 import StudentCourses from "./pages/student/StudentCourses";
 import StudentWeekly from "./pages/student/StudentWeekly";
 import StudentConfiguration from "./pages/student/StudentConfiguration";
+import TestPage from "./pages/TestPage";
 
 export const UserContext = createContext();
 
@@ -96,6 +98,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />}></Route>
+            <Route path="/test" element={<TestPage />}></Route>
             <Route
               path="/contact"
               element={
