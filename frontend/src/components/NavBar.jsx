@@ -7,8 +7,6 @@ import { UserContext } from "../App";
 import { Dropdown } from "react-bootstrap";
 import {
   FaUserCheck,
-  FaChalkboard,
-  FaUserClock,
   FaBell,
   FaEnvelope,
   FaSignOutAlt,
@@ -22,19 +20,36 @@ function Navbar() {
   const handleClick = () => {
     setClicked(!clicked);
   };
+
   return (
     <>
       <NavContainer>
         <Link to="/">
           <img
             src={Logo}
-            className="w-[60px]"
             alt="Logo"
-            style={{ marginLeft: "15px" }}
+            style={{ marginLeft: "10px" }}
             width={90}
             height={80}
           />
         </Link>
+        <div className="left-links">
+          {(role === "student" || role === "teacher") && (
+            <Link to={`/${role}/dashboard`} className="nav-link">
+              Dashboard
+            </Link>
+          )}
+          {(role === "student" || role === "teacher") && (
+            <Link to={`/${role}/attendance`} className="nav-link">
+              Attendance
+            </Link>
+          )}
+          {(role === "student" || role === "admin") && (
+            <Link to={`/${role}/justifications`} className="nav-link">
+              Justifications
+            </Link>
+          )}
+        </div>
         <div
           className={`links ${clicked ? "active" : ""}`}
           style={{ marginRight: "20px" }}
@@ -50,34 +65,6 @@ function Navbar() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item
-                  style={{ color: "black" }}
-                  href={`/${role}/dashboard`}
-                  className="d-block"
-                >
-                  <FaChalkboard style={{ marginRight: "5px" }} />
-                  Dashboard
-                </Dropdown.Item>
-                {(role === "student" || role === "teacher") && (
-                  <Dropdown.Item
-                    style={{ color: "black" }}
-                    href={`/${role}/attendance`}
-                    className="d-block"
-                  >
-                    <FaUserClock style={{ marginRight: "5px" }} />
-                    Attendance
-                  </Dropdown.Item>
-                )}
-                {(role === "student" || role === "admin") && (
-                  <Dropdown.Item
-                    style={{ color: "black" }}
-                    href={`/${role}/justifications`}
-                    className="d-block"
-                  >
-                    <FaUserCheck style={{ marginRight: "5px" }} />
-                    Justifications
-                  </Dropdown.Item>
-                )}
                 <Dropdown.Item
                   style={{ color: "black" }}
                   href="/notifications"
@@ -96,19 +83,19 @@ function Navbar() {
                 </Dropdown.Item>
                 <Dropdown.Item
                   style={{ color: "black" }}
-                  href="/logout"
-                  className="d-block"
-                >
-                  <FaSignOutAlt style={{ marginRight: "5px" }} />
-                  Log Out
-                </Dropdown.Item>
-                <Dropdown.Item
-                  style={{ color: "black" }}
                   href="/profile"
                   className="d-block"
                 >
                   <FaUserCircle style={{ marginRight: "5px" }} />
                   Profile
+                </Dropdown.Item>
+                <Dropdown.Item
+                  style={{ color: "black" }}
+                  href="/logout"
+                  className="d-block"
+                >
+                  <FaSignOutAlt style={{ marginRight: "5px" }} />
+                  Log Out
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -146,10 +133,19 @@ const NavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   a {
     color: white;
     text-decoration: none;
     margin-right: 1rem;
+  }
+  .left-links {
+    display: flex;
+    align-items: center;
+  }
+  .nav-link {
+    color: white;
+    margin-right: 10px;
   }
   .links {
     position: absolute;
