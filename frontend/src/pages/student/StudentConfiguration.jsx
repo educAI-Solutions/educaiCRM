@@ -3,15 +3,13 @@ import { Form, Button, Card, Row, Col } from "react-bootstrap";
 
 function StudentConfiguration() {
   return (
-    <div
-      className="d-flex justify-content-center align-items-center"
-      style={{ height: "70vh" }}
-    >
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "50vh" }}>
       <Row className="gx-5">
         <Col>
-          <Card style={{ width: "30rem" }} className="shadow">
+          <br />
+          <Card className="shadow">
             <Card.Body>
-              <h2>Student Preferences</h2>
+              <h2 className="mb-4">Student Preferences</h2>
               <Form>
                 <Form.Group controlId="formBasicCheckbox1" className="mb-3">
                   <Form.Check
@@ -33,26 +31,29 @@ function StudentConfiguration() {
 
                 <Form.Group className="mb-3">
                   <Form.Label>Select language</Form.Label>
-                  <Form.Check
-                    type="radio"
-                    id="english"
-                    label="English"
-                    name="language"
-                  />
-                  <Form.Check
-                    type="radio"
-                    id="spanish"
-                    label="Spanish"
-                    name="language"
-                  />
+                  <div>
+                    <Form.Check
+                      type="radio"
+                      id="english"
+                      label="English"
+                      name="language"
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="spanish"
+                      label="Spanish"
+                      name="language"
+                    />
+                  </div>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                  Save Changes
+                <Button variant="primary" type="submit" className="w-100">
+                  Save
                 </Button>
               </Form>
             </Card.Body>
           </Card>
+          <br />
         </Col>
       </Row>
     </div>

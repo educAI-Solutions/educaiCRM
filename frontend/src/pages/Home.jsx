@@ -28,13 +28,6 @@ const Home = () => {
         <Row>
           <Col>
             {!isLoggedIn && (
-              <Link to={`/register`}>
-                <Button variant="outline-light" className="m-2">
-                  Register
-                </Button>
-              </Link>
-            )}
-            {!isLoggedIn && (
               <Link to={`/login`}>
                 <Button variant="outline-light" className="m-2">
                   Log In

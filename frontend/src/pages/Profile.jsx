@@ -10,7 +10,7 @@ function Profile() {
     >
       <Row className="gx-5">
         <Col>
-          <Card style={{ width: "30rem" }} className="shadow">
+          <Card className="shadow w-100">
             <Card.Body>
               <h2>Edit Profile</h2>
               <Form>

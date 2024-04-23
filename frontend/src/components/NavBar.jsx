@@ -44,7 +44,7 @@ function Navbar() {
               Attendance
             </Link>
           )}
-          {(role === "student" || role === "admin") && (
+          {(role === "admin") && (
             <Link to={`/${role}/justifications`} className="nav-link">
               Justifications
             </Link>
