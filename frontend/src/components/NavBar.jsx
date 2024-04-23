@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import BurguerButton from "./BurguerButton";
 import Logo from "../img/logotipo1.png";
 import { Link } from "react-router-dom";
@@ -13,9 +14,21 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 
+const languages = {
+  en: { label: "English", flag: "🇺🇸" },
+  es: { label: "Español", flag: "🇪🇸" },
+};
+
 function Navbar() {
+  const { t, i18n } = useTranslation();
   const [clicked, setClicked] = useState(false);
   const { username, role, isLoggedIn } = useContext(UserContext);
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
+
+  const handleLanguageChange = (langCode) => {
+    setSelectedLanguage(langCode);
+    i18n.changeLanguage(langCode);
+  };
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -24,90 +37,107 @@ function Navbar() {
   return (
     <>
       <NavContainer>
-        <Link to="/">
-          <img
-            src={Logo}
-            alt="Logo"
-            style={{ marginLeft: "10px" }}
-            width={90}
-            height={80}
-          />
-        </Link>
         <div className="left-links">
-          {(role === "student" || role === "teacher") && (
+          <Link to="/">
+            <img
+              src={Logo}
+              alt="Logo"
+              style={{ marginLeft: "3px" }}
+              width={90}
+              height={80}
+            />
+          </Link>
+          {isLoggedIn && (
             <Link to={`/${role}/dashboard`} className="nav-link">
-              Dashboard
-            </Link>
-          )}
-          {(role === "student" || role === "teacher") && (
-            <Link to={`/${role}/attendance`} className="nav-link">
-              Attendance
-            </Link>
-          )}
-          {(role === "student" || role === "admin") && (
-            <Link to={`/${role}/justifications`} className="nav-link">
-              Justifications
+              {t("navbar.dashboard")}
             </Link>
           )}
         </div>
-        <div
-          className={`links ${clicked ? "active" : ""}`}
-          style={{ marginRight: "20px" }}
-        >
-          {isLoggedIn && (
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                <FaUserCheck
-                  style={{ marginRight: "2px", marginBottom: "1px" }}
-                  size="1.5em"
-                />
-                {username} {/* display the username */}
-              </Dropdown.Toggle>
+        <div className="d-flex align-items-center justify-content-end p-3">
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary" id="language-dropdown">
+              {languages[selectedLanguage].flag}{" "}
+              {languages[selectedLanguage].label}
+            </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+            <Dropdown.Menu className="dropdown-menu-width">
+              {Object.keys(languages).map((langCode) => (
                 <Dropdown.Item
+                  key={langCode}
+                  onClick={() => handleLanguageChange(langCode)}
                   style={{ color: "black" }}
-                  href="/notifications"
-                  className="d-block"
                 >
-                  <FaBell style={{ marginRight: "5px" }} />
-                  Notifications
+                  {languages[langCode].flag} {languages[langCode].label}
                 </Dropdown.Item>
-                <Dropdown.Item
-                  style={{ color: "black" }}
-                  href="/contact"
-                  className="d-block"
-                >
-                  <FaEnvelope style={{ marginRight: "5px" }} />
-                  Contact
-                </Dropdown.Item>
-                <Dropdown.Item
-                  style={{ color: "black" }}
-                  href="/profile"
-                  className="d-block"
-                >
-                  <FaUserCircle style={{ marginRight: "5px" }} />
-                  Profile
-                </Dropdown.Item>
-                <Dropdown.Item
-                  style={{ color: "black" }}
-                  href="/logout"
-                  className="d-block"
-                >
-                  <FaSignOutAlt style={{ marginRight: "5px" }} />
-                  Log Out
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          )}
-          {!isLoggedIn && (
-            <Link
-              to="/login"
-              style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "1rem" }}
-            >
-              Log In
-            </Link>
-          )}
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <div
+            className={`links ${clicked ? "active" : ""}`}
+            style={{
+              marginRight: "20px",
+              marginLeft: "5px",
+            }}
+          >
+            {isLoggedIn && (
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <FaUserCheck
+                    style={{ marginRight: "2px", marginBottom: "1px" }}
+                    size="1.5em"
+                  />
+                  {username}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    style={{ color: "black" }}
+                    href="/notifications"
+                    className="d-block"
+                  >
+                    <FaBell style={{ marginRight: "5px" }} />
+                    {t("navbar.notifications")}
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    style={{ color: "black" }}
+                    href="/contact"
+                    className="d-block"
+                  >
+                    <FaEnvelope style={{ marginRight: "5px" }} />
+                    {t("navbar.contact")}
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    style={{ color: "black" }}
+                    href="/profile"
+                    className="d-block"
+                  >
+                    <FaUserCircle style={{ marginRight: "5px" }} />
+                    {t("navbar.profile")}
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    style={{ color: "black" }}
+                    href="/logout"
+                    className="d-block"
+                  >
+                    <FaSignOutAlt style={{ marginRight: "5px" }} />
+                    {t("navbar.logout")}
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            )}
+            {!isLoggedIn && (
+              <Link
+                to="/login"
+                style={{
+                  color: "#FFFFFF",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                }}
+              >
+                {t("navbar.login")}
+              </Link>
+            )}
+          </div>
         </div>
         <div className="burguer">
           <BurguerButton clicked={clicked} handleClick={handleClick} />
@@ -195,25 +225,22 @@ const NavContainer = styled.nav`
     }
     z-index: 3;
   }
+  .dropdown-menu-width {
+    width: 100%;
+  }
 `;
 
 const BgDiv = styled.div`
-  background-color: #222;
-  position: absolute;
-  top: -1000px;
-  left: -1000px;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  transition: all 0.6s ease;
+  position: fixed; // Fixed position
+  top: 0; // Start from the top
+  left: 0; // Start from the left
+  width: 100%; // Full width
+  height: 100%; // Full height
+  z-index: -1; // Behind other content
+  transition: all 0.7s ease; // Smooth transition
 
   &.active {
-    background-color: black;
-    position: absolute;
-    top: -570px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.8); // Semi-transparent black when active
+    z-index: 1; // Above other content when active
   }
 `;

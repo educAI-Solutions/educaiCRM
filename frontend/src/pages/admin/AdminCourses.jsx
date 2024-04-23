@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Table,
   Form,
@@ -26,6 +27,7 @@ function AdminCourses() {
   });
   const [programs, setPrograms] = useState([]);
   const [instructors, setInstructors] = useState([]);
+  const { t } = useTranslation();
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -132,20 +134,32 @@ function AdminCourses() {
     <Container>
       <div>
         <Row className="mb-3 text-center">
-          <h1>Course Management</h1>
+          <h1>{t("adminDashboard.courseManagement.title")}</h1>
         </Row>
         <Row className="justify-content-center mt-3 mb-3">
           <Col md={8}>
             <Card className="shadow">
               <Card.Body>
-                <h2>Course List</h2>
+                <h2>{t("adminDashboard.courseManagement.courseList.title")}</h2>
                 <Table responsive>
                   <thead>
                     <tr>
-                      <th>Course Name</th>
-                      <th>Course Code</th>
-                      <th>Section</th>
-                      <th>Actions</th>
+                      <th>
+                        {t("adminDashboard.courseManagement.courseList.name")}
+                      </th>
+                      <th>
+                        {t("adminDashboard.courseManagement.courseList.code")}
+                      </th>
+                      <th>
+                        {t(
+                          "adminDashboard.courseManagement.courseList.section"
+                        )}
+                      </th>
+                      <th>
+                        {t(
+                          "adminDashboard.courseManagement.courseList.actions"
+                        )}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -156,12 +170,16 @@ function AdminCourses() {
                         <td>{course.section}</td>
                         <td>
                           <Button onClick={() => handleEditCourse(course._id)}>
-                            Edit
+                            {t(
+                              "adminDashboard.courseManagement.courseList.edit"
+                            )}
                           </Button>
                           <Button
                             onClick={() => handleDeleteCourse(course._id)}
                           >
-                            Delete
+                            {t(
+                              "adminDashboard.courseManagement.courseList.delete"
+                            )}
                           </Button>
                         </td>
                       </tr>
@@ -191,10 +209,12 @@ function AdminCourses() {
           <Col md={8}>
             <Card className="shadow">
               <Card.Body>
-                <h2>Create a New Course</h2>
+                <h2>{t("adminDashboard.courseManagement.createForm.title")}</h2>
                 <Form onSubmit={handleCreateCourse}>
                   <Form.Group controlId="name">
-                    <Form.Label>Course Name</Form.Label>
+                    <Form.Label>
+                      {t("adminDashboard.courseManagement.createForm.name")}
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="name"
@@ -205,7 +225,9 @@ function AdminCourses() {
                   </Form.Group>
 
                   <Form.Group controlId="code">
-                    <Form.Label>Course Code</Form.Label>
+                    <Form.Label>
+                      {t("adminDashboard.courseManagement.createForm.code")}
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="code"
@@ -216,7 +238,9 @@ function AdminCourses() {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Course Section</Form.Label>
+                    <Form.Label>
+                      {t("adminDashboard.courseManagement.createForm.section")}
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="section"
@@ -227,12 +251,19 @@ function AdminCourses() {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Programs</Form.Label>
+                    <Form.Label>
+                      {t("adminDashboard.courseManagement.createForm.program")}
+                    </Form.Label>
                     <Select
                       name="programs"
                       // show the options plus the none option
                       options={[
-                        { value: null, label: "None" },
+                        {
+                          value: null,
+                          label: t(
+                            "adminDashboard.courseManagement.createForm.noneProgram"
+                          ),
+                        },
                         ...programs.map((program) => ({
                           value: program._id,
                           label: program.name,
@@ -240,13 +271,20 @@ function AdminCourses() {
                       ]}
                       className="basic-multi-select"
                       classNamePrefix="select"
+                      placeholder={t(
+                        "adminDashboard.courseManagement.createForm.selectProgram"
+                      )} // show the options plus the none option
                       onChange={handleProgramChange}
                       required
                     />
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Instructors</Form.Label>
+                    <Form.Label>
+                      {t(
+                        "adminDashboard.courseManagement.createForm.instructors"
+                      )}
+                    </Form.Label>
                     <Select
                       isMulti
                       name="instructors"
@@ -256,13 +294,20 @@ function AdminCourses() {
                       }))}
                       className="basic-single-select"
                       classNamePrefix="select"
+                      placeholder={t(
+                        "adminDashboard.courseManagement.createForm.selectInstructors"
+                      )} // show the options plus the none option
                       onChange={handleInstructorsChange}
                       required
                     />
                   </Form.Group>
 
                   <Form.Group controlId="startDate">
-                    <Form.Label>Start Date</Form.Label>
+                    <Form.Label>
+                      {t(
+                        "adminDashboard.courseManagement.createForm.startDate"
+                      )}
+                    </Form.Label>
                     <Form.Control
                       type="date"
                       name="startDate"
@@ -273,7 +318,9 @@ function AdminCourses() {
                   </Form.Group>
 
                   <Form.Group controlId="endDate">
-                    <Form.Label>End Date</Form.Label>
+                    <Form.Label>
+                      {t("adminDashboard.courseManagement.createForm.endDate")}
+                    </Form.Label>
                     <Form.Control
                       type="date"
                       name="endDate"
@@ -284,7 +331,7 @@ function AdminCourses() {
                   </Form.Group>
 
                   <Button type="submit" className="mt-3">
-                    Create Course
+                    {t("adminDashboard.courseManagement.createForm.submit")}
                   </Button>
                 </Form>
               </Card.Body>

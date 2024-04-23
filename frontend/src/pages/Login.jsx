@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import axios from "axios"; // Import Axios for making HTTP requests
 import { jwtDecode } from "jwt-decode"; // Import jwt-decode to decode JWT tokens
@@ -10,6 +11,7 @@ const Login = ({ onLogin }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate hook
+  const { t } = useTranslation(); // Initialize useTranslation hook
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,20 +56,20 @@ const Login = ({ onLogin }) => {
             <div className="card-body">
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Username or Email</Form.Label>
+                  <Form.Label>{t("utils.login.usernameMail")}</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter username or email"
+                    placeholder={t("utils.login.enterUsernameMail")}
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                   />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>{t("utils.login.password")}</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Password"
+                    placeholder={t("utils.login.enterPassword")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -76,7 +78,7 @@ const Login = ({ onLogin }) => {
                 {error && <p className="text-danger">{error}</p>}
 
                 <Button variant="primary" type="submit" className="mt-3">
-                  Login
+                  {t("utils.login.login")}
                 </Button>
               </Form>
             </div>

@@ -1,0 +1,168 @@
+{
+  "home": {
+    "welcome": "Welcome to EducAI CRM",
+    "welcomeBack": "Welcome back, {{username}}",
+    "description": "Facilitating your academic activities related to classes."
+  },
+  "about": {
+    "title": "About Us",
+    "description": "This is the about page"
+  },
+  "navbar": {
+    "dashboard": "Dashboard",
+    "notifications": "Notifications",
+    "contact": "Contact",
+    "profile": "Profile",
+    "logout": "Log Out",
+    "login": "Log In"
+  },
+  "adminDashboard": {
+    "title": "Admin Dashboard",
+    "users": "Users",
+    "programs": "Programs",
+    "courses": "Courses",
+    "classes": "Classes",
+    "justifications": "Justifications",
+    "attendance": "Attendance",
+    "insights": "Insights",
+    "configuration": "Configuration",
+    "usersManagement": {
+      "title": "User Management",
+      "create": "Create User",
+      "recent": "Recent Users",
+      "recentTable": {
+        "username": "Username",
+        "email": "Email",
+        "role": "Role",
+        "actions": "Actions",
+        "edit": "Edit",
+        "delete": "Delete",
+        "notfound": "No users found"
+      },
+      "search": "Search Users",
+      "searchTable": {
+        "username": "Username",
+        "enterUser": "Enter the username or email",
+        "email": "Email",
+        "role": "Role",
+        "actions": "Actions",
+        "edit": "Edit",
+        "delete": "Delete",
+        "notfound": "No users found",
+        "search": "Search"
+      },
+      "registerForm": {
+        "username": "Username",
+        "enterUsername": "Enter the username",
+        "email": "Email",
+        "enterEmail": "Enter Email",
+        "role": "Role",
+        "selectRole": "Select the role",
+        "password": "Password",
+        "enterPassword": "Enter the password",
+        "admin": "Admin",
+        "teacher": "Teacher",
+        "student": "Student",
+        "submit": "Register"
+      }
+    },
+    "programManagement": {
+      "title": "Program Management",
+      "create": "Create Program",
+      "recent": "Recent Programs",
+      "editCourses": "Edit Courses",
+      "editParticipants": "Edit Participants",
+      "delete": "Delete",
+      "createForm": {
+        "title": "Create Program",
+        "name": "New Program Name",
+        "enterName": "Enter the name",
+        "enterCourses": "Select courses...",
+        "noneCourse": "None for now",
+        "enterParticipants": "Select participants...",
+        "description": "Description",
+        "enterDescription": "Enter the description",
+        "submit": "Create Course"
+      }
+    },
+    "courseManagement": {
+      "title": "Course Management",
+      "create": "Create Course",
+      "recent": "Recent Courses",
+      "editClasses": "Edit Classes",
+      "editParticipants": "Edit Participants",
+      "delete": "Delete",
+      "courseList": {
+        "title": "Course List",
+        "name": "Course Name",
+        "code": "Course Code",
+        "section": "Section",
+        "actions": "Actions",
+        "edit": "Edit",
+        "delete": "Delete",
+        "notfound": "No courses found"
+      },
+      "createForm": {
+        "title": "Create a New Course",
+        "name": "Course Name",
+        "code": "Course Code",
+        "section": "Section",
+        "program": "Program",
+        "selectProgram": "Select...",
+        "noneProgram": "None for now",
+        "instructors": "Instructors",
+        "selectInstructors": "Select...",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "submit": "Create"
+      }
+    },
+    "classManagement": {
+      "title": "Class Management",
+      "create": "Create Class",
+      "recent": "Recent Classes",
+      "editParticipants": "Edit Participants",
+      "delete": "Delete",
+      "classList": {
+        "title": "Class List",
+        "name": "Class Name",
+        "course": "Course",
+        "date": "Date",
+        "startTime": "Start Time",
+        "location": "Location",
+        "actions": "Actions",
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "createForm": {
+        "title": "Create a New Class",
+        "name": "Class Name",
+        "course": "Course",
+        "selectCourse": "Select...",
+        "date": "Date",
+        "startTime": "Start Time",
+        "endTime": "End Time",
+        "location": "Location",
+        "submit": "Create Class"
+      }
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved to EducAI Solutions"
+  },
+  "utils": {
+    "login": {
+      "title": "Log In",
+      "usernameMail": "Username or Email",
+      "enterUsernameMail": "Enter your username or email",
+      "password": "Password",
+      "enterPassword": "Enter your password",
+      "login": "Log In",
+      "forgot": "Forgot your password?"
+    },
+    "logout": {
+      "title": "Log Out",
+      "message": "Are you sure you want to log out?"
+    }
+  }
+}

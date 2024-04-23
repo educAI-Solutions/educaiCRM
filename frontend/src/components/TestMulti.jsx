@@ -6,7 +6,7 @@ function MyComponent() {
 
   return (
     <div>
-      <h1>{t("welcome")}</h1>
+      <h1>{t("home.title")}</h1>
     </div>
   );
 }

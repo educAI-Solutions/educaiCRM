@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Import useTranslation hook from react-i18next
 import axios from "axios"; // Import Axios for making HTTP requests
 
 function RecentUsers() {
   const [users, setUsers] = useState([]);
+  const { t } = useTranslation(); // Initialize the useTranslation hook
 
   useEffect(() => {
     // Fetch the users from your API here and set the users state
@@ -43,17 +45,17 @@ function RecentUsers() {
       <thead>
         <tr>
           <th>#</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
+          <th>{t("adminDashboard.usersManagement.recentTable.username")}</th>
+          <th>{t("adminDashboard.usersManagement.recentTable.email")}</th>
+          <th>{t("adminDashboard.usersManagement.recentTable.role")}</th>
+          <th>{t("adminDashboard.usersManagement.recentTable.actions")}</th>
         </tr>
       </thead>
       {users.length === 0 && (
         <tbody>
           <tr>
             <td colSpan="5" className="text-center">
-              No users found
+              {t("adminDashboard.usersManagement.recentTable.notfound")}
             </td>
           </tr>
         </tbody>
@@ -67,13 +69,13 @@ function RecentUsers() {
             <td>{user.role}</td>
             <td>
               <Button variant="danger" onClick={() => deleteUser(user._id)}>
-                Delete
+                {t("adminDashboard.usersManagement.recentTable.delete")}
               </Button>
               <Button
                 variant="primary"
                 onClick={() => editRole(user._id, "newRole")}
               >
-                Edit Role
+                {t("adminDashboard.usersManagement.recentTable.edit")}
               </Button>
             </td>
           </tr>

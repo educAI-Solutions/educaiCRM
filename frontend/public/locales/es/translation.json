@@ -1,0 +1,176 @@
+{
+  "home": {
+    "welcome": "Bienvenido a EducAI CRM",
+    "welcomeBack": "Bienvenido de nuevo, {{username}}",
+    "description": "Facilitamos la gestión de tus cursos y programas educativos."
+  },
+  "about": {
+    "title": "Sobre nosotros",
+    "description": "Esto es la página de sobre nosotros"
+  },
+  "navbar": {
+    "dashboard": "Panel de Control",
+    "notifications": "Notificaciones",
+    "contact": "Contacto",
+    "profile": "Perfil",
+    "logout": "Cerrar Sesión",
+    "login": "Iniciar Sesión"
+  },
+  "adminDashboard": {
+    "title": "Panel de Administrador",
+    "users": "Usuarios",
+    "programs": "Programas",
+    "courses": "Cursos",
+    "classes": "Clases",
+    "justifications": "Justificaciones",
+    "attendance": "Asistencia",
+    "insights": "Información",
+    "configuration": "Configuración",
+    "usersManagement": {
+      "title": "Gestión de Usuarios",
+      "create": "Crear Usuario",
+      "recent": "Usuarios Recientes",
+      "recentTable": {
+        "username": "Usuario",
+        "email": "Correo",
+        "role": "Rol",
+        "actions": "Acciones",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "notfound": "No se encontraron usuarios"
+      },
+      "search": "Buscar Usuario",
+      "searchTable": {
+        "username": "Usuario",
+        "enterUser": "Ingresa el usuario o correo",
+        "email": "Correo",
+        "role": "Rol",
+        "actions": "Acciones",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "notfound": "No se encontraron usuarios",
+        "search": "Buscar"
+      },
+      "registerForm": {
+        "username": "Nombre de Usuario",
+        "enterUsername": "Ingresa el nombre de usuario",
+        "email": "Correo",
+        "enterEmail": "Ingresa el correo",
+        "role": "Rol",
+        "selectRole": "Selecciona el rol",
+        "password": "Contraseña",
+        "enterPassword": "Ingresa la contraseña",
+        "admin": "Administrador",
+        "teacher": "Profesor",
+        "student": "Estudiante",
+        "submit": "Registrar"
+      }
+    },
+    "programManagement": {
+      "title": "Gestión de Programas",
+      "create": "Crear Programa",
+      "recent": "Programas Recientes",
+      "editCourses": "Editar Cursos",
+      "editParticipants": "Editar Participantes",
+      "delete": "Eliminar",
+      "recentTable": {
+        "name": "Nombre",
+        "description": "Descripción",
+        "actions": "Acciones",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "notfound": "No se encontraron programas"
+      },
+      "createForm": {
+        "title": "Crear Programa",
+        "name": "Nombre Nuevo Programa",
+        "enterName": "Ingresa el nombre",
+        "enterCourses": "Selecciona los cursos",
+        "noneCourse": "Ninguno por ahora",
+        "enterParticipants": "Selecciona los participantes",
+        "description": "Descripción",
+        "enterDescription": "Ingresa la descripción",
+        "submit": "Crear"
+      }
+    },
+    "courseManagement": {
+      "title": "Gestión de Cursos",
+      "create": "Crear Curso",
+      "recent": "Cursos Recientes",
+      "editClasses": "Editar Clases",
+      "editParticipants": "Editar Participantes",
+      "delete": "Eliminar",
+      "courseList": {
+        "title": "Lista de Cursos",
+        "name": "Nombre Curso",
+        "code": "Código Curso",
+        "section": "Sección",
+        "actions": "Acciones",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "notfound": "No se encontraron cursos"
+      },
+      "createForm": {
+        "title": "Crear Nuevo Curso",
+        "name": "Nombre Curso",
+        "code": "Código Curso",
+        "section": "Sección",
+        "program": "Programa",
+        "selectProgram": "Selecciona...",
+        "noneProgram": "Ninguno por ahora",
+        "instructors": "Instructores",
+        "selectInstructors": "Selecciona...",
+        "startDate": "Fecha de Inicio",
+        "endDate": "Fecha de Término",
+        "submit": "Crear Curso"
+      }
+    },
+    "classManagement": {
+      "title": "Gestión de Clases",
+      "create": "Crear Clase",
+      "recent": "Clases Recientes",
+      "editParticipants": "Editar Participantes",
+      "delete": "Eliminar",
+      "classList": {
+        "title": "Lista de Clases",
+        "name": "Nombre de la Clase",
+        "course": "Curso",
+        "date": "Fecha",
+        "startTime": "Hora de Inicio",
+        "location": "Ubicación",
+        "actions": "Acciones",
+        "edit": "Editar",
+        "delete": "Eliminar"
+      },
+      "createForm": {
+        "title": "Crear una Nueva Clase",
+        "name": "Nombre de la Clase",
+        "course": "Curso",
+        "selectCourse": "Seleccionar...",
+        "date": "Fecha",
+        "startTime": "Hora de Inicio",
+        "endTime": "Hora de Fin",
+        "location": "Ubicación",
+        "submit": "Crear Clase"
+      }
+    }
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados a EducAI Solutions"
+  },
+  "utils": {
+    "login": {
+      "title": "Iniciar Sesión",
+      "usernameMail": "Nombre de Usuario o Correo Electrónico",
+      "enterUsernameMail": "Ingresa tu nombre de usuario o correo electrónico",
+      "password": "Contraseña",
+      "enterPassword": "Ingresa tu contraseña",
+      "login": "Iniciar Sesión",
+      "forgot": "Olvidaste tu contraseña?"
+    },
+    "logout": {
+      "title": "Cerrar Sesión",
+      "message": "¿Estás seguro que deseas cerrar sesión?"
+    }
+  }
+}

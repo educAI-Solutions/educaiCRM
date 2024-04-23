@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import {
   FaUsers,
   FaBookOpen,
@@ -21,6 +22,7 @@ import AdminPrograms from "./AdminPrograms";
 
 function AdminDashboard() {
   const [selectedItem, setSelectedItem] = useState("");
+  const { t } = useTranslation();
 
   const renderComponent = () => {
     switch (selectedItem) {
@@ -86,7 +88,7 @@ function AdminDashboard() {
                   fontWeight: "bold",
                 }}
               >
-                Administrator Dashboard
+                {t("adminDashboard.title")}
               </Card.Title>
             </Card.ImgOverlay>
           </Card>
@@ -101,7 +103,7 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("users")}
           >
             <Card.Body>
-              <FaUsers className="m-2" /> Users
+              <FaUsers className="m-2" /> {t("adminDashboard.users")}
             </Card.Body>
           </Card>
         </Col>
@@ -113,7 +115,7 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("programs")}
           >
             <Card.Body>
-              <FaListAlt className="m-2" /> Programs
+              <FaListAlt className="m-2" /> {t("adminDashboard.programs")}
             </Card.Body>
           </Card>
         </Col>
@@ -125,7 +127,7 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("courses")}
           >
             <Card.Body>
-              <FaBookOpen className="m-2" /> Courses
+              <FaBookOpen className="m-2" /> {t("adminDashboard.courses")}
             </Card.Body>
           </Card>
         </Col>
@@ -137,7 +139,8 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("classes")}
           >
             <Card.Body>
-              <FaChalkboardTeacher className="m-2" /> Classes
+              <FaChalkboardTeacher className="m-2" />{" "}
+              {t("adminDashboard.classes")}
             </Card.Body>
           </Card>
         </Col>
@@ -151,7 +154,7 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("justifications")}
           >
             <Card.Body>
-              <FaFileAlt className="m-2" /> Justifications
+              <FaFileAlt className="m-2" /> {t("adminDashboard.justifications")}
             </Card.Body>
           </Card>
         </Col>
@@ -163,7 +166,7 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("insights")}
           >
             <Card.Body>
-              <FaChartPie className="m-2" /> Insights
+              <FaChartPie className="m-2" /> {t("adminDashboard.insights")}
             </Card.Body>
           </Card>
         </Col>
@@ -175,7 +178,7 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("attendance")}
           >
             <Card.Body>
-              <FaUserCheck className="m-2" /> Attendance
+              <FaUserCheck className="m-2" /> {t("adminDashboard.attendance")}
             </Card.Body>
           </Card>
         </Col>
@@ -187,7 +190,7 @@ function AdminDashboard() {
             onClick={() => setSelectedItem("configuration")}
           >
             <Card.Body>
-              <FaCog className="m-2" /> Configuration
+              <FaCog className="m-2" /> {t("adminDashboard.configuration")}
             </Card.Body>
           </Card>
         </Col>

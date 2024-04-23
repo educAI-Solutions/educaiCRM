@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 
 const RegisterUser = () => {
@@ -9,6 +10,7 @@ const RegisterUser = () => {
   const [role, setRole] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSuccessMessage("");
@@ -61,51 +63,75 @@ const RegisterUser = () => {
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail" className="mb-2">
-                  <Form.Label>Email</Form.Label>
+                  <Form.Label>
+                    {t("adminDashboard.usersManagement.registerForm.email")}
+                  </Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="Enter email"
+                    placeholder={t(
+                      "adminDashboard.usersManagement.registerForm.enterEmail"
+                    )}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicUsername" className="mb-2">
-                  <Form.Label>Username</Form.Label>
+                  <Form.Label>
+                    {t("adminDashboard.usersManagement.registerForm.username")}
+                  </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter username"
+                    placeholder={t(
+                      "adminDashboard.usersManagement.registerForm.enterUsername"
+                    )}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword" className="mb-2">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>
+                    {t("adminDashboard.usersManagement.registerForm.password")}
+                  </Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Password"
+                    placeholder={t(
+                      "adminDashboard.usersManagement.registerForm.enterPassword"
+                    )}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicRole" className="mb-2">
-                  <Form.Label>Role</Form.Label>
+                  <Form.Label>
+                    {t("adminDashboard.usersManagement.registerForm.role")}
+                  </Form.Label>
                   <Form.Control
                     as="select"
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
                   >
-                    <option value="">Select role</option>
-                    <option value="admin">Admin</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="student">Student</option>
+                    <option value="">
+                      {t(
+                        "adminDashboard.usersManagement.registerForm.selectRole"
+                      )}
+                    </option>
+                    <option value="admin">
+                      {t("adminDashboard.usersManagement.registerForm.admin")}
+                    </option>
+                    <option value="teacher">
+                      {t("adminDashboard.usersManagement.registerForm.teacher")}
+                    </option>
+                    <option value="student">
+                      {t("adminDashboard.usersManagement.registerForm.student")}
+                    </option>
                   </Form.Control>
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="mt-3">
-                  Register
+                  {t("adminDashboard.usersManagement.registerForm.submit")}
                 </Button>
               </Form>
             </div>

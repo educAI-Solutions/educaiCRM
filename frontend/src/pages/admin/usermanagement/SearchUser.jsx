@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Table, Form, Button, InputGroup, FormControl } from "react-bootstrap";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 function SearchUser() {
   const [searchTerm, setSearchTerm] = useState("");
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const { t } = useTranslation();
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -43,13 +45,15 @@ function SearchUser() {
       <Form onSubmit={handleSearch}>
         <InputGroup className="mb-3 mt-2">
           <FormControl
-            placeholder="Search user by username or email"
+            placeholder={t(
+              "adminDashboard.usersManagement.searchTable.enterUser"
+            )}
             aria-label="Search user by username or email"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <Button variant="outline-secondary" type="submit">
-            Search
+            {t("adminDashboard.usersManagement.searchTable.search")}
           </Button>
         </InputGroup>
       </Form>
@@ -58,10 +62,12 @@ function SearchUser() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Actions</th>
+              <th>
+                {t("adminDashboard.usersManagement.searchTable.username")}
+              </th>
+              <th>{t("adminDashboard.usersManagement.searchTable.email")}</th>
+              <th>{t("adminDashboard.usersManagement.searchTable.role")}</th>
+              <th>{t("adminDashboard.usersManagement.searchTable.actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -72,10 +78,10 @@ function SearchUser() {
               <td>{user.role}</td>
               <td>
                 <Button variant="danger" onClick={() => deleteUser(user._id)}>
-                  Delete
+                  {t("adminDashboard.usersManagement.searchTable.delete")}
                 </Button>
                 <Button variant="primary" onClick={() => editUser(user._id)}>
-                  Edit User
+                  {t("adminDashboard.usersManagement.searchTable.edit")}
                 </Button>
               </td>
             </tr>

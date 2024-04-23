@@ -8,6 +8,7 @@ import {
   Pagination,
   Card,
 } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import Select from "react-select";
 
@@ -16,6 +17,7 @@ const AdminPrograms = () => {
   const [newProgram, setNewProgram] = useState({});
   const [courses, setCourses] = useState([]);
   const [participants, setParticipants] = useState([]);
+  const { t } = useTranslation();
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -147,7 +149,7 @@ const AdminPrograms = () => {
     <Container>
       <Row className="mb-3 text-center">
         <Col>
-          <h1>Program Management</h1>
+          <h1>{t("adminDashboard.programManagement.title")}</h1>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -162,19 +164,19 @@ const AdminPrograms = () => {
                     variant="primary"
                     onClick={() => handleEditCourses(program._id)}
                   >
-                    Edit Courses
+                    {t("adminDashboard.programManagement.editCourses")}
                   </Button>
                   <Button
                     variant="secondary"
                     onClick={() => handleEditParticipants(program._id)}
                   >
-                    Edit Participants
+                    {t("adminDashboard.programManagement.editParticipants")}
                   </Button>
                   <Button
                     variant="danger"
                     onClick={() => handleDelete(program._id)}
                   >
-                    Delete
+                    {t("adminDashboard.programManagement.delete")}
                   </Button>
                 </Card.Body>
               </Card>
@@ -198,25 +200,34 @@ const AdminPrograms = () => {
       <Row className="my-3">
         <Card>
           <Card.Body>
-            <h2>Create New Program</h2>
+            <h2>{t("adminDashboard.programManagement.createForm.title")}</h2>
             <Form.Control
               name="name"
               value={newProgram.name || ""}
               onChange={handleNewProgramChange}
-              placeholder="New Program Name"
+              placeholder={t(
+                "adminDashboard.programManagement.createForm.name"
+              )}
               required
             />
             <Form.Control
               name="description"
               value={newProgram.description || ""}
               onChange={handleNewProgramChange}
-              placeholder="Description"
+              placeholder={t(
+                "adminDashboard.programManagement.createForm.description"
+              )}
             />
             <Select
               isMulti
               name="courses"
               options={[
-                { value: "none", label: "None for now" },
+                {
+                  value: "none",
+                  label: t(
+                    "adminDashboard.programManagement.createForm.noneCourse"
+                  ),
+                },
                 ...courses.map((course) => ({
                   value: course._id,
                   label: `${course.name} - Section:${course.section}`,
@@ -225,7 +236,9 @@ const AdminPrograms = () => {
               className="basic-multi-select"
               classNamePrefix="select"
               onChange={handleCourseChange}
-              placeholder="Select courses..."
+              placeholder={t(
+                "adminDashboard.programManagement.createForm.enterCourses"
+              )}
               required
             />
             <Select
@@ -238,11 +251,13 @@ const AdminPrograms = () => {
               className="basic-multi-select"
               classNamePrefix="select"
               onChange={handleParticipantChange}
-              placeholder="Select students..."
+              placeholder={t(
+                "adminDashboard.programManagement.createForm.enterParticipants"
+              )}
               required
             />
             <Button variant="primary" onClick={handleCreate}>
-              Create
+              {t("adminDashboard.programManagement.createForm.submit")}
             </Button>
           </Card.Body>
         </Card>

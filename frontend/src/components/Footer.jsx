@@ -1,5 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 import {
   faLinkedin,
   faWhatsapp,
@@ -7,6 +8,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <div
       className="flex flex-col items-center p-4 text-white relative w-full"
@@ -47,8 +49,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="text-center mt-4">
-        &copy; {new Date().getFullYear()} All rights reserved to EducAI
-        Solutions
+        &copy; {new Date().getFullYear()} {t("footer.rights")}
       </p>
     </div>
   );

@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { UserContext } from "../App";
 
 const Home = () => {
   const { username, role, isLoggedIn } = useContext(UserContext);
+  const { t } = useTranslation();
   return (
     <div
       className="d-flex align-items-center justify-content-center"
@@ -20,45 +22,40 @@ const Home = () => {
       >
         <Row>
           <Col>
-            {!isLoggedIn && <h1>Welcome to EducAI CRM</h1>}
-            {isLoggedIn && <h1>Welcome back, {username}</h1>}
-            <p>Facilitating your academic activities related to classes.</p>
+            {!isLoggedIn && <h1>{t("home.welcome")}</h1>}
+            {isLoggedIn && (
+              <h1>{t("home.welcomeBack", { username: username })}</h1>
+            )}
+            <p>{t("home.description")}</p>
           </Col>
         </Row>
         <Row>
           <Col>
             {!isLoggedIn && (
-              <Link to={`/register`}>
-                <Button variant="outline-light" className="m-2">
-                  Register
-                </Button>
-              </Link>
-            )}
-            {!isLoggedIn && (
               <Link to={`/login`}>
                 <Button variant="outline-light" className="m-2">
-                  Log In
+                  {t("utils.login.title")}
                 </Button>
               </Link>
             )}
             {isLoggedIn && (
               <Link to={`/${role}/dashboard`}>
                 <Button variant="outline-light" className="m-2">
-                  Dashboard
+                  {t("navbar.dashboard")}
                 </Button>
               </Link>
             )}
             {isLoggedIn && (role === "student" || role === "admin") && (
               <Link to={`/${role}/justifications`}>
                 <Button variant="outline-light" className="m-2">
-                  Justifications
+                  {t("adminDashboard.justifications")}
                 </Button>
               </Link>
             )}
             {isLoggedIn && (role === "student" || role === "teacher") && (
               <Link to={`/${role}/attendance`}>
                 <Button variant="outline-light" className="m-2">
-                  Attendance
+                  {t("adminDashboard.attendance")}
                 </Button>
               </Link>
             )}

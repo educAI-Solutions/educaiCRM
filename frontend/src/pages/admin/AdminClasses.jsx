@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import Select from "react-select";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 function AdminClasses() {
   const [classes, setClasses] = useState([]);
@@ -24,6 +25,7 @@ function AdminClasses() {
     instructors: [],
     participants: [],
   });
+  const { t } = useTranslation();
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -107,20 +109,24 @@ function AdminClasses() {
   return (
     <Container>
       <Row className="mb-3 text-center">
-        <h1>Class Management</h1>
+        <h1>{t("adminDashboard.classManagement.title")}</h1>
       </Row>
       <Card className="shadow mb-3">
         <Card.Body>
-          <h2>Class List</h2>
+          <h2>{t("adminDashboard.classManagement.classList.title")}</h2>
           <Table responsive>
             <thead>
               <tr>
-                <th>Class Name</th>
-                <th>Course</th>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>Location</th>
-                <th>Actions</th>
+                <th>{t("adminDashboard.classManagement.classList.name")}</th>
+                <th>{t("adminDashboard.classManagement.classList.course")}</th>
+                <th>{t("adminDashboard.classManagement.classList.date")}</th>
+                <th>
+                  {t("adminDashboard.classManagement.classList.startTime")}
+                </th>
+                <th>
+                  {t("adminDashboard.classManagement.classList.location")}
+                </th>
+                <th>{t("adminDashboard.classManagement.classList.actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -133,10 +139,10 @@ function AdminClasses() {
                   <td>{classItem.location}</td>
                   <td>
                     <Button onClick={() => handleEditClass(classItem._id)}>
-                      Edit
+                      {t("adminDashboard.classManagement.classList.edit")}
                     </Button>
                     <Button onClick={() => handleDeleteClass(classItem._id)}>
-                      Delete
+                      {t("adminDashboard.classManagement.classList.delete")}
                     </Button>
                   </td>
                 </tr>
@@ -160,10 +166,12 @@ function AdminClasses() {
       </Card>
       <Card className="mb-4 shadow">
         <Card.Body>
-          <h2>Create New Class</h2>
+          <h2>{t("adminDashboard.classManagement.createForm.title")}</h2>
           <Form onSubmit={handleCreateClass}>
             <Form.Group controlId="name">
-              <Form.Label>Class Name</Form.Label>
+              <Form.Label>
+                {t("adminDashboard.classManagement.createForm.name")}
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="name"
@@ -174,7 +182,9 @@ function AdminClasses() {
             </Form.Group>
 
             <Form.Group controlId="course">
-              <Form.Label>Course</Form.Label>
+              <Form.Label>
+                {t("adminDashboard.classManagement.createForm.course")}
+              </Form.Label>
               <Select
                 name="course"
                 options={courses.map((course) => ({
@@ -183,13 +193,18 @@ function AdminClasses() {
                 }))}
                 className="basic-single-select"
                 classNamePrefix="select"
+                placeholder={t(
+                  "adminDashboard.classManagement.createForm.selectCourse"
+                )}
                 onChange={handleCourseChange}
                 required
               />
             </Form.Group>
 
             <Form.Group controlId="date">
-              <Form.Label>Date</Form.Label>
+              <Form.Label>
+                {t("adminDashboard.classManagement.createForm.date")}
+              </Form.Label>
               <Form.Control
                 type="date"
                 name="date"
@@ -200,7 +215,9 @@ function AdminClasses() {
             </Form.Group>
 
             <Form.Group controlId="startTime">
-              <Form.Label>Start Time</Form.Label>
+              <Form.Label>
+                {t("adminDashboard.classManagement.createForm.startTime")}
+              </Form.Label>
               <Form.Control
                 type="time"
                 name="startTime"
@@ -211,7 +228,9 @@ function AdminClasses() {
             </Form.Group>
 
             <Form.Group controlId="endTime">
-              <Form.Label>End Time</Form.Label>
+              <Form.Label>
+                {t("adminDashboard.classManagement.createForm.endTime")}
+              </Form.Label>
               <Form.Control
                 type="time"
                 name="endTime"
@@ -222,7 +241,9 @@ function AdminClasses() {
             </Form.Group>
 
             <Form.Group controlId="location">
-              <Form.Label>Location</Form.Label>
+              <Form.Label>
+                {t("adminDashboard.classManagement.createForm.location")}
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="location"
@@ -232,7 +253,9 @@ function AdminClasses() {
               />
             </Form.Group>
 
-            <Button type="submit">Create Class</Button>
+            <Button type="submit">
+              {t("adminDashboard.classManagement.createForm.submit")}
+            </Button>
           </Form>
         </Card.Body>
       </Card>
