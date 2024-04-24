@@ -8,11 +8,12 @@ function StudentConfiguration() {
   return (
     <div
       className="d-flex justify-content-center align-items-center"
-      style={{ height: "70vh" }}
+      style={{ minHeight: "50vh" }}
     >
       <Row className="gx-5">
         <Col>
-          <Card style={{ width: "30rem" }} className="shadow">
+          <br />
+          <Card className="shadow">
             <Card.Body>
               <h2>
                 {t(
@@ -52,6 +53,7 @@ function StudentConfiguration() {
               </Form>
             </Card.Body>
           </Card>
+          <br />
         </Col>
       </Row>
     </div>
