@@ -153,6 +153,89 @@
         "location": "Ubicación",
         "submit": "Crear Clase"
       }
+    },
+    "insightsManagement": {
+      "insights": "Informes",
+      "attendanceOverall": "Asistencia General",
+      "justifications": "Justificaciones",
+      "users": "Usuarios",
+      "january": "Enero",
+      "february": "Febrero",
+      "march": "Marzo",
+      "april": "Abril",
+      "may": "Mayo",
+      "june": "Junio",
+      "approved": "Aprobado",
+      "pending": "Pendiente",
+      "rejected": "Rechazado",
+      "active": "Activo",
+      "inactive": "Inactivo"
+    },
+    "justificationsManagement": {
+      "title": "Gestión de Justificaciones",
+      "searchPlaceholder": "Buscar una justificación por su título o ID",
+      "tableTitle": "Título",
+      "tableStatus": "Estado",
+      "tableActions": "Acciones",
+      "buttonApprove": "Aprobar",
+      "buttonReject": "Rechazar"
+    },
+    "adminConfig": {
+      "preferences": "Preferencias de Administrador",
+      "emailNotifications": "Recibir notificaciones por correo electrónico",
+      "darkMode": "Activar modo oscuro",
+      "smsNotifications": "Recibir notificaciones por SMS",
+      "saveChanges": "Guardar cambios"
+    },
+    "adminAttendance": {
+      "title": "Visualizador de Asistencia",
+      "selectCourse": "Seleccionar Curso",
+      "checkAttendance": "Verificar Asistencia",
+      "studentName": "Nombre del Estudiante",
+      "attendance": "Asistencia"
+    }
+  },
+  "teacherDashboard": {
+    "title": "Panel de Control del Profesor",
+    "weeklyReminder": "Recordatorio Semanal",
+    "weeklyReminderDesc": "Podrás ver tus recordatorios aquí",
+    "classes": "Clases",
+    "classesDesc": "Administrar clases actuales y futuras",
+    "attendance": "Asistencia",
+    "attendanceDesc": "Administrar asistencia aquí",
+    "currentCourses": "Cursos Actuales",
+    "currentCoursesDesc": "Administrar tus cursos actuales aquí",
+    "attendanceManagement": {
+      "title": "Gestión de Asistencia",
+      "selectCourse": "Selecciona un curso",
+      "selectClass": "Selecciona una clase",
+      "downloadExcel": "Descargar Excel de Asistencia",
+      "upload": "Subir"
+    },
+    "classManagement": {
+      "teacherClassesPage": "Página de Clases del Profesor",
+      "selectCourse": "Selecciona un curso",
+      "className": "Nombre de la Clase",
+      "location": "Ubicación",
+      "date": "Fecha",
+      "time": "Hora",
+      "actions": "Acciones",
+      "editTimes": "Editar Horarios",
+      "editAttendance": "Editar Asistencia",
+      "deleteClass": "Eliminar Clase"
+    },
+    "courseManagement": {
+      "teacherCoursesPage": "Página de Cursos del Profesor",
+      "courseName": "Nombre del Curso",
+      "participants": "Participantes",
+      "classes": "Clases",
+      "actions": "Acciones",
+      "editParticipants": "Editar Participantes",
+      "editClasses": "Editar Clases",
+      "leaveCourse": "Salir del Curso"
+    },
+    "weeklyManagement": {
+      "teacherWeeklyPage": "Página Semanal del Profesor"
     }
   },
   "footer": {

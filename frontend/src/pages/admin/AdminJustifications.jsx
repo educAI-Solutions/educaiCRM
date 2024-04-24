@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Table,
   Row,
@@ -11,6 +12,7 @@ import {
 import axios from "axios";
 
 function AdminJustifications() {
+  const { t } = useTranslation();
   const [justifications, setJustifications] = useState([]);
   const [selectedJustification, setSelectedJustification] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,11 +52,13 @@ function AdminJustifications() {
   return (
     <Container>
       <Row className="mb-3 text-center">
-        <h1>Justification Management</h1>
+        <h1>{t("adminDashboard.justificationsManagement.title")}</h1>
       </Row>
       <InputGroup className="mb-3">
         <FormControl
-          placeholder="Search for a justification by its Title or ID"
+          placeholder={t(
+            "adminDashboard.justificationsManagement.searchPlaceholder"
+          )}
           aria-label="Search"
           aria-describedby="basic-addon2"
           value={searchTerm}
@@ -67,9 +71,15 @@ function AdminJustifications() {
           <Table responsive>
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th>
+                  {t("adminDashboard.justificationsManagement.tableTitle")}
+                </th>
+                <th>
+                  {t("adminDashboard.justificationsManagement.tableStatus")}
+                </th>
+                <th>
+                  {t("adminDashboard.justificationsManagement.tableActions")}
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -83,14 +93,18 @@ function AdminJustifications() {
                         handleStatusChange(justification._id, "approved")
                       }
                     >
-                      Approve
+                      {t(
+                        "adminDashboard.justificationsManagement.buttonApprove"
+                      )}
                     </Button>
                     <Button
                       onClick={() =>
                         handleStatusChange(justification._id, "rejected")
                       }
                     >
-                      Reject
+                      {t(
+                        "adminDashboard.justificationsManagement.buttonReject"
+                      )}
                     </Button>
                   </td>
                 </tr>

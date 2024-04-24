@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Table, Button } from "react-bootstrap";
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
 import { UserContext } from "../../App";
 
 function TeacherClasses() {
+  const { t } = useTranslation();
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [classes, setClasses] = useState([]);
@@ -60,23 +62,23 @@ function TeacherClasses() {
 
   return (
     <div>
-      <h2>Teacher Classes Page</h2>
+      <h2>{t("teacherDashboard.classManagement.teacherClassesPage")}</h2>
       <Select
         value={selectedCourse}
         onChange={handleCourseChange}
         options={courses}
         isClearable
-        placeholder="Select a course"
+        placeholder={t("teacherDashboard.classManagement.selectCourse")}
       />
       {selectedCourse && (
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Class Name</th>
-              <th>Location</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Actions</th>
+              <th>{t("teacherDashboard.classManagement.className")}</th>
+              <th>{t("teacherDashboard.classManagement.location")}</th>
+              <th>{t("teacherDashboard.classManagement.date")}</th>
+              <th>{t("teacherDashboard.classManagement.time")}</th>
+              <th>{t("teacherDashboard.classManagement.actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -88,16 +90,16 @@ function TeacherClasses() {
                 <td>{cls.startTime}</td>
                 <td>
                   <Button variant="primary" onClick={() => editTimes(cls._id)}>
-                    Edit Times
+                    {t("teacherDashboard.classManagement.editTimes")}
                   </Button>{" "}
                   <Button
                     variant="secondary"
                     onClick={() => editAttendance(cls._id)}
                   >
-                    Edit Attendance
+                    {t("teacherDashboard.classManagement.editAttendance")}
                   </Button>{" "}
                   <Button variant="danger" onClick={() => deleteClass(cls._id)}>
-                    Delete Class
+                    {t("teacherDashboard.classManagement.deleteClass")}
                   </Button>
                 </td>
               </tr>

@@ -145,6 +145,89 @@
         "location": "Location",
         "submit": "Create Class"
       }
+    },
+    "insightsManagement": {
+      "insights": "Insights",
+      "attendanceOverall": "Attendance Overall",
+      "justifications": "Justifications",
+      "users": "Users",
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "approved": "Approved",
+      "pending": "Pending",
+      "rejected": "Rejected",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "justificationsManagement": {
+      "title": "Justification Management",
+      "searchPlaceholder": "Search for a justification by its Title or ID",
+      "tableTitle": "Title",
+      "tableStatus": "Status",
+      "tableActions": "Actions",
+      "buttonApprove": "Approve",
+      "buttonReject": "Reject"
+    },
+    "adminConfig": {
+      "preferences": "Admin Preferences",
+      "emailNotifications": "Receive email notifications",
+      "darkMode": "Enable dark mode",
+      "smsNotifications": "Receive SMS notifications",
+      "saveChanges": "Save Changes"
+    },
+    "adminAttendance": {
+      "title": "Attendance Visualizer",
+      "selectCourse": "Select Course",
+      "checkAttendance": "Check Attendance",
+      "studentName": "Student Name",
+      "attendance": "Attendance"
+    }
+  },
+  "teacherDashboard": {
+    "title": "Teacher Dashboard",
+    "weeklyReminder": "Weekly Reminder",
+    "weeklyReminderDesc": "You will be able to view your reminders here",
+    "classes": "Classes",
+    "classesDesc": "Manage current and future classes",
+    "attendance": "Attendance",
+    "attendanceDesc": "Manage attendance here",
+    "currentCourses": "Current courses",
+    "currentCoursesDesc": "Manage your current courses here",
+    "attendanceManagement": {
+      "title": "Attendance Management",
+      "selectCourse": "Select a course",
+      "selectClass": "Select a class",
+      "downloadExcel": "Download Attendance Excel",
+      "upload": "Upload"
+    },
+    "classManagement": {
+      "teacherClassesPage": "Teacher Classes Page",
+      "selectCourse": "Select a course",
+      "className": "Class Name",
+      "location": "Location",
+      "date": "Date",
+      "time": "Time",
+      "actions": "Actions",
+      "editTimes": "Edit Times",
+      "editAttendance": "Edit Attendance",
+      "deleteClass": "Delete Class"
+    },
+    "courseManagement": {
+      "teacherCoursesPage": "Teacher Courses Page",
+      "courseName": "Course Name",
+      "participants": "Participants",
+      "classes": "Classes",
+      "actions": "Actions",
+      "editParticipants": "Edit Participants",
+      "editClasses": "Edit Classes",
+      "leaveCourse": "Leave Course"
+    },
+    "weeklyManagement": {
+      "teacherWeeklyPage": "Teacher Weekly Page"
     }
   },
   "footer": {

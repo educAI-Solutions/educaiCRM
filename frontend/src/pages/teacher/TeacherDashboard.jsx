@@ -7,8 +7,11 @@ import {
   FaBook,
   FaBookOpen,
 } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 function TeacherDashboard() {
+  const { t } = useTranslation();
+
   return (
     <div
       className="d-flex"
@@ -53,7 +56,7 @@ function TeacherDashboard() {
                     fontWeight: "bold",
                   }}
                 >
-                  Teacher Dashboard
+                  {t("teacherDashboard.title")}
                 </Card.Title>
               </Card.ImgOverlay>
             </Card>
@@ -68,9 +71,11 @@ function TeacherDashboard() {
               >
                 <Card.Body>
                   <FaBook className="dashboard-icon" />
-                  <Card.Title className="mt-3">Weekly Reminder</Card.Title>
+                  <Card.Title className="mt-3">
+                    {t("teacherDashboard.weeklyReminder")}
+                  </Card.Title>
                   <Card.Text>
-                    You will be able to view your reminders here
+                    {t("teacherDashboard.weeklyReminderDesc")}
                   </Card.Text>
                 </Card.Body>
               </Link>
@@ -84,8 +89,10 @@ function TeacherDashboard() {
               >
                 <Card.Body>
                   <FaFileUpload className="dashboard-icon" />
-                  <Card.Title className="mt-3">Classes</Card.Title>
-                  <Card.Text>Manage current and future classes</Card.Text>
+                  <Card.Title className="mt-3">
+                    {t("teacherDashboard.classes")}
+                  </Card.Title>
+                  <Card.Text>{t("teacherDashboard.classesDesc")}</Card.Text>
                 </Card.Body>
               </Link>
             </Card>
@@ -98,8 +105,10 @@ function TeacherDashboard() {
               >
                 <Card.Body>
                   <FaClipboardList className="dashboard-icon" />
-                  <Card.Title className="mt-3">Attendance</Card.Title>
-                  <Card.Text>Manage attendance here</Card.Text>
+                  <Card.Title className="mt-3">
+                    {t("teacherDashboard.attendance")}
+                  </Card.Title>
+                  <Card.Text>{t("teacherDashboard.attendanceDesc")}</Card.Text>
                 </Card.Body>
               </Link>
             </Card>
@@ -112,8 +121,12 @@ function TeacherDashboard() {
               >
                 <Card.Body>
                   <FaBookOpen className="dashboard-icon" />
-                  <Card.Title className="mt-3">Current courses</Card.Title>
-                  <Card.Text>Manage your current courses here</Card.Text>
+                  <Card.Title className="mt-3">
+                    {t("teacherDashboard.currentCourses")}
+                  </Card.Title>
+                  <Card.Text>
+                    {t("teacherDashboard.currentCoursesDesc")}
+                  </Card.Text>
                 </Card.Body>
               </Link>
             </Card>

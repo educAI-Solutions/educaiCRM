@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   LineChart,
   Line,
@@ -14,38 +15,42 @@ import {
 import { Container, Row, Card, Col } from "react-bootstrap";
 
 function AdminInsights() {
+  const { t } = useTranslation();
+
   const attendanceData = [
-    { month: "January", attendance: 65 },
-    { month: "February", attendance: 59 },
-    { month: "March", attendance: 80 },
-    { month: "April", attendance: 81 },
-    { month: "May", attendance: 56 },
-    { month: "June", attendance: 55 },
+    { month: t("adminDashboard.insightsManagement.january"), attendance: 65 },
+    { month: t("adminDashboard.insightsManagement.february"), attendance: 59 },
+    { month: t("adminDashboard.insightsManagement.march"), attendance: 80 },
+    { month: t("adminDashboard.insightsManagement.april"), attendance: 81 },
+    { month: t("adminDashboard.insightsManagement.may"), attendance: 56 },
+    { month: t("adminDashboard.insightsManagement.june"), attendance: 55 },
   ];
 
   const justificationData = [
-    { name: "Approved", value: 300 },
-    { name: "Pending", value: 50 },
-    { name: "Rejected", value: 100 },
+    { name: t("adminDashboard.insightsManagement.approved"), value: 300 },
+    { name: t("adminDashboard.insightsManagement.pending"), value: 50 },
+    { name: t("adminDashboard.insightsManagement.rejected"), value: 100 },
   ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   const userData = [
-    { name: "Active", value: 200 },
-    { name: "Inactive", value: 50 },
+    { name: t("adminDashboard.insightsManagement.active"), value: 200 },
+    { name: t("adminDashboard.insightsManagement.inactive"), value: 50 },
   ];
 
   return (
     <Container>
       <Row className="mb-3 text-center">
-        <h1>Insights</h1>
+        <h1>{t("adminDashboard.insightsManagement.insights")}</h1>
       </Row>
       <Row>
         <Col>
           <Card style={{ width: "36rem" }}>
             <Card.Body>
-              <Card.Title>Attendance Overall</Card.Title>
+              <Card.Title>
+                {t("adminDashboard.insightsManagement.attendanceOverall")}
+              </Card.Title>
               <LineChart width={500} height={300} data={attendanceData}>
                 <XAxis dataKey="month" />
                 <YAxis />
@@ -60,7 +65,9 @@ function AdminInsights() {
         <Col>
           <Card style={{ width: "36rem" }}>
             <Card.Body>
-              <Card.Title>Justifications</Card.Title>
+              <Card.Title>
+                {t("adminDashboard.insightsManagement.justifications")}
+              </Card.Title>
               <PieChart width={400} height={400}>
                 <Pie
                   dataKey="value"
@@ -88,7 +95,9 @@ function AdminInsights() {
       <Row>
         <Card style={{ width: "36rem" }}>
           <Card.Body>
-            <Card.Title>Users</Card.Title>
+            <Card.Title>
+              {t("adminDashboard.insightsManagement.users")}
+            </Card.Title>
             <PieChart width={400} height={400}>
               <Pie
                 dataKey="value"

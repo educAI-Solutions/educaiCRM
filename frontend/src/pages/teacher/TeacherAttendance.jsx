@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next"; // Importamos useTranslation
 import { UserContext } from "../../App";
 
 function TeacherAttendance() {
+  const { t } = useTranslation(); // Inicializamos useTranslation
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
   const [classes, setClasses] = useState([]);
@@ -81,7 +83,7 @@ function TeacherAttendance() {
 
   const handleDownload = async () => {
     if (!selectedClass) {
-      alert("Please select a class");
+      alert(t("teacher.Dashboard.selectClass")); // Usamos la función t() para traducir el texto
       return;
     }
 
@@ -107,9 +109,15 @@ function TeacherAttendance() {
 
   return (
     <div className="d-flex flex-column align-items-center mt-5 justify-content-center">
-      <h2 className="mb-4">Teacher Attendance Page</h2>
+      <h2 className="mb-4">
+        {t("teacherDashboard.attendanceManagement.title")}
+      </h2>{" "}
+      {/* Traducimos el título */}
       <select onChange={handleCourseChange}>
-        <option value="">Select a course</option>
+        <option value="">
+          {t("teacherDashboard.attendanceManagement.selectCourse")}
+        </option>{" "}
+        {/* Traducimos las opciones del select */}
         {courses.map((course) => (
           <option key={course._id} value={course._id}>
             {course.name}
@@ -117,7 +125,10 @@ function TeacherAttendance() {
         ))}
       </select>
       <select onChange={(e) => setSelectedClass(e.target.value)}>
-        <option value="">Select a class</option>
+        <option value="">
+          {t("teacherDashboard.attendanceManagement.selectClass")}
+        </option>{" "}
+        {/* Traducimos las opciones del select */}
         {classes.map((cls) => (
           <option key={cls._id} value={cls._id}>
             {cls.name}
@@ -125,7 +136,8 @@ function TeacherAttendance() {
         ))}
       </select>
       <button onClick={handleDownload} className="btn btn-primary mt-3">
-        Download Attendance Excel
+        {t("teacherDashboard.attendanceManagement.downloadExcel")}{" "}
+        {/* Traducimos el texto del botón */}
       </button>
       <div className="container">
         <div className="input-group mb-3">
@@ -135,7 +147,8 @@ function TeacherAttendance() {
             onChange={handleFileChange}
           />
           <button onClick={handleUpload} className="btn btn-primary mt-3">
-            Upload
+            {t("teacherDashboard.attendanceManagement.upload")}{" "}
+            {/* Traducimos el texto del botón */}
           </button>
         </div>
       </div>

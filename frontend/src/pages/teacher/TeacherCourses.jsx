@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Table, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 import { UserContext } from "../../App";
 
 function TeacherCourses() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [courses, setCourses] = useState([]);
   const { id } = useContext(UserContext);
 
@@ -36,14 +38,14 @@ function TeacherCourses() {
 
   return (
     <div>
-      <h2>Teacher Courses Page</h2>
+      <h2>{t("teacherDashboard.courseManagement.teacherCoursesPage")}</h2>
       <Table responsive striped bordered hover>
         <thead>
           <tr>
-            <th>Course Name</th>
-            <th>Participants</th>
-            <th>Classes</th>
-            <th>Actions</th>
+            <th>{t("teacherDashboard.courseManagement.courseName")}</th>
+            <th>{t("teacherDashboard.courseManagement.participants")}</th>
+            <th>{t("teacherDashboard.courseManagement.classes")}</th>
+            <th>{t("teacherDashboard.courseManagement.actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -57,19 +59,19 @@ function TeacherCourses() {
                   variant="primary"
                   onClick={() => editParticipants(course._id)}
                 >
-                  Edit Participants
+                  {t("teacherDashboard.courseManagement.editParticipants")}
                 </Button>{" "}
                 <Button
                   variant="secondary"
                   onClick={() => editClasses(course._id)}
                 >
-                  Edit Classes
+                  {t("teacherDashboard.courseManagement.editClasses")}
                 </Button>{" "}
                 <Button
                   variant="danger"
                   onClick={() => leaveCourse(course._id)}
                 >
-                  Leave Course
+                  {t("teacherDashboard.courseManagement.leaveCourse")}
                 </Button>
               </td>
             </tr>

@@ -1,7 +1,10 @@
 import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 function AdminConfiguration() {
+  const { t } = useTranslation();
+
   return (
     <div
       className="d-flex justify-content-center align-items-center"
@@ -9,38 +12,31 @@ function AdminConfiguration() {
     >
       <Card style={{ width: "30rem" }} className="shadow">
         <Card.Body>
-          <h2>Admin Preferences</h2>
+          <h2>{t("adminDashboard.adminConfig.preferences")}</h2>
           <Form>
             <Form.Group controlId="formBasicCheckbox1" className="mb-3">
-              <Form.Check type="checkbox" label="Receive email notifications" />
+              <Form.Check
+                type="checkbox"
+                label={t("adminDashboard.adminConfig.emailNotifications")}
+              />
             </Form.Group>
 
             <Form.Group controlId="formBasicCheckbox2" className="mb-3">
-              <Form.Check type="checkbox" label="Enable dark mode" />
+              <Form.Check
+                type="checkbox"
+                label={t("adminDashboard.adminConfig.darkMode")}
+              />
             </Form.Group>
 
             <Form.Group controlId="formBasicCheckbox3" className="mb-3">
-              <Form.Check type="checkbox" label="Receive SMS notifications" />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Select language</Form.Label>
               <Form.Check
-                type="radio"
-                id="english"
-                label="English"
-                name="language"
-              />
-              <Form.Check
-                type="radio"
-                id="spanish"
-                label="Spanish"
-                name="language"
+                type="checkbox"
+                label={t("adminDashboard.adminConfig.smsNotifications")}
               />
             </Form.Group>
 
             <Button variant="primary" type="submit">
-              Save Changes
+              {t("adminDashboard.adminConfig.saveChanges")}
             </Button>
           </Form>
         </Card.Body>
