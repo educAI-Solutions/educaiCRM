@@ -1,29 +1,47 @@
-import React from 'react';
-import { Container, Row, Col, ListGroup, Button } from 'react-bootstrap';
+import React from "react";
+import { Container, Row, Col, ListGroup, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Import useTranslation from react-i18next
 
 function Notifications() {
+  const { t } = useTranslation(); // Use the translation function
+
   const notifications = [
-    { id: 1, text: 'Notificación 1', type: 'success', read: false },
-    { id: 2, text: 'Notificación 2', type: 'danger', read: false },
-    { id: 3, text: 'Notificación 3', type: 'warning', read: false },
-    // Agrega más notificaciones aquí
+    {
+      id: 1,
+      text: t("notifications.notification1"),
+      type: "success",
+      read: false,
+    }, // Translate notification text
+    {
+      id: 2,
+      text: t("notifications.notification2"),
+      type: "danger",
+      read: false,
+    },
+    {
+      id: 3,
+      text: t("notifications.notification3"),
+      type: "warning",
+      read: false,
+    },
+    // Add more notifications here
   ];
 
   const markAsRead = (id) => {
-    // Implementa la lógica para marcar la notificación como leída
+    // Implement logic to mark the notification as read
   };
 
   const deleteNotification = (id) => {
-    // Implementa la lógica para eliminar la notificación
+    // Implement logic to delete the notification
   };
 
   return (
     <Container fluid className="bg-light min-vh-100 py-5">
-
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={6}>
           <div className="bg-white p-4 rounded shadow">
-            <h2 className="text-center mb-4">Notifications</h2>
+            <h2 className="text-center mb-4">{t("notifications.title")}</h2>{" "}
+            {/* Translate title */}
             <ListGroup>
               {notifications.map((notification) => (
                 <ListGroup.Item
@@ -32,8 +50,22 @@ function Notifications() {
                 >
                   <span>{notification.text}</span>
                   <div>
-                    <Button variant="light" style={{ border: '1px solid black' }} onClick={() => markAsRead(notification.id)}>Mark as read</Button>
-                    <Button variant="light" style={{ border: '1px solid black' }} onClick={() => deleteNotification(notification.id)}>Delete</Button>
+                    <Button
+                      variant="light"
+                      style={{ border: "1px solid black" }}
+                      onClick={() => markAsRead(notification.id)}
+                    >
+                      {t("notifications.markAsRead")}
+                    </Button>{" "}
+                    {/* Translate button text */}
+                    <Button
+                      variant="light"
+                      style={{ border: "1px solid black" }}
+                      onClick={() => deleteNotification(notification.id)}
+                    >
+                      {t("notifications.delete")}
+                    </Button>{" "}
+                    {/* Translate button text */}
                   </div>
                 </ListGroup.Item>
               ))}

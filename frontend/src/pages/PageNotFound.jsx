@@ -1,8 +1,11 @@
 import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import triset from "../img/triset.png";
+import { useTranslation } from "react-i18next"; // Import useTranslation from react-i18next
 
 function PageNotFound() {
+  const { t } = useTranslation(); // Use the translation function
+
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
@@ -28,16 +31,16 @@ function PageNotFound() {
                 className="mt-3"
                 style={{ fontSize: "30px", marginLeft: "150px" }}
               >
-                404 Not Found
-              </Card.Text>
+                {t("pageNotFound.404")}
+              </Card.Text>{" "}
+              {/* Translate text */}
               <Card.Text
                 className="mt-3"
                 style={{ fontSize: "30px", marginLeft: "150px" }}
               >
-                Lo siento, pero la página que estás buscando no existe o se
-                produjo otro error inesperado. Por favor dirígete a la página
-                principal para poder elegir una nueva dirección
-              </Card.Text>
+                {t("pageNotFound.message")}
+              </Card.Text>{" "}
+              {/* Translate text */}
             </Card.Body>
           </Card>
         </Col>

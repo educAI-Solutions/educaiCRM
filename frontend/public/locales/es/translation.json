@@ -320,6 +320,40 @@
       "placeholder": "Escribe tu pregunta aquí..."
     }
   },
+  "contact": {
+    "title": "Contacto",
+    "fullName": "Nombre completo",
+    "fullNamePlaceholder": "Ingrese su nombre completo",
+    "email": "Email",
+    "emailPlaceholder": "Ingrese su email",
+    "subject": "Asunto",
+    "subjectPlaceholder": "Ingrese el asunto",
+    "message": "Mensaje",
+    "messagePlaceholder": "Ingrese su mensaje",
+    "submit": "Enviar"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "notification1": "Notificación 1",
+    "notification2": "Notificación 2",
+    "notification3": "Notificación 3",
+    "markAsRead": "Marcar como leída",
+    "delete": "Eliminar"
+  },
+  "pageNotFound": {
+    "404": "404 No Encontrado",
+    "message": "Lo siento, pero la página que estás buscando no existe o se produjo otro error inesperado. Por favor dirígete a la página principal para poder elegir una nueva dirección."
+  },
+  "profile": {
+    "editProfile": "Editar Perfil",
+    "publicProfile": "Perfil Público",
+    "profilePicture": "Foto de Perfil",
+    "fullName": "Nombre Completo",
+    "enterFullName": "Ingrese su nombre completo",
+    "changePassword": "Cambiar Contraseña",
+    "enterNewPassword": "Ingrese una nueva contraseña",
+    "saveChanges": "Guardar Cambios"
+  },
   "footer": {
     "rights": "Todos los derechos reservados a EducAI Solutions"
   },

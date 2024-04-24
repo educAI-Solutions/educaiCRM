@@ -1,8 +1,11 @@
 import React from "react";
 import Logo1 from "../img/fotoperfil.png";
 import { Form, Button, Card, Row, Col } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Import useTranslation from react-i18next
 
 function Profile() {
+  const { t } = useTranslation(); // Use the translation function
+
   return (
     <div
       className="d-flex justify-content-center align-items-center"
@@ -12,10 +15,14 @@ function Profile() {
         <Col>
           <Card className="shadow w-100">
             <Card.Body>
-              <h2>Edit Profile</h2>
+              <h2>{t("profile.editProfile")}</h2> {/* Translate title */}
               <Form>
                 <Form.Group controlId="formBasicCheckbox3" className="mb-3">
-                  <Form.Check type="checkbox" label="Public Profile" />
+                  <Form.Check
+                    type="checkbox"
+                    label={t("profile.publicProfile")}
+                  />{" "}
+                  {/* Translate label */}
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -30,13 +37,16 @@ function Profile() {
                       }}
                     />
                   </div>
-                  <Form.Label>Profile Picture</Form.Label>
+                  <Form.Label>{t("profile.profilePicture")}</Form.Label>
                   <Form.Control type="file" />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Full Name</Form.Label>
-                  <Form.Control type="text" placeholder="Enter full name" />
+                  <Form.Label>{t("profile.fullName")}</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder={t("profile.enterFullName")}
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -45,15 +55,15 @@ function Profile() {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Change Password</Form.Label>
+                  <Form.Label>{t("profile.changePassword")}</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Enter new password"
+                    placeholder={t("profile.enterNewPassword")}
                   />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                  Save Changes
+                  {t("profile.saveChanges")}
                 </Button>
               </Form>
             </Card.Body>
