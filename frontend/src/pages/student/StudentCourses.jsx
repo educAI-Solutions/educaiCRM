@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Card, ListGroup, Container, Alert } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Importar useTranslation de react-i18next
 
 function StudentCourses() {
+  const { t } = useTranslation(); // Usar la función de traducción
+
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -11,17 +14,28 @@ function StudentCourses() {
 
   return (
     <Container className="m-2">
-      <h2>My Courses</h2>
+      <h2>{t("studentDashboard.courseManagement.courseManagement")}</h2>{" "}
+      {/* Usar la función de traducción aquí */}
       {courses.length === 0 ? (
-        <Alert variant="info">You are not enrolled in any courses.</Alert>
+        <Alert variant="info">
+          {t("studentDashboard.courseManagement.noCoursesEnrolled")}
+        </Alert>
       ) : (
         courses.map((course) => (
           <Card className="mb-3" key={course.id}>
             <Card.Header as="h5">{course.name}</Card.Header>
             <ListGroup variant="flush">
-              <ListGroup.Item>Instructor: {course.instructor}</ListGroup.Item>
-              <ListGroup.Item>Time: {course.time}</ListGroup.Item>
-              <ListGroup.Item>Location: {course.location}</ListGroup.Item>
+              <ListGroup.Item>
+                {t("studentDashboard.courseManagement.instructor")}:{" "}
+                {course.instructor}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {t("studentDashboard.courseManagement.time")}: {course.time}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {t("studentDashboard.courseManagement.location")}:{" "}
+                {course.location}
+              </ListGroup.Item>
             </ListGroup>
           </Card>
         ))

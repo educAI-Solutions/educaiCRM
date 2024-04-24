@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import {
   FaBook,
   FaUserCheck,
@@ -12,6 +13,7 @@ import {
 } from "react-icons/fa";
 
 function StudentDashboard() {
+  const { t } = useTranslation();
   return (
     <Container className="mt-3">
       <Row className="mb-3">
@@ -49,7 +51,7 @@ function StudentDashboard() {
                   fontWeight: "bold",
                 }}
               >
-                Student Dashboard
+                {t("studentDashboard.studentDashboard")}
               </Card.Title>
             </Card.ImgOverlay>
           </Card>
@@ -64,8 +66,12 @@ function StudentDashboard() {
             >
               <Card.Body>
                 <FaBook className="dashboard-icon" />
-                <Card.Title className="mt-3">Upload Justifications</Card.Title>
-                <Card.Text>Upload a new justification here</Card.Text>
+                <Card.Title className="mt-3">
+                  {t("studentDashboard.uploadJustifications")}
+                </Card.Title>
+                <Card.Text>
+                  {t("studentDashboard.justificationsDescription")}
+                </Card.Text>
               </Card.Body>
             </Link>
           </Card>
@@ -78,8 +84,12 @@ function StudentDashboard() {
             >
               <Card.Body>
                 <FaSearch className="dashboard-icon" />
-                <Card.Title className="mt-3">Review Justifications</Card.Title>
-                <Card.Text>Review all your Justifications</Card.Text>
+                <Card.Title className="mt-3">
+                  {t("studentDashboard.reviewJustifications")}
+                </Card.Title>
+                <Card.Text>
+                  {t("studentDashboard.reviewJustificationsDescription")}
+                </Card.Text>
               </Card.Body>
             </Link>
           </Card>
@@ -92,9 +102,11 @@ function StudentDashboard() {
             >
               <Card.Body>
                 <FaUserCheck className="dashboard-icon" />
-                <Card.Title className="mt-3">Attendance</Card.Title>
+                <Card.Title className="mt-3">
+                  {t("studentDashboard.attendance")}
+                </Card.Title>
                 <Card.Text>
-                  Check your attendance record to all your Courses
+                  {t("studentDashboard.attendanceDescription")}
                 </Card.Text>
               </Card.Body>
             </Link>
@@ -108,8 +120,12 @@ function StudentDashboard() {
             >
               <Card.Body>
                 <FaChalkboardTeacher className="dashboard-icon" />
-                <Card.Title className="mt-3">Upcoming classes</Card.Title>
-                <Card.Text>See your upcoming classes</Card.Text>
+                <Card.Title className="mt-3">
+                  {t("studentDashboard.upcomingClasses")}
+                </Card.Title>
+                <Card.Text>
+                  {t("studentDashboard.upcomingClassesDescription")}
+                </Card.Text>
               </Card.Body>
             </Link>
           </Card>
@@ -124,8 +140,12 @@ function StudentDashboard() {
             >
               <Card.Body>
                 <FaBook className="dashboard-icon" />
-                <Card.Title className="mt-3">Courses</Card.Title>
-                <Card.Text>View your courses</Card.Text>
+                <Card.Title className="mt-3">
+                  {t("studentDashboard.courses")}
+                </Card.Title>
+                <Card.Text>
+                  {t("studentDashboard.coursesDescription")}
+                </Card.Text>
               </Card.Body>
             </Link>
           </Card>
@@ -135,8 +155,10 @@ function StudentDashboard() {
             <Link to="/student/faq" className="text-decoration-none text-dark">
               <Card.Body>
                 <FaQuestionCircle className="dashboard-icon" />
-                <Card.Title className="mt-3">FAQ</Card.Title>
-                <Card.Text>Frequently Asked Questions</Card.Text>
+                <Card.Title className="mt-3">
+                  {t("studentDashboard.faq")}
+                </Card.Title>
+                <Card.Text>{t("studentDashboard.faqDescription")}</Card.Text>
               </Card.Body>
             </Link>
           </Card>
@@ -149,8 +171,12 @@ function StudentDashboard() {
             >
               <Card.Body>
                 <FaCalendarWeek className="dashboard-icon" />
-                <Card.Title className="mt-3">Weekly Calendar</Card.Title>
-                <Card.Text>View your weekly calendar</Card.Text>
+                <Card.Title className="mt-3">
+                  {t("studentDashboard.weeklyCalendar")}
+                </Card.Title>
+                <Card.Text>
+                  {t("studentDashboard.weeklyCalendarDescription")}r
+                </Card.Text>
               </Card.Body>
             </Link>
           </Card>
@@ -163,8 +189,12 @@ function StudentDashboard() {
             >
               <Card.Body>
                 <FaCog className="dashboard-icon" />
-                <Card.Title className="mt-3">Configuration</Card.Title>
-                <Card.Text>Configure your settings</Card.Text>
+                <Card.Title className="mt-3">
+                  {t("studentDashboard.configuration")}
+                </Card.Title>
+                <Card.Text>
+                  {t("studentDashboard.configurationDescription")}
+                </Card.Text>
               </Card.Body>
             </Link>
           </Card>

@@ -230,6 +230,88 @@
       "teacherWeeklyPage": "Teacher Weekly Page"
     }
   },
+  "studentDashboard": {
+    "studentDashboard": "Student Dashboard",
+    "uploadJustifications": "Upload Justifications",
+    "reviewJustifications": "Review Justifications",
+    "attendance": "Attendance",
+    "upcomingClasses": "Upcoming classes",
+    "courses": "Courses",
+    "faq": "FAQ",
+    "weeklyCalendar": "Weekly Calendar",
+    "configuration": "Configuration",
+    "justificationsDescription": "Upload a new justification here",
+    "reviewJustificationsDescription": "Review all your Justifications",
+    "attendanceDescription": "Check your attendance record to all your Courses",
+    "upcomingClassesDescription": "See your upcoming classes",
+    "coursesDescription": "View your courses",
+    "faqDescription": "Frequently Asked Questions",
+    "weeklyCalendarDescription": "View your weekly calendar",
+    "configurationDescription": "Configure your settings",
+    "attendanceManagement": {
+      "studentAttendancePage": "Student Attendance Page",
+      "overallAttendance": "Overall Attendance",
+      "courseDetails": "Course Details",
+      "courseName": "Course Name",
+      "section": "Section",
+      "program": "Program",
+      "attendancePercentage": "Attendance Percentage",
+      "selectCourse": "Select a course",
+      "className": "Class Name",
+      "date": "Date",
+      "attended": "Attended",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "configurationManagement": {
+      "studentPreferences": "Student Preferences",
+      "receiveEmailNotifications": "Receive email notifications",
+      "enableDarkMode": "Enable dark mode",
+      "receiveSMSNotifications": "Receive SMS notifications",
+      "saveChanges": "Save Changes"
+    },
+    "courseManagement": {
+      "courseManagement": "My Courses",
+      "noCoursesEnrolled": "You are not enrolled in any courses.",
+      "instructor": "Instructor",
+      "time": "Time",
+      "location": "Location"
+    },
+    "justificationManagement": {
+      "studentJustification": "Student Justification",
+      "fullName": "Full Name",
+      "enterFullName": "Enter your full name",
+      "rut": "RUT",
+      "enterRut": "Enter your RUT",
+      "reason": "Reason",
+      "enterReason": "Enter your reason",
+      "selectClasses": "Select Classes",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "justificationDocument": "Justification Document",
+      "submitJustification": "Submit Justification"
+    },
+    "justificationReview": {
+      "myJustifications": "My Justifications",
+      "date": "Date",
+      "reason": "Reason",
+      "status": "Status"
+    },
+    "upcomingClassesView": {
+      "myUpcomingClasses": "My Upcoming Classes This Week",
+      "noUpcomingClasses": "You have no upcoming classes this week.",
+      "date": "Date",
+      "time": "Time",
+      "location": "Location"
+    },
+    "studentWeekly": {
+      "pageTitle": "Student Weekly Page"
+    },
+    "studentFAQ": {
+      "chatTitle": "Chat with AI",
+      "placeholder": "Type your question here..."
+    }
+  },
   "footer": {
     "rights": "All rights reserved to EducAI Solutions"
   },

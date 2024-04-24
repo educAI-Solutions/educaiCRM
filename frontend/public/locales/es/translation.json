@@ -238,6 +238,88 @@
       "teacherWeeklyPage": "Página Semanal del Profesor"
     }
   },
+  "studentDashboard": {
+    "studentDashboard": "Panel de Estudiante",
+    "uploadJustifications": "Subir Justificaciones",
+    "reviewJustifications": "Revisar Justificaciones",
+    "attendance": "Asistencia",
+    "upcomingClasses": "Clases Próximas",
+    "courses": "Cursos",
+    "faq": "Preguntas Frecuentes",
+    "weeklyCalendar": "Calendario Semanal",
+    "configuration": "Configuración",
+    "justificationsDescription": "Sube una nueva justificación aquí",
+    "reviewJustificationsDescription": "Revisa todas tus justificaciones",
+    "attendanceDescription": "Verifica tu registro de asistencia a todos tus cursos",
+    "upcomingClassesDescription": "Mira tus clases próximas",
+    "coursesDescription": "Visualiza tus cursos",
+    "faqDescription": "Preguntas frecuentes",
+    "weeklyCalendarDescription": "Mira tu calendario semanal",
+    "configurationDescription": "Configura tus ajustes",
+    "attendanceManagement": {
+      "studentAttendancePage": "Página de Asistencia de Estudiantes",
+      "overallAttendance": "Asistencia General",
+      "courseDetails": "Detalles del Curso",
+      "courseName": "Nombre del Curso",
+      "section": "Sección",
+      "program": "Programa",
+      "attendancePercentage": "Porcentaje de Asistencia",
+      "selectCourse": "Selecciona un curso",
+      "className": "Nombre de la Clase",
+      "date": "Fecha",
+      "attended": "Asistió",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "configurationManagement": {
+      "studentPreferences": "Preferencias del Estudiante",
+      "receiveEmailNotifications": "Recibir notificaciones por correo electrónico",
+      "enableDarkMode": "Activar modo oscuro",
+      "receiveSMSNotifications": "Recibir notificaciones por SMS",
+      "saveChanges": "Guardar Cambios"
+    },
+    "courseManagement": {
+      "courseManagement": "Mis Cursos",
+      "noCoursesEnrolled": "No estás inscrito en ningún curso.",
+      "instructor": "Instructor",
+      "time": "Hora",
+      "location": "Ubicación"
+    },
+    "justificationManagement": {
+      "studentJustification": "Justificación de Estudiante",
+      "fullName": "Nombre Completo",
+      "enterFullName": "Ingrese su nombre completo",
+      "rut": "RUT",
+      "enterRut": "Ingrese su RUT",
+      "reason": "Motivo",
+      "enterReason": "Ingrese su motivo",
+      "selectClasses": "Seleccionar Clases",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha de Fin",
+      "justificationDocument": "Documento de Justificación",
+      "submitJustification": "Enviar Justificación"
+    },
+    "justificationReview": {
+      "myJustifications": "Mis Justificaciones",
+      "date": "Fecha",
+      "reason": "Motivo",
+      "status": "Estado"
+    },
+    "upcomingClassesView": {
+      "myUpcomingClasses": "Mis Clases Próximas Esta Semana",
+      "noUpcomingClasses": "No tienes clases próximas esta semana.",
+      "date": "Fecha",
+      "time": "Hora",
+      "location": "Ubicación"
+    },
+    "studentWeekly": {
+      "pageTitle": "Página Semanal del Estudiante"
+    },
+    "studentFAQ": {
+      "chatTitle": "Chatea con IA",
+      "placeholder": "Escribe tu pregunta aquí..."
+    }
+  },
   "footer": {
     "rights": "Todos los derechos reservados a EducAI Solutions"
   },

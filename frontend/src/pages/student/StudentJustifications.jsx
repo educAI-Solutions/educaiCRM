@@ -2,10 +2,12 @@ import React, { useState, useContext, useEffect } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import Select from "react-select";
 import axios from "axios";
+import { useTranslation } from "react-i18next"; // Importar useTranslation de react-i18next
 import { UserContext } from "../../App";
 
 function StudentJustifications() {
   const { id } = useContext(UserContext);
+  const { t } = useTranslation(); // Usar la función de traducción
   const [classes, setClasses] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [formData, setFormData] = useState({
@@ -116,41 +118,59 @@ function StudentJustifications() {
       <Row className="justify-content-center">
         <Col xs={10} md={8} lg={6}>
           <div className="p-4 shadow-lg rounded bg-light">
-            <h2 className="text-center mb-4">Student Justification</h2>
+            <h2 className="text-center mb-4">
+              {t(
+                "studentDashboard.justificationManagement.studentJustification"
+              )}
+            </h2>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="formFullName">
-                <Form.Label>Full Name</Form.Label>
+                <Form.Label>
+                  {t("studentDashboard.justificationManagement.fullName")}
+                </Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter your full name"
+                  placeholder={t(
+                    "studentDashboard.justificationManagement.enterFullName"
+                  )}
                   name="fullname"
                   value={formData.fullname}
                   onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group controlId="formRut">
-                <Form.Label>RUT</Form.Label>
+                <Form.Label>
+                  {t("studentDashboard.justificationManagement.rut")}
+                </Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter your RUT"
+                  placeholder={t(
+                    "studentDashboard.justificationManagement.enterRut"
+                  )}
                   name="rut"
                   value={formData.rut}
                   onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group controlId="formReason">
-                <Form.Label>Reason</Form.Label>
+                <Form.Label>
+                  {t("studentDashboard.justificationManagement.reason")}
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  placeholder="Enter your reason"
+                  placeholder={t(
+                    "studentDashboard.justificationManagement.enterReason"
+                  )}
                   name="reason"
                   value={formData.reason}
                   onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group controlId="formClasses">
-                <Form.Label>Select Classes</Form.Label>
+                <Form.Label>
+                  {t("studentDashboard.justificationManagement.selectClasses")}
+                </Form.Label>
                 <Select
                   isMulti
                   value={selectedClasses}
@@ -163,7 +183,9 @@ function StudentJustifications() {
                 />
               </Form.Group>
               <Form.Group controlId="formStartDate">
-                <Form.Label>Start Date</Form.Label>
+                <Form.Label>
+                  {t("studentDashboard.justificationManagement.startDate")}
+                </Form.Label>
                 <Form.Control
                   type="date"
                   name="startDate"
@@ -172,7 +194,9 @@ function StudentJustifications() {
                 />
               </Form.Group>
               <Form.Group controlId="formEndDate">
-                <Form.Label>End Date</Form.Label>
+                <Form.Label>
+                  {t("studentDashboard.justificationManagement.endDate")}
+                </Form.Label>
                 <Form.Control
                   type="date"
                   name="endDate"
@@ -181,7 +205,11 @@ function StudentJustifications() {
                 />
               </Form.Group>
               <Form.Group controlId="formJustificationFile">
-                <Form.Label>Justification Document</Form.Label>
+                <Form.Label>
+                  {t(
+                    "studentDashboard.justificationManagement.justificationDocument"
+                  )}
+                </Form.Label>
                 <Form.Control
                   type="file"
                   name="justificationFile"
@@ -191,7 +219,9 @@ function StudentJustifications() {
               <div className="text-center">
                 <br />
                 <Button variant="primary" type="submit">
-                  Submit Justification
+                  {t(
+                    "studentDashboard.justificationManagement.submitJustification"
+                  )}
                 </Button>
               </div>
             </Form>

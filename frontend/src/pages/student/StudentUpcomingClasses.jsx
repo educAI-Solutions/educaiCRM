@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Card, ListGroup, Container, Alert } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Import useTranslation from react-i18next
 
 function StudentUpcomingClasses() {
+  const { t } = useTranslation(); // Use the translation function
+
   const [upcomingClasses, setUpcomingClasses] = useState([]);
 
   useEffect(() => {
@@ -11,18 +14,27 @@ function StudentUpcomingClasses() {
 
   return (
     <Container className="m-2">
-      <h2>My Upcoming Classes This Week</h2>
+      <h2>{t("studentDashboard.upcomingClassesView.myUpcomingClasses")}</h2>
       {upcomingClasses.length === 0 ? (
-        <Alert variant="info">You have no upcoming classes this week.</Alert>
+        <Alert variant="info">
+          {t("studentDashboard.upcomingClassesView.noUpcomingClasses")}
+        </Alert>
       ) : (
         upcomingClasses.map((upcomingClass) => (
           <Card className="mb-3" key={upcomingClass.id}>
             <Card.Header as="h5">{upcomingClass.courseName}</Card.Header>
             <ListGroup variant="flush">
-              <ListGroup.Item>Date: {upcomingClass.date}</ListGroup.Item>
-              <ListGroup.Item>Time: {upcomingClass.time}</ListGroup.Item>
               <ListGroup.Item>
-                Location: {upcomingClass.location}
+                {t("studentDashboard.upcomingClassesView.date")}:{" "}
+                {upcomingClass.date}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {t("studentDashboard.upcomingClassesView.time")}:{" "}
+                {upcomingClass.time}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {t("studentDashboard.upcomingClassesView.location")}:{" "}
+                {upcomingClass.location}
               </ListGroup.Item>
             </ListGroup>
           </Card>

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Import useTranslation from react-i18next
 
 function StudentJustificationsReview() {
+  const { t } = useTranslation(); // Use the translation function
+
   const [justifications, setJustifications] = useState([]);
 
   useEffect(() => {
@@ -11,13 +14,13 @@ function StudentJustificationsReview() {
 
   return (
     <div className="m-2">
-      <h2>My Justifications</h2>
+      <h2>{t("studentDashboard.justificationReview.myJustifications")}</h2>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Reason</th>
-            <th>Status</th>
+            <th>{t("studentDashboard.justificationReview.date")}</th>
+            <th>{t("studentDashboard.justificationReview.reason")}</th>
+            <th>{t("studentDashboard.justificationReview.status")}</th>
           </tr>
         </thead>
         <tbody>

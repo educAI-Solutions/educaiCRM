@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Table, Container, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 import { UserContext } from "../../App";
 import Select from "react-select";
 
 function StudentAttendance() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [coursesAttendance, setCoursesAttendance] = useState([]);
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -58,17 +60,25 @@ function StudentAttendance() {
   return (
     <Container className="justify-content-center">
       <Row className="text-center">
-        <h2>Student Attendance Page</h2>
+        <h2>
+          {t("studentDashboard.attendanceManagement.studentAttendancePage")}
+        </h2>{" "}
+        {/* Translate the page title */}
       </Row>
       <Row>
-        <h4>Overall Attendance</h4>
+        <h4>{t("studentDashboard.attendanceManagement.overallAttendance")}</h4>{" "}
+        {/* Translate the section title */}
         <Table responsive striped bordered hover>
           <thead>
             <tr>
-              <th>Course Name</th>
-              <th>Section</th>
-              <th>Program</th>
-              <th>Attendance Percentage</th>
+              <th>{t("studentDashboard.attendanceManagement.courseName")}</th>
+              <th>{t("studentDashboard.attendanceManagement.section")}</th>
+              <th>{t("studentDashboard.attendanceManagement.program")}</th>
+              <th>
+                {t(
+                  "studentDashboard.attendanceManagement.attendancePercentage"
+                )}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -90,7 +100,8 @@ function StudentAttendance() {
         </Table>
       </Row>
       <Row>
-        <h4>Course Details</h4>
+        <h4>{t("studentDashboard.attendanceManagement.courseDetails")}</h4>{" "}
+        {/* Translate the section title */}
         <Select
           value={selectedCourse}
           onChange={handleCourseChange}
@@ -99,15 +110,15 @@ function StudentAttendance() {
             label: course.name,
           }))}
           isClearable
-          placeholder="Select a course"
+          placeholder={t("studentDashboard.attendanceManagement.selectCourse")}
         />
         {selectedCourse && (
           <Table responsive striped bordered hover>
             <thead>
               <tr>
-                <th>Class Name</th>
-                <th>Date</th>
-                <th>Attended</th>
+                <th>{t("studentDashboard.attendanceManagement.className")}</th>
+                <th>{t("studentDashboard.attendanceManagement.date")}</th>
+                <th>{t("studentDashboard.attendanceManagement.attended")}</th>
               </tr>
             </thead>
             <tbody>
@@ -121,7 +132,9 @@ function StudentAttendance() {
                     <td>{cls.name}</td>
                     <td>{new Date(cls.date).toDateString()}</td>
                     <td>
-                      {participant && participant.attended ? "Yes" : "No"}
+                      {participant && participant.attended
+                        ? t("studentDashboard.attendanceManagement.yes")
+                        : t("studentDashboard.attendanceManagement.no")}
                     </td>
                   </tr>
                 );
