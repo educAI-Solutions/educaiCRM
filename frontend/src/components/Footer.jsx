@@ -11,7 +11,7 @@ const Footer = () => {
   const { t } = useTranslation();
   return (
     <div
-      className="flex flex-col items-center p-4 text-white relative w-full"
+      className="flex flex-col items-center p-1 text-white relative w-full"
       style={{
         background:
           "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
@@ -48,7 +48,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <p className="text-center mt-4">
+      <p className="text-center mt-2">
         &copy; {new Date().getFullYear()} {t("footer.rights")}
       </p>
     </div>
