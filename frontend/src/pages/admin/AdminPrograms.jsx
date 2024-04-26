@@ -58,7 +58,10 @@ const AdminPrograms = () => {
         "http://localhost:5050/api/courses/get-all"
       );
       if (Array.isArray(response.data.data)) {
-        setCourses(response.data.data);
+        const coursesWithoutProgram = response.data.data.filter(
+          (course) => !course.program
+        );
+        setCourses(coursesWithoutProgram);
       } else {
         console.error("Error: received non-array response data");
         setCourses([]);
@@ -127,7 +130,8 @@ const AdminPrograms = () => {
     }
   };
 
-  const handleCreate = async () => {
+  const handleCreate = async (event) => {
+    event.preventDefault();
     try {
       await axios.post("http://localhost:5050/api/programs/create", newProgram);
       setNewProgram({});
@@ -201,64 +205,75 @@ const AdminPrograms = () => {
         <Card>
           <Card.Body>
             <h2>{t("adminDashboard.programManagement.createForm.title")}</h2>
-            <Form.Control
-              name="name"
-              value={newProgram.name || ""}
-              onChange={handleNewProgramChange}
-              placeholder={t(
-                "adminDashboard.programManagement.createForm.name"
-              )}
-              required
-            />
-            <Form.Control
-              name="description"
-              value={newProgram.description || ""}
-              onChange={handleNewProgramChange}
-              placeholder={t(
-                "adminDashboard.programManagement.createForm.description"
-              )}
-            />
-            <Select
-              isMulti
-              name="courses"
-              options={[
-                {
-                  value: "none",
-                  label: t(
-                    "adminDashboard.programManagement.createForm.noneCourse"
-                  ),
-                },
-                ...courses.map((course) => ({
-                  value: course._id,
-                  label: `${course.name} - Section:${course.section}`,
-                })),
-              ]}
-              className="basic-multi-select"
-              classNamePrefix="select"
-              onChange={handleCourseChange}
-              placeholder={t(
-                "adminDashboard.programManagement.createForm.enterCourses"
-              )}
-              required
-            />
-            <Select
-              isMulti
-              name="participants"
-              options={participants.map((participant) => ({
-                value: participant._id,
-                label: participant.username,
-              }))}
-              className="basic-multi-select"
-              classNamePrefix="select"
-              onChange={handleParticipantChange}
-              placeholder={t(
-                "adminDashboard.programManagement.createForm.enterParticipants"
-              )}
-              required
-            />
-            <Button variant="primary" onClick={handleCreate}>
-              {t("adminDashboard.programManagement.createForm.submit")}
-            </Button>
+            <Form onSubmit={handleCreate}>
+              <Form.Group controlId="name">
+                <Form.Control
+                  name="name"
+                  value={newProgram.name || ""}
+                  onChange={handleNewProgramChange}
+                  placeholder={t(
+                    "adminDashboard.programManagement.createForm.name"
+                  )}
+                  required
+                />
+              </Form.Group>
+              <Form.Group controlId="description">
+                <Form.Control
+                  name="description"
+                  value={newProgram.description || ""}
+                  onChange={handleNewProgramChange}
+                  placeholder={t(
+                    "adminDashboard.programManagement.createForm.description"
+                  )}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="courses">
+                <Select
+                  isMulti
+                  name="courses"
+                  options={[
+                    {
+                      value: "none",
+                      label: t(
+                        "adminDashboard.programManagement.createForm.noneCourse"
+                      ),
+                    },
+                    ...courses.map((course) => ({
+                      value: course._id,
+                      label: `${course.name} - Section:${course.section}`,
+                    })),
+                  ]}
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                  onChange={handleCourseChange}
+                  placeholder={t(
+                    "adminDashboard.programManagement.createForm.enterCourses"
+                  )}
+                  required
+                />
+              </Form.Group>
+              <Form.Group controlId="participants">
+                <Select
+                  isMulti
+                  name="participants"
+                  options={participants.map((participant) => ({
+                    value: participant._id,
+                    label: participant.username,
+                  }))}
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                  onChange={handleParticipantChange}
+                  placeholder={t(
+                    "adminDashboard.programManagement.createForm.enterParticipants"
+                  )}
+                  required
+                />
+              </Form.Group>
+              <Button type="submit" className="mt-3">
+                {t("adminDashboard.programManagement.createForm.submit")}
+              </Button>
+            </Form>
           </Card.Body>
         </Card>
       </Row>

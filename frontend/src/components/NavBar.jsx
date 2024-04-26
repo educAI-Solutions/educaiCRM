@@ -90,37 +90,29 @@ function Navbar() {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    style={{ color: "black" }}
-                    href="/notifications"
-                    className="d-block"
-                  >
-                    <FaBell style={{ marginRight: "5px" }} />
-                    {t("navbar.notifications")}
+                  <Dropdown.Item style={{ color: "black" }} className="d-block">
+                    <Link to={"/notifications"} style={{ color: "black" }}>
+                      <FaBell style={{ marginRight: "5px" }} />
+                      {t("navbar.notifications")}
+                    </Link>
                   </Dropdown.Item>
-                  <Dropdown.Item
-                    style={{ color: "black" }}
-                    href="/contact"
-                    className="d-block"
-                  >
-                    <FaEnvelope style={{ marginRight: "5px" }} />
-                    {t("navbar.contact")}
+                  <Dropdown.Item style={{ color: "black" }} className="d-block">
+                    <Link to={"/contact"} style={{ color: "black" }}>
+                      <FaEnvelope style={{ marginRight: "5px" }} />
+                      {t("navbar.contact")}
+                    </Link>
                   </Dropdown.Item>
-                  <Dropdown.Item
-                    style={{ color: "black" }}
-                    href="/profile"
-                    className="d-block"
-                  >
-                    <FaUserCircle style={{ marginRight: "5px" }} />
-                    {t("navbar.profile")}
+                  <Dropdown.Item style={{ color: "black" }} className="d-block">
+                    <Link to={"/profile"} style={{ color: "black" }}>
+                      <FaUserCircle style={{ marginRight: "5px" }} />
+                      {t("navbar.profile")}
+                    </Link>
                   </Dropdown.Item>
-                  <Dropdown.Item
-                    style={{ color: "black" }}
-                    href="/logout"
-                    className="d-block"
-                  >
-                    <FaSignOutAlt style={{ marginRight: "5px" }} />
-                    {t("navbar.logout")}
+                  <Dropdown.Item style={{ color: "black" }} className="d-block">
+                    <Link to={"/logout"} style={{ color: "black" }}>
+                      <FaSignOutAlt style={{ marginRight: "5px" }} />
+                      {t("navbar.logout")}
+                    </Link>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

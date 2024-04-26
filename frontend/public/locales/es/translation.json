@@ -174,12 +174,16 @@
     "justificationsManagement": {
       "title": "Gestión de Justificaciones",
       "searchPlaceholder": "Buscar una justificación por su título o ID",
-      "tableTitle": "Título",
+      "tableName": "Nombre Completo",
+      "tableUsername": "Usuario",
       "tableStatus": "Estado",
+      "tableDownload": "Descargar",
+      "buttonDownload": "Descargar",
       "tableActions": "Acciones",
       "buttonApprove": "Aprobar",
       "buttonReject": "Rechazar",
-      "buttonQuestion": "Preguntar"
+      "buttonQuestion": "Preguntar",
+      "buttonPending": "Pendiente"
     },
     "adminConfig": {
       "preferences": "Preferencias de Administrador",

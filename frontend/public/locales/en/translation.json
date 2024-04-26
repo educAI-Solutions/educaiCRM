@@ -166,12 +166,16 @@
     "justificationsManagement": {
       "title": "Justification Management",
       "searchPlaceholder": "Search for a justification by its Title or ID",
-      "tableTitle": "Title",
+      "tableName": "Full Name",
+      "tableUsername": "Username",
       "tableStatus": "Status",
+      "tableDownload": "Download",
+      "buttonDownload": "Download",
       "tableActions": "Actions",
       "buttonApprove": "Approve",
       "buttonReject": "Reject",
-      "buttonQuestion": "Question"
+      "buttonQuestion": "Question",
+      "buttonPending": "Pending"
     },
     "adminConfig": {
       "preferences": "Admin Preferences",
