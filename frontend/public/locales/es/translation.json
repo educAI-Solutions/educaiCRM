@@ -178,7 +178,8 @@
       "tableStatus": "Estado",
       "tableActions": "Acciones",
       "buttonApprove": "Aprobar",
-      "buttonReject": "Rechazar"
+      "buttonReject": "Rechazar",
+      "buttonQuestion": "Preguntar"
     },
     "adminConfig": {
       "preferences": "Preferencias de Administrador",

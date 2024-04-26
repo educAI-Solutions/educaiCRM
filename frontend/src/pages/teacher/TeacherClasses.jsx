@@ -14,7 +14,7 @@ function TeacherClasses() {
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  });
 
   const fetchCourses = async () => {
     try {

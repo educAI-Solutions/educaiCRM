@@ -1,16 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next"; // Import useTranslation from react-i18next
+import { UserContext } from "../../App";
 
 function StudentJustificationsReview() {
   const { t } = useTranslation(); // Use the translation function
+  const { id } = useContext(UserContext);
 
   const [justifications, setJustifications] = useState([]);
 
   useEffect(() => {
-    // Fetch the justifications from your API here and set the justifications state
-    // Make sure to fetch only the justifications that the student has sent
-  }, []);
+    fetchJustifications();
+  });
+
+  const fetchJustifications = async () => {
+    // Send a GET request to the API
+    const response = await fetch(
+      `http://localhost:5050/api/justifications/get-all/student/${id}`
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      setJustifications(data.data);
+    } else {
+      console.error("Error fetching justifications:", response);
+    }
+  };
 
   return (
     <div className="m-2">
@@ -25,10 +40,20 @@ function StudentJustificationsReview() {
         </thead>
         <tbody>
           {justifications.map((justification) => (
-            <tr key={justification.date}>
-              <td>{justification.date}</td>
-              <td>{justification.reason}</td>
-              <td>{justification.status}</td>
+            <tr key={justification._id}>
+              <td>{justification.startDate}</td>
+              <td>{justification.reason.substring(0, 20)}</td>
+              <td
+                className={
+                  justification.state === "approved"
+                    ? "text-success"
+                    : justification.state === "rejected"
+                    ? "text-danger"
+                    : "text-warning"
+                }
+              >
+                {justification.state.toUpperCase()}
+              </td>
             </tr>
           ))}
         </tbody>

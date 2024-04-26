@@ -170,7 +170,8 @@
       "tableStatus": "Status",
       "tableActions": "Actions",
       "buttonApprove": "Approve",
-      "buttonReject": "Reject"
+      "buttonReject": "Reject",
+      "buttonQuestion": "Question"
     },
     "adminConfig": {
       "preferences": "Admin Preferences",

@@ -19,11 +19,9 @@ function StudentJustifications() {
     startDate: "",
     endDate: "",
     file: null,
+    fileExtension: "",
+    justificationID: "",
   });
-
-  useEffect(() => {
-    fetchClasses();
-  }, []);
 
   const fetchClasses = async () => {
     try {
@@ -42,13 +40,22 @@ function StudentJustifications() {
     }
   };
 
+  useEffect(() => {
+    fetchClasses();
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, file: e.target.files[0] });
+    const file = e.target.files[0];
+    setFormData({
+      ...formData,
+      file: file,
+      fileExtension: file.name.split(".").pop(),
+    });
   };
 
   const handleClassesChange = (selectedOptions) => {
@@ -62,15 +69,9 @@ function StudentJustifications() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // add to the formdata the fileExtension if it exists
-    if (formData.file) {
-      const fileExtension = formData.file.name.split(".").pop();
-      setFormData({ ...formData, fileExtension: fileExtension });
-    }
-
+    console.log("Form data:", formData);
     try {
-      // Send a POST request to create a new justification
+      // Send a POST request to create a new justification and make it wait for the response
       const response = await axios.post(
         "http://localhost:5050/api/justifications/create",
         formData
@@ -79,14 +80,18 @@ function StudentJustifications() {
       if (response.status === 201) {
         // store the justification id from the response
         const justificationId = response.data.data._id;
-        // append it to the form data
-        setFormData({ ...formData, justificationID: justificationId });
+
+        // Append to formData the justificationID withour mutating the state
+        const newFormData = {
+          ...formData,
+          justificationID: justificationId,
+        };
 
         try {
           // Send a POST request to the storage API
           const storageResponse = await axios.post(
             "http://localhost:7070/storage/upload/justifications",
-            formData,
+            newFormData,
             {
               headers: {
                 "Content-Type": "multipart/form-data",

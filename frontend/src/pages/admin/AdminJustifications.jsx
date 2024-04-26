@@ -23,7 +23,9 @@ function AdminJustifications() {
 
   const fetchJustifications = async () => {
     try {
-      const response = await axios.get("/api/justifications");
+      const response = await axios.get(
+        "http://localhost:5050/api/justifications/get-all"
+      );
       setJustifications(response.data.data);
     } catch (error) {
       console.error("Error fetching justifications:", error);
@@ -46,7 +48,7 @@ function AdminJustifications() {
   };
 
   const filteredJustifications = justifications.filter((justification) =>
-    justification.title.toLowerCase().includes(searchTerm.toLowerCase())
+    justification.fullname.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -85,8 +87,8 @@ function AdminJustifications() {
             <tbody>
               {filteredJustifications.map((justification) => (
                 <tr key={justification._id}>
-                  <td>{justification.title}</td>
-                  <td>{justification.status}</td>
+                  <td>{justification.fullname}</td>
+                  <td>{justification.state}</td>
                   <td>
                     <Button
                       onClick={() =>
@@ -104,6 +106,15 @@ function AdminJustifications() {
                     >
                       {t(
                         "adminDashboard.justificationsManagement.buttonReject"
+                      )}
+                    </Button>
+                    <Button
+                      onClick={() =>
+                        handleStatusChange(justification._id, "questioned")
+                      }
+                    >
+                      {t(
+                        "adminDashboard.justificationsManagement.buttonQuestion"
                       )}
                     </Button>
                   </td>
