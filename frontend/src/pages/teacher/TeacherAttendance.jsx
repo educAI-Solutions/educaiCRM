@@ -36,7 +36,7 @@ function TeacherAttendance() {
     };
 
     fetchCourses();
-  }, []);
+  });
 
   const handleCourseChange = async (e) => {
     setSelectedClassId(null); // Reset class selection when the course changes
