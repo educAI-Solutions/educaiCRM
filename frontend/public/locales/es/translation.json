@@ -216,7 +216,9 @@
       "selectCourse": "Selecciona un curso",
       "selectClass": "Selecciona una clase",
       "downloadExcel": "Descargar Excel de Asistencia",
-      "upload": "Subir"
+      "upload": "Subir",
+      "loading": "Cargando...",
+      "fetchCoursesError": "Error al obtener los cursos"
     },
     "classManagement": {
       "teacherClassesPage": "Página de Clases del Profesor",

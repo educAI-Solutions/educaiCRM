@@ -1,29 +1,60 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useTranslation } from "react-i18next"; // Importamos useTranslation
+import { useTranslation } from "react-i18next";
 import { UserContext } from "../../App";
 
 function TeacherAttendance() {
-  const { t } = useTranslation(); // Inicializamos useTranslation
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [classes, setClasses] = useState([]);
-  const [courses, setCourses] = useState([]);
+  const { t } = useTranslation();
   const { id } = useContext(UserContext);
 
+  // State variables with clearer names
+  const [selectedCourseId, setSelectedCourseId] = useState(null);
+  const [selectedClassId, setSelectedClassId] = useState(null);
+  const [courses, setCourses] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // For loading states
+  const [statusMessage, setStatusMessage] = useState(null); // For feedback messages
+
   useEffect(() => {
-    fetchCoursesInstructor();
+    const fetchCourses = async () => {
+      // Cleaner function within useEffect
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          `http://localhost:5050/api/courses/get/instructor/${id}`
+        );
+        setCourses(response.data.data);
+      } catch (error) {
+        console.error("Fetch courses error:", error);
+        setStatusMessage(
+          t("teacherDashboard.attendanceManagement.fetchCoursesError")
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCourses();
   }, []);
 
-  const fetchCoursesInstructor = async () => {
+  const handleCourseChange = async (e) => {
+    setSelectedClassId(null); // Reset class selection when the course changes
+    setIsLoading(true);
     try {
+      const courseId = e.target.value;
+      setSelectedCourseId(courseId);
       const response = await axios.get(
-        `http://localhost:5050/api/courses/get/instructor/${id}`
+        `http://localhost:5050/api/courses/get/${courseId}`
       );
-      setCourses(response.data.data);
+      setClasses(response.data.data.classes);
     } catch (error) {
-      console.error("Fetch courses error:", error);
-      setCourses([]);
+      console.error("Error fetching classes:", error);
+      setStatusMessage(
+        t("teacherDashboard.attendanceManagement.fetchClassesError")
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -31,71 +62,67 @@ function TeacherAttendance() {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleCourseChange = async (e) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5050/api/courses/get/${e.target.value}`
-      );
-      setClasses(response.data.data.classes);
-    } catch (error) {
-      console.error("Error fetching classes:", error);
-      setClasses([]);
-    }
-  };
-
   const handleUpload = async () => {
+    if (!selectedClassId || !selectedFile) {
+      setStatusMessage(
+        t("teacherDashboard.attendanceManagement.selectClassAndFile")
+      );
+      return;
+    }
+
+    setIsLoading(true);
+    setStatusMessage(null); // Clear any previous messages
+
     const formData = new FormData();
     formData.append("file", selectedFile);
 
     try {
-      // First, send the file to the endpoint that parses the Excel data
+      // Send the file for parsing first
       const parseResponse = await axios.post(
-        `http://localhost:5050/api/attendance/upload/${selectedClass}`,
+        `http://localhost:5050/api/attendance/upload/${selectedClassId}`,
         formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
-      // If the parsing is successful, upload the file
       if (parseResponse.data.success) {
-        formData.append("classId", selectedClass);
+        formData.append("classId", selectedClassId);
         const uploadResponse = await axios.post(
           "http://localhost:7070/storage/upload/attendance",
           formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
-
         console.log(uploadResponse.data);
+        setStatusMessage(
+          t("teacherDashboard.attendanceManagement.uploadSuccess")
+        );
       } else {
-        console.error("Parse error:", parseResponse.data.error);
+        setStatusMessage(parseResponse.data.error);
       }
     } catch (error) {
       console.error("Upload error:", error);
+      setStatusMessage(t("teacherDashboard.attendanceManagement.uploadError"));
+    } finally {
+      setIsLoading(false);
     }
   };
-
   const handleDownload = async () => {
-    if (!selectedClass) {
-      alert(t("teacher.Dashboard.selectClass")); // Usamos la función t() para traducir el texto
+    if (!selectedClassId) {
+      alert(t("teacher.Dashboard.selectClass"));
       return;
     }
 
+    setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/attendance/generate/${selectedClass}`,
+        `http://localhost:5050/api/attendance/generate/${selectedClassId}`,
         { responseType: "arraybuffer" }
       );
+
       const blob = new Blob([response.data], {
-        type: "application/vnd.excel",
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // Correct MIME type
       });
       const filename = "attendance.xlsx";
+
       const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
       link.setAttribute("download", filename);
@@ -104,54 +131,84 @@ function TeacherAttendance() {
       document.body.removeChild(link);
     } catch (error) {
       console.error("Download error:", error);
+      setStatusMessage(
+        t("teacherDashboard.attendanceManagement.downloadError")
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="d-flex flex-column align-items-center mt-5 justify-content-center">
-      <h2 className="mb-4">
+    <div className="container">
+      {" "}
+      {/* Added container for basic styling */}
+      <h2 className="mb-4 text-center">
         {t("teacherDashboard.attendanceManagement.title")}
-      </h2>{" "}
-      {/* Traducimos el título */}
-      <select onChange={handleCourseChange}>
-        <option value="">
-          {t("teacherDashboard.attendanceManagement.selectCourse")}
-        </option>{" "}
-        {/* Traducimos las opciones del select */}
-        {courses.map((course) => (
-          <option key={course._id} value={course._id}>
-            {course.name}
-          </option>
-        ))}
-      </select>
-      <select onChange={(e) => setSelectedClass(e.target.value)}>
-        <option value="">
-          {t("teacherDashboard.attendanceManagement.selectClass")}
-        </option>{" "}
-        {/* Traducimos las opciones del select */}
-        {classes.map((cls) => (
-          <option key={cls._id} value={cls._id}>
-            {cls.name}
-          </option>
-        ))}
-      </select>
-      <button onClick={handleDownload} className="btn btn-primary mt-3">
-        {t("teacherDashboard.attendanceManagement.downloadExcel")}{" "}
-        {/* Traducimos el texto del botón */}
-      </button>
-      <div className="container">
-        <div className="input-group mb-3">
-          <input
-            type="file"
-            className="form-control"
-            onChange={handleFileChange}
-          />
-          <button onClick={handleUpload} className="btn btn-primary mt-3">
-            {t("teacherDashboard.attendanceManagement.upload")}{" "}
-            {/* Traducimos el texto del botón */}
-          </button>
+      </h2>
+      <div className="row mb-3">
+        <div className="col">
+          <select onChange={handleCourseChange} className="form-select">
+            {" "}
+            {/* form-select for styling */}
+            <option value="">
+              {t("teacherDashboard.attendanceManagement.selectCourse")}
+            </option>
+            {courses.map((course) => (
+              <option key={course._id} value={course._id}>
+                {course.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col">
+          <select
+            onChange={(e) => setSelectedClassId(e.target.value)}
+            className="form-select"
+          >
+            <option value="">
+              {t("teacherDashboard.attendanceManagement.selectClass")}
+            </option>
+            {classes.map((cls) => (
+              <option key={cls._id} value={cls._id}>
+                {cls.name}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
+      <button
+        onClick={handleDownload}
+        className="btn btn-primary"
+        disabled={isLoading}
+      >
+        {isLoading
+          ? t("teacherDashboard.attendanceManagement.loading")
+          : t("teacherDashboard.attendanceManagement.downloadExcel")}
+      </button>
+      <div className="input-group mt-3">
+        <input
+          type="file"
+          className="form-control"
+          onChange={handleFileChange}
+        />
+        <button
+          onClick={handleUpload}
+          className="btn btn-primary"
+          disabled={isLoading}
+        >
+          {isLoading
+            ? t("teacherDashboard.attendanceManagement.loading")
+            : t("teacherDashboard.attendanceManagement.upload")}
+        </button>
+      </div>
+      {statusMessage && (
+        <div className="alert alert-info mt-3">
+          {" "}
+          {/* Or alert-danger for errors */}
+          {statusMessage}
+        </div>
+      )}
     </div>
   );
 }

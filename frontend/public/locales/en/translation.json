@@ -208,7 +208,9 @@
       "selectCourse": "Select a course",
       "selectClass": "Select a class",
       "downloadExcel": "Download Attendance Excel",
-      "upload": "Upload"
+      "upload": "Upload",
+      "loading": "Loading...",
+      "fetchCoursesError": "Error fetching courses"
     },
     "classManagement": {
       "teacherClassesPage": "Teacher Classes Page",
