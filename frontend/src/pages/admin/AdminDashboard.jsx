@@ -62,7 +62,7 @@ function AdminDashboard() {
               src={Background}
               alt="Banner"
               className="img-fluid"
-              style={{ maxHeight: "170px", objectFit: "cover" }}
+              style={{ maxHeight: "160px", objectFit: "cover" }}
             />
             <div
               style={{
@@ -149,7 +149,7 @@ function AdminDashboard() {
       <Row className="justify-content-center m-2">
         <Col md={3} lg={2}>
           <Card
-            className={`mb-3 ${
+            className={`mb-2 ${
               selectedItem === "justifications" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("justifications")}
@@ -161,7 +161,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-3 ${
+            className={`mb-2 ${
               selectedItem === "insights" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("insights")}
@@ -173,7 +173,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-3 ${
+            className={`mb-2 ${
               selectedItem === "attendance" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("attendance")}
@@ -185,7 +185,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-3 ${
+            className={`mb-2 ${
               selectedItem === "configuration" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("configuration")}
@@ -197,6 +197,7 @@ function AdminDashboard() {
         </Col>
       </Row>
       <Row className="justify-content-center">
+        <hr className="my-3 styled-hr" />
         <Col md={12} className="py-2">
           {renderComponent()}
         </Col>

@@ -10,7 +10,9 @@ function AdminUsers() {
   return (
     <Container>
       <Row className="text-center mb-3">
-        <h1>{t("adminDashboard.usersManagement.title")}</h1>
+        <h1 style={{ color: "#1b2432" }}>
+          {t("adminDashboard.usersManagement.title")}
+        </h1>
       </Row>
       <Row>
         <Col md={12}>
