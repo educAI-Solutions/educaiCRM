@@ -19,6 +19,7 @@ import AdminAttendance from "./AdminAttendance";
 import AdminClasses from "./AdminClasses";
 import AdminConfiguration from "./AdminConfiguration";
 import AdminPrograms from "./AdminPrograms";
+import Background from "../../img/fondo-biblioteca.jpg";
 
 function AdminDashboard() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -58,7 +59,7 @@ function AdminDashboard() {
           <Card className="position-relative">
             <Card.Img
               variant="top"
-              src="https://bibliotecas.uai.cl/wp-content/uploads/2021/03/fondo-biblioteca-pregrado-santiago.jpg"
+              src={Background}
               alt="Banner"
               className="img-fluid"
               style={{ maxHeight: "170px", objectFit: "cover" }}

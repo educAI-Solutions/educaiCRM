@@ -5,7 +5,7 @@ import BurguerButton from "./BurguerButton";
 import Logo from "../img/logotipo1.png";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Button } from "react-bootstrap";
 import {
   FaUserCheck,
   FaBell,
@@ -42,6 +42,7 @@ function Navbar() {
             <img
               src={Logo}
               alt="Logo"
+              className="logo"
               style={{ marginLeft: "3px" }}
               width={90}
               height={80}
@@ -53,11 +54,10 @@ function Navbar() {
             </Link>
           )}
         </div>
-        <div className="d-flex align-items-center justify-content-end p-3">
+        <div className="d-flex align-items-center justify-content-end p-2">
           <Dropdown>
             <Dropdown.Toggle variant="secondary" id="language-dropdown">
-              {languages[selectedLanguage].flag}{" "}
-              {languages[selectedLanguage].label}
+              {languages[selectedLanguage].flag}
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="dropdown-menu-width">
@@ -118,15 +118,10 @@ function Navbar() {
               </Dropdown>
             )}
             {!isLoggedIn && (
-              <Link
-                to="/login"
-                style={{
-                  color: "#FFFFFF",
-                  fontWeight: "bold",
-                  fontSize: "1rem",
-                }}
-              >
-                {t("navbar.login")}
+              <Link to="/login">
+                <Button variant="outline-light" className="my-2 my-sm-0">
+                  {t("navbar.login")}
+                </Button>
               </Link>
             )}
           </div>
@@ -143,19 +138,11 @@ function Navbar() {
 export default Navbar;
 
 const NavContainer = styled.nav`
-  h2 {
-    color: white;
-    font-weight: 400;
-    span {
-      font-weight: bold;
-    }
-  }
   padding: 0.4rem;
-  background-color: #333;
+  background-color: #1b2432;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   a {
     color: white;
     text-decoration: none;

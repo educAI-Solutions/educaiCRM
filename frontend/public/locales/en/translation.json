@@ -10,6 +10,7 @@
   },
   "navbar": {
     "dashboard": "Dashboard",
+    "dashboardHome": "Go to my Dashboard",
     "notifications": "Notifications",
     "contact": "Contact",
     "profile": "Profile",

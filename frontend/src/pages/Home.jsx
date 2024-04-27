@@ -12,13 +12,13 @@ const Home = () => {
       className="d-flex align-items-center justify-content-center"
       style={{
         background:
-          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
-        height: "100vh",
+          "linear-gradient(90deg, #121420 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
+        height: "80vh",
       }}
     >
       <Container
         className="text-center text-white"
-        style={{ fontFamily: "Montserrat, sans-serif" }}
+        style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.2rem" }}
       >
         <Row>
           <Col>
@@ -41,21 +41,7 @@ const Home = () => {
             {isLoggedIn && (
               <Link to={`/${role}/dashboard`}>
                 <Button variant="outline-light" className="m-2">
-                  {t("navbar.dashboard")}
-                </Button>
-              </Link>
-            )}
-            {isLoggedIn && (role === "student" || role === "admin") && (
-              <Link to={`/${role}/justifications`}>
-                <Button variant="outline-light" className="m-2">
-                  {t("adminDashboard.justifications")}
-                </Button>
-              </Link>
-            )}
-            {isLoggedIn && (role === "student" || role === "teacher") && (
-              <Link to={`/${role}/attendance`}>
-                <Button variant="outline-light" className="m-2">
-                  {t("adminDashboard.attendance")}
+                  {t("navbar.dashboardHome")}
                 </Button>
               </Link>
             )}

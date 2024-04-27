@@ -11,6 +11,7 @@ import {
   FaCalendarWeek,
   FaCog,
 } from "react-icons/fa";
+import Background from "../../img/fondo-biblioteca.jpg";
 
 function StudentDashboard() {
   const { t } = useTranslation();
@@ -21,7 +22,7 @@ function StudentDashboard() {
           <Card className="position-relative">
             <Card.Img
               variant="top"
-              src="https://bibliotecas.uai.cl/wp-content/uploads/2021/03/fondo-biblioteca-pregrado-santiago.jpg"
+              src={Background}
               alt="Banner"
               className="img-fluid"
               style={{ maxHeight: "170px", objectFit: "cover" }}

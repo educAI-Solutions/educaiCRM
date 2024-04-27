@@ -14,7 +14,7 @@ const Footer = () => {
       className="flex flex-col items-center p-1 text-white relative w-full"
       style={{
         background:
-          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
+          "linear-gradient(90deg, #121420 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
         fontFamily: "Montserrat, sans-serif",
       }}
     >

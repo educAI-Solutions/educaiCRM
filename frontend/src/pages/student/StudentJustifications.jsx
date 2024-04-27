@@ -51,10 +51,10 @@ function StudentJustifications() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    const maxSize = 2 * 1024 * 1024; // 2MB
+    const maxSize = 5 * 1024 * 1024; // 2MB
 
     if (file.size > maxSize) {
-      alert("File is too large, please upload a file smaller than 2MB.");
+      alert("File is too large, please upload a file smaller than 5MB.");
       e.target.value = ""; // Clear the input
     } else {
       setFormData({

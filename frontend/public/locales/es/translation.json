@@ -10,6 +10,7 @@
   },
   "navbar": {
     "dashboard": "Panel de Control",
+    "dashboardHome": "Ir a mi Panel de Control",
     "notifications": "Notificaciones",
     "contact": "Contacto",
     "profile": "Perfil",
