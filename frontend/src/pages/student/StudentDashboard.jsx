@@ -60,7 +60,7 @@ function StudentDashboard() {
       </Row>
       <Row className="justify-content-center">
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-          <Card className="text-center shadow mb-3 h-100">
+          <Card className="text-center shadow mb-3 h-100 cardDashboard">
             <Link
               to="/student/justifications"
               className="text-decoration-none text-dark"
@@ -78,7 +78,7 @@ function StudentDashboard() {
           </Card>
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-          <Card className="text-center shadow mb-3 h-100">
+          <Card className="text-center shadow mb-3 h-100 cardDashboard">
             <Link
               to="/student/justificationsreview"
               className="text-decoration-none text-dark"
@@ -96,7 +96,7 @@ function StudentDashboard() {
           </Card>
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-          <Card className="text-center shadow mb-3 h-100">
+          <Card className="text-center shadow mb-3 h-100 cardDashboard">
             <Link
               to="/student/attendance"
               className="text-decoration-none text-dark"
@@ -114,7 +114,7 @@ function StudentDashboard() {
           </Card>
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-          <Card className="text-center shadow mb-3 h-100">
+          <Card className="text-center shadow mb-3 h-100 cardDashboard">
             <Link
               to="/student/upcomingclasses"
               className="text-decoration-none text-dark"
@@ -134,7 +134,7 @@ function StudentDashboard() {
       </Row>
       <Row className="justify-content-center mb-5">
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-          <Card className="text-center shadow mb-3 h-100">
+          <Card className="text-center shadow mb-3 h-100 cardDashboard">
             <Link
               to="/student/courses"
               className="text-decoration-none text-dark"
@@ -152,7 +152,7 @@ function StudentDashboard() {
           </Card>
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-          <Card className="text-center shadow mb-3 h-100">
+          <Card className="text-center shadow mb-3 h-100 cardDashboard">
             <Link to="/student/faq" className="text-decoration-none text-dark">
               <Card.Body>
                 <FaQuestionCircle className="dashboard-icon" />
@@ -165,7 +165,7 @@ function StudentDashboard() {
           </Card>
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-          <Card className="text-center shadow mb-3 h-100">
+          <Card className="text-center shadow mb-3 h-100 cardDashboard">
             <Link
               to="/student/weekly"
               className="text-decoration-none text-dark"
@@ -183,7 +183,7 @@ function StudentDashboard() {
           </Card>
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
-          <Card className="text-center shadow mb-3 h-100">
+          <Card className="text-center shadow mb-3 h-100 cardDashboard">
             <Link
               to="/student/configuration"
               className="text-decoration-none text-dark"

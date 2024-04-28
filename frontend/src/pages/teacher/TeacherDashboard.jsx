@@ -65,7 +65,7 @@ function TeacherDashboard() {
         </Row>
         <Row className="justify-content-center">
           <Col xs={12} sm={6} md={4} lg={3}>
-            <Card className="text-center shadow mb-3 h-100">
+            <Card className="text-center shadow mb-3 h-100 cardDashboard">
               <Link
                 to="/teacher/weekly"
                 className="text-decoration-none text-dark"
@@ -83,7 +83,7 @@ function TeacherDashboard() {
             </Card>
           </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
-            <Card className="text-center shadow mb-3 h-100">
+            <Card className="text-center shadow mb-3 h-100 cardDashboard">
               <Link
                 to="/teacher/classes"
                 className="text-decoration-none text-dark"
@@ -99,7 +99,7 @@ function TeacherDashboard() {
             </Card>
           </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
-            <Card className="text-center shadow mb-3 h-100">
+            <Card className="text-center shadow mb-3 h-100 cardDashboard">
               <Link
                 to="/teacher/attendance"
                 className="text-decoration-none text-dark"
@@ -115,7 +115,7 @@ function TeacherDashboard() {
             </Card>
           </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
-            <Card className="text-center shadow mb-3 h-100">
+            <Card className="text-center shadow mb-3 h-100 cardDashboard">
               <Link
                 to="/teacher/courses"
                 className="text-decoration-none text-dark"

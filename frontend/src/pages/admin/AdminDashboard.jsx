@@ -98,7 +98,7 @@ function AdminDashboard() {
       <Row className="justify-content-center m-2">
         <Col md={3} lg={2}>
           <Card
-            className={`mb-3 ${
+            className={`mb-3 cardDashboard ${
               selectedItem === "users" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("users")}
@@ -110,7 +110,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-3 ${
+            className={`mb-3 cardDashboard ${
               selectedItem === "programs" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("programs")}
@@ -122,7 +122,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-3 ${
+            className={`mb-3 cardDashboard ${
               selectedItem === "courses" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("courses")}
@@ -134,7 +134,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-3 ${
+            className={`mb-3 cardDashboard ${
               selectedItem === "classes" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("classes")}
@@ -149,7 +149,7 @@ function AdminDashboard() {
       <Row className="justify-content-center m-2">
         <Col md={3} lg={2}>
           <Card
-            className={`mb-2 ${
+            className={`mb-2 cardDashboard ${
               selectedItem === "justifications" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("justifications")}
@@ -161,7 +161,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-2 ${
+            className={`mb-2 cardDashboard ${
               selectedItem === "insights" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("insights")}
@@ -173,7 +173,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-2 ${
+            className={`mb-2 cardDashboard ${
               selectedItem === "attendance" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("attendance")}
@@ -185,7 +185,7 @@ function AdminDashboard() {
         </Col>
         <Col md={3} lg={2}>
           <Card
-            className={`mb-2 ${
+            className={`mb-2 cardDashboard ${
               selectedItem === "configuration" ? "bg-primary text-white" : ""
             }`}
             onClick={() => setSelectedItem("configuration")}

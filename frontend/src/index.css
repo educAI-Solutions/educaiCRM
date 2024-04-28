@@ -38,3 +38,15 @@ hr {
     rgba(0, 0, 0, 0)
   );
 }
+
+.cardDashboard {
+  transition: transform 0.3s ease;
+}
+
+.cardDashboard:hover {
+  transform: scale(1.05);
+}
+
+.cardDashboard:active {
+  transform: scale(0.95);
+}

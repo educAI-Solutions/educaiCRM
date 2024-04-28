@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import RegisterUser from "./pages/admin/usermanagement/RegisterUser";
 import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import NavBar from "./components/NavBar";
@@ -14,7 +13,6 @@ import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentAttendance from "./pages/student/StudentAttendance";
 import StudentJustifications from "./pages/student/StudentJustifications";
 import StudentJustificationsReview from "./pages/student/StudentJustificationsReview";
-import AdminJustifications from "./pages/admin/AdminJustifications";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import TeacherAttendance from "./pages/teacher/TeacherAttendance";
@@ -30,6 +28,7 @@ import StudentCourses from "./pages/student/StudentCourses";
 import StudentWeekly from "./pages/student/StudentWeekly";
 import StudentConfiguration from "./pages/student/StudentConfiguration";
 import TestPage from "./pages/TestPage";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 export const UserContext = createContext();
 
@@ -107,7 +106,6 @@ function App() {
                 </>
               }
             ></Route>
-            <Route path="/register" element={<RegisterUser />} />
             <Route
               path="/login"
               element={
@@ -116,64 +114,185 @@ function App() {
                 </>
               }
             ></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/notifications" element={<Notifications />}></Route>
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            ></Route>
+
+            <Route
+              path="/notifications"
+              element={
+                <ProtectedRoute>
+                  <Notifications />
+                </ProtectedRoute>
+              }
+            ></Route>
+
             <Route
               path="/logout"
               element={
-                <>
+                <ProtectedRoute>
                   <Logout onLogout={onLogout} />
-                </>
+                </ProtectedRoute>
               }
             ></Route>
-            <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+
             <Route
-              path="/admin/justifications"
-              element={<AdminJustifications />}
+              path="/admin/dashboard"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
             ></Route>
+
             <Route
               path="/teacher/attendance"
-              element={<TeacherAttendance />}
+              element={
+                <ProtectedRoute requiredRole="teacher">
+                  <TeacherAttendance />
+                </ProtectedRoute>
+              }
             ></Route>
-            <Route path="/teacher/weekly" element={<TeacherWeekly />}></Route>
+
+            <Route
+              path="/teacher/weekly"
+              element={
+                <ProtectedRoute requiredRole="teacher">
+                  <TeacherWeekly />
+                </ProtectedRoute>
+              }
+            ></Route>
+
             <Route
               path="/teacher/dashboard"
-              element={<TeacherDashboard />}
+              element={
+                <ProtectedRoute requiredRole="teacher">
+                  <TeacherDashboard />
+                </ProtectedRoute>
+              }
             ></Route>
-            <Route path="/teacher/faq" element={<TeacherFAQ />}></Route>
-            <Route path="/teacher/courses" element={<TeacherCourses />}></Route>
-            <Route path="/teacher/classes" element={<TeacherClasses />}></Route>
+
+            <Route
+              path="/teacher/faq"
+              element={
+                <ProtectedRoute requiredRole="teacher">
+                  <TeacherFAQ />
+                </ProtectedRoute>
+              }
+            ></Route>
+
+            <Route
+              path="/teacher/courses"
+              element={
+                <ProtectedRoute requiredRole="teacher">
+                  <TeacherCourses />
+                </ProtectedRoute>
+              }
+            ></Route>
+
+            <Route
+              path="/teacher/classes"
+              element={
+                <ProtectedRoute requiredRole="teacher">
+                  <TeacherClasses />
+                </ProtectedRoute>
+              }
+            ></Route>
+
             <Route
               path="/student/attendance"
-              element={<StudentAttendance />}
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentAttendance />
+                </ProtectedRoute>
+              }
             ></Route>
+
             <Route
               path="/student/dashboard"
-              element={<StudentDashboard />}
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentDashboard />
+                </ProtectedRoute>
+              }
             ></Route>
+
             <Route
               path="/student/justifications"
-              element={<StudentJustifications />}
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentJustifications />
+                </ProtectedRoute>
+              }
             ></Route>
+
             <Route
               path="/student/justificationsreview"
-              element={<StudentJustificationsReview />}
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentJustificationsReview />
+                </ProtectedRoute>
+              }
             ></Route>
-            <Route path="/student/courses" element={<StudentCourses />}></Route>
-            <Route path="/student/weekly" element={<StudentWeekly />}></Route>
+
+            <Route
+              path="/student/courses"
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentCourses />
+                </ProtectedRoute>
+              }
+            ></Route>
+
+            <Route
+              path="/student/weekly"
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentWeekly />
+                </ProtectedRoute>
+              }
+            ></Route>
+
             <Route
               path="/student/upcomingclasses"
-              element={<StudentUpcomingClasses />}
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentUpcomingClasses />
+                </ProtectedRoute>
+              }
             ></Route>
+
             <Route
               path="/student/justificationsreview"
-              element={<StudentJustificationsReview />}
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentJustificationsReview />
+                </ProtectedRoute>
+              }
             ></Route>
+
             <Route
               path="/student/configuration"
-              element={<StudentConfiguration />}
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentConfiguration />
+                </ProtectedRoute>
+              }
             />
-            <Route path="/student/faq" element={<StudentFAQ />}></Route>
+
+            <Route
+              path="/student/faq"
+              element={
+                <ProtectedRoute requiredRole="student">
+                  <StudentFAQ />
+                </ProtectedRoute>
+              }
+            ></Route>
             <Route path="*" element={<PageNotFound />} />
           </Routes>
 
