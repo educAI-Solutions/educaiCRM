@@ -36,9 +36,20 @@
         "email": "Correo",
         "role": "Rol",
         "actions": "Acciones",
-        "edit": "Editar",
+        "edit": "Editar Rol",
         "delete": "Eliminar",
         "notfound": "No se encontraron usuarios"
+      },
+      "modalEditUser": {
+        "title": "Editar Usuario",
+        "username": "Nombre de Usuario",
+        "email": "Correo",
+        "role": "Rol",
+        "admin": "Administrador",
+        "teacher": "Profesor",
+        "student": "Estudiante",
+        "close": "Cerrar",
+        "submit": "Guardar Cambios"
       },
       "search": "Buscar Usuario",
       "searchTable": {
@@ -47,7 +58,7 @@
         "email": "Correo",
         "role": "Rol",
         "actions": "Acciones",
-        "edit": "Editar",
+        "edit": "Editar Rol",
         "delete": "Eliminar",
         "notfound": "No se encontraron usuarios",
         "search": "Buscar"

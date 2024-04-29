@@ -36,9 +36,20 @@
         "email": "Email",
         "role": "Role",
         "actions": "Actions",
-        "edit": "Edit",
+        "edit": "Edit Role",
         "delete": "Delete",
         "notfound": "No users found"
+      },
+      "modalEditUser": {
+        "title": "Edit User",
+        "username": "Username",
+        "email": "Email",
+        "role": "Role",
+        "admin": "Admin",
+        "teacher": "Teacher",
+        "student": "Student",
+        "close": "Close",
+        "submit": "Save Changes"
       },
       "search": "Search Users",
       "searchTable": {
@@ -47,7 +58,7 @@
         "email": "Email",
         "role": "Role",
         "actions": "Actions",
-        "edit": "Edit",
+        "edit": "Edit Role",
         "delete": "Delete",
         "notfound": "No users found",
         "search": "Search"
