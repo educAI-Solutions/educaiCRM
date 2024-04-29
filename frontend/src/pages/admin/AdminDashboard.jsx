@@ -10,6 +10,8 @@ import {
   FaUserCheck,
   FaCog,
   FaListAlt,
+  FaIdBadge,
+  FaUserGraduate,
 } from "react-icons/fa";
 import AdminJustifications from "./AdminJustifications";
 import AdminUsers from "./AdminUsers";
@@ -19,6 +21,8 @@ import AdminAttendance from "./AdminAttendance";
 import AdminClasses from "./AdminClasses";
 import AdminConfiguration from "./AdminConfiguration";
 import AdminPrograms from "./AdminPrograms";
+import AdminTeachers from "./AdminTeachers";
+import AdminStudents from "./AdminStudents";
 import Background from "../../img/fondo-biblioteca.jpg";
 
 function AdminDashboard() {
@@ -43,6 +47,10 @@ function AdminDashboard() {
         return <AdminConfiguration />;
       case "programs":
         return <AdminPrograms />;
+      case "teachers":
+        return <AdminTeachers />;
+      case "students":
+        return <AdminStudents />;
       default:
         return <></>;
     }
@@ -145,8 +153,6 @@ function AdminDashboard() {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
-      <Row className="justify-content-center m-2">
         <Col md={3} lg={2}>
           <Card
             className={`mb-2 cardDashboard ${
@@ -156,6 +162,32 @@ function AdminDashboard() {
           >
             <Card.Body>
               <FaFileAlt className="m-2" /> {t("adminDashboard.justifications")}
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row className="justify-content-center m-2">
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-2 cardDashboard ${
+              selectedItem === "teachers" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("teachers")}
+          >
+            <Card.Body>
+              <FaIdBadge className="m-2" /> {t("adminDashboard.teachers")}
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3} lg={2}>
+          <Card
+            className={`mb-2 cardDashboard ${
+              selectedItem === "students" ? "bg-primary text-white" : ""
+            }`}
+            onClick={() => setSelectedItem("students")}
+          >
+            <Card.Body>
+              <FaUserGraduate className="m-2" /> {t("adminDashboard.students")}
             </Card.Body>
           </Card>
         </Col>
