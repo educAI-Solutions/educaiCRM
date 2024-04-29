@@ -91,211 +91,213 @@ function App() {
     >
       <BrowserRouter>
         <div
-          className="flex flex-col min-h-screen"
+          className="flex flex-col min-vh-100 "
           style={{ fontFamily: "Montserrat, sans-serif" }}
         >
           <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/test" element={<TestPage />}></Route>
-            <Route
-              path="/contact"
-              element={
-                <>
-                  <Contact isLoggedIn={isLoggedIn} />
-                </>
-              }
-            ></Route>
-            <Route
-              path="/login"
-              element={
-                <>
-                  <Login onLogin={onLogin} />
-                </>
-              }
-            ></Route>
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            ></Route>
+          <main className="flex-grow-1 mb-5">
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/test" element={<TestPage />}></Route>
+              <Route
+                path="/contact"
+                element={
+                  <>
+                    <Contact isLoggedIn={isLoggedIn} />
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/login"
+                element={
+                  <>
+                    <Login onLogin={onLogin} />
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/notifications"
-              element={
-                <ProtectedRoute>
-                  <Notifications />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/notifications"
+                element={
+                  <ProtectedRoute>
+                    <Notifications />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/logout"
-              element={
-                <ProtectedRoute>
-                  <Logout onLogout={onLogout} />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/logout"
+                element={
+                  <ProtectedRoute>
+                    <Logout onLogout={onLogout} />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/admin/dashboard"
-              element={
-                <ProtectedRoute requiredRole="admin">
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <ProtectedRoute requiredRole="admin">
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/teacher/attendance"
-              element={
-                <ProtectedRoute requiredRole="teacher">
-                  <TeacherAttendance />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/teacher/attendance"
+                element={
+                  <ProtectedRoute requiredRole="teacher">
+                    <TeacherAttendance />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/teacher/weekly"
-              element={
-                <ProtectedRoute requiredRole="teacher">
-                  <TeacherWeekly />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/teacher/weekly"
+                element={
+                  <ProtectedRoute requiredRole="teacher">
+                    <TeacherWeekly />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/teacher/dashboard"
-              element={
-                <ProtectedRoute requiredRole="teacher">
-                  <TeacherDashboard />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/teacher/dashboard"
+                element={
+                  <ProtectedRoute requiredRole="teacher">
+                    <TeacherDashboard />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/teacher/faq"
-              element={
-                <ProtectedRoute requiredRole="teacher">
-                  <TeacherFAQ />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/teacher/faq"
+                element={
+                  <ProtectedRoute requiredRole="teacher">
+                    <TeacherFAQ />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/teacher/courses"
-              element={
-                <ProtectedRoute requiredRole="teacher">
-                  <TeacherCourses />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/teacher/courses"
+                element={
+                  <ProtectedRoute requiredRole="teacher">
+                    <TeacherCourses />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/teacher/classes"
-              element={
-                <ProtectedRoute requiredRole="teacher">
-                  <TeacherClasses />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/teacher/classes"
+                element={
+                  <ProtectedRoute requiredRole="teacher">
+                    <TeacherClasses />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/attendance"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentAttendance />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/student/attendance"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentAttendance />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/dashboard"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentDashboard />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/student/dashboard"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentDashboard />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/justifications"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentJustifications />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/student/justifications"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentJustifications />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/justificationsreview"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentJustificationsReview />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/student/justificationsreview"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentJustificationsReview />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/courses"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentCourses />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/student/courses"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentCourses />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/weekly"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentWeekly />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/student/weekly"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentWeekly />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/upcomingclasses"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentUpcomingClasses />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/student/upcomingclasses"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentUpcomingClasses />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/justificationsreview"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentJustificationsReview />
-                </ProtectedRoute>
-              }
-            ></Route>
+              <Route
+                path="/student/justificationsreview"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentJustificationsReview />
+                  </ProtectedRoute>
+                }
+              ></Route>
 
-            <Route
-              path="/student/configuration"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentConfiguration />
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/student/configuration"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentConfiguration />
+                  </ProtectedRoute>
+                }
+              />
 
-            <Route
-              path="/student/faq"
-              element={
-                <ProtectedRoute requiredRole="student">
-                  <StudentFAQ />
-                </ProtectedRoute>
-              }
-            ></Route>
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-
+              <Route
+                path="/student/faq"
+                element={
+                  <ProtectedRoute requiredRole="student">
+                    <StudentFAQ />
+                  </ProtectedRoute>
+                }
+              ></Route>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </main>
+          <div className="p-5"></div>
           <Footer />
         </div>
       </BrowserRouter>
