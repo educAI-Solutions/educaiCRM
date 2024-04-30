@@ -1,9 +1,46 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { useTranslation } from "react-i18next"; // Import useTranslation from react-i18next
+import { useTranslation } from "react-i18next"; // Import useTranslation from react-i18nex
+import axios from "axios";
+import { UserContext } from "../App";
 
 const Contact = ({ isLoggedIn }) => {
   const { t } = useTranslation(); // Use the translation function
+  const { id } = useContext(UserContext);
+  const [formData, setFormData] = useState({
+    id: id,
+    name: "",
+    subject: "",
+    content: "",
+  });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5050/api/contact/create",
+        formData
+      );
+
+      if (response.status === 201) {
+        // Handle successful submission
+        console.log("Contact form submitted successfully");
+      } else {
+        // Handle errors
+        console.log("An error occurred while submitting the form");
+      }
+    } catch (error) {
+      console.error("An error occurred while submitting the form:", error);
+    }
+  };
+
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   return (
     <Container>
@@ -12,23 +49,17 @@ const Contact = ({ isLoggedIn }) => {
           <Col xs={12} md={6}>
             <Card className="mt-4">
               <Card.Body>
-                <Card.Title>{t("contact.title")}</Card.Title>{" "}
-                {/* Translate title */}
-                <Form>
+                <Card.Title>
+                  <h2>{t("contact.title")}</h2>
+                </Card.Title>{" "}
+                <Form onSubmit={handleSubmit}>
                   <Form.Group controlId="formGroupName">
                     <Form.Label>{t("contact.fullName")}</Form.Label>{" "}
-                    {/* Translate labels */}
                     <Form.Control
                       type="text"
+                      name="name"
                       placeholder={t("contact.fullNamePlaceholder")}
-                    />
-                  </Form.Group>
-
-                  <Form.Group controlId="formGroupEmail">
-                    <Form.Label>{t("contact.email")}</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder={t("contact.emailPlaceholder")}
+                      onChange={handleChange}
                     />
                   </Form.Group>
 
@@ -36,7 +67,9 @@ const Contact = ({ isLoggedIn }) => {
                     <Form.Label>{t("contact.subject")}</Form.Label>
                     <Form.Control
                       type="text"
+                      name="subject"
                       placeholder={t("contact.subjectPlaceholder")}
+                      onChange={handleChange}
                     />
                   </Form.Group>
 
@@ -44,8 +77,10 @@ const Contact = ({ isLoggedIn }) => {
                     <Form.Label>{t("contact.message")}</Form.Label>
                     <Form.Control
                       as="textarea"
-                      rows={3}
+                      name="content"
+                      rows={7}
                       placeholder={t("contact.messagePlaceholder")}
+                      onChange={handleChange}
                     />
                   </Form.Group>
                   <br />
