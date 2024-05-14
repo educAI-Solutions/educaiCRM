@@ -29,6 +29,7 @@ import StudentWeekly from "./pages/student/StudentWeekly";
 import StudentConfiguration from "./pages/student/StudentConfiguration";
 import TestPage from "./pages/TestPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import ChatBot from "./pages/ChatBot";
 
 export const UserContext = createContext();
 
@@ -120,6 +121,15 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Profile />
+                  </ProtectedRoute>
+                }
+              ></Route>
+
+              <Route
+                path="/chat"
+                element={
+                  <ProtectedRoute>
+                    <ChatBot />
                   </ProtectedRoute>
                 }
               ></Route>

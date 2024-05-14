@@ -109,6 +109,12 @@ function Navbar() {
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Item style={{ color: "black" }} className="d-block">
+                    <Link to={"/chat"} style={{ color: "black" }}>
+                      <FaUserCircle style={{ marginRight: "5px" }} />
+                      Chat
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item style={{ color: "black" }} className="d-block">
                     <Link to={"/logout"} style={{ color: "black" }}>
                       <FaSignOutAlt style={{ marginRight: "5px" }} />
                       {t("navbar.logout")}
