@@ -9,6 +9,8 @@
   list-style: none;
   padding: 0;
   margin-bottom: 10px;
+  overflow-y: auto;
+  max-height: 300px; /* Set a max height if needed */
 }
 
 .message {
@@ -31,6 +33,11 @@
   position: sticky;
   bottom: 0;
   background-color: white; /* Ensure form is visible when scrolling */
+}
+
+.message-list-container {
+  overflow-y: auto;
+  max-height: 300px; /* Set a max height if needed */
 }
 
 .bot-message {

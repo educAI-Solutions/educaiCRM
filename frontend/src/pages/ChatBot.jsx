@@ -37,6 +37,11 @@ const ChatBot = () => {
     "Feel free to ask me anything you'd like to know.",
   ];
 
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission (and reload)
+    sendMessage();
+  };
+
   const sendMessage = async () => {
     // Add the user's message
     const newMessage = { _id: messages.length + 1, message, sender: "user" };
@@ -54,7 +59,7 @@ const ChatBot = () => {
     // Simulate a delay for the bot's response (optional)
     setTimeout(() => {
       setMessages([...messages, newMessage, botReply]);
-    }, 500);
+    }, 750);
   };
 
   return (
@@ -62,21 +67,22 @@ const ChatBot = () => {
       <Card>
         <Card.Header>ChatBot</Card.Header>
         <Card.Body className="chat-container">
-          <ListGroup className="message-list" ref={messageListRef}>
-            {messages.map((msg) => (
-              <Alert
-                key={msg._id}
-                variant={msg.sender === "bot" ? "success" : "primary"} // Use Bootstrap variants for colors
-                className={`message ${
-                  msg.sender === "bot" ? "text-start" : "text-end"
-                }`}
-              >
-                {msg.message}
-              </Alert>
-            ))}
-          </ListGroup>
-
-          <Form className="message-form">
+          <div className="message-list-container">
+            <ListGroup className="message-list" ref={messageListRef}>
+              {messages.map((msg) => (
+                <Alert
+                  key={msg._id}
+                  variant={msg.sender === "bot" ? "success" : "primary"} // Use Bootstrap variants for colors
+                  className={`message ${
+                    msg.sender === "bot" ? "text-start" : "text-end"
+                  }`}
+                >
+                  {msg.message}
+                </Alert>
+              ))}
+            </ListGroup>
+          </div>
+          <Form className="message-form" onSubmit={handleSubmit}>
             <InputGroup>
               <FormControl
                 placeholder="Type your message..."
