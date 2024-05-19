@@ -111,6 +111,36 @@ function StudentJustifications() {
           } else {
             console.error("Error storing data:", storageResponse);
           }
+
+          // Send Notification to the Student that the justification was created and uploaded successfully
+          const notification = {
+            recipient: id,
+            content: `Justificación creada y subida con éxito. ID: ${justificationId}`,
+            type: "success",
+            subject: "Justificación",
+          };
+
+          try {
+            // Send a POST request to create a new notification
+            const notificationResponse = await axios.post(
+              "http://localhost:5050/api/notifications",
+              notification
+            );
+
+            if (notificationResponse.status === 201) {
+              console.log("Notification created:", notificationResponse.data);
+            } else {
+              console.error(
+                "Error creating notification:",
+                notificationResponse
+              );
+            }
+          } catch (notificationError) {
+            console.error(
+              "Error sending request to the notifications API:",
+              notificationError
+            );
+          }
         } catch (storageError) {
           console.error(
             "Error sending request to the storage API:",
