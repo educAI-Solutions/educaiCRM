@@ -32,6 +32,65 @@ function AdminJustifications() {
         }
       );
       fetchJustifications();
+      // Get the Student's email address from the justification object
+      const justification = justifications.find(
+        (justification) => justification._id === justificationId
+      );
+      // save student id
+      const studentId = justification.student._id;
+
+      // Create a notification object
+      const notification = {
+        recipient: studentId,
+        subject: `Justification ${newState}`,
+        type: "warning",
+        content: `Your justification with id ${justificationId} has been ${newState}.`,
+      };
+
+      try {
+        // Send a POST request to create a new notification
+        const notificationResponse = await axios.post(
+          "http://localhost:5050/api/notifications",
+          notification
+        );
+
+        if (notificationResponse.status === 201) {
+          console.log("Notification created:", notificationResponse.data);
+          try {
+            // Get the id of the notification created
+            const notificationId = notificationResponse.data.data._id;
+            const notificationSentResponse = await axios.post(
+              "http://127.0.0.1:9090/notifications",
+              {
+                id: notificationId,
+              }
+            );
+
+            if (notificationSentResponse.status === 200) {
+              console.log("Notification sent:", notificationSentResponse.data);
+            } else {
+              console.error(
+                "Error creating notification:",
+                notificationSentResponse
+              );
+            }
+          } catch (notificationError) {
+            console.error(
+              "Error sending request to the notifications API:",
+              notificationError
+            );
+          }
+        } else {
+          console.error("Error creating notification:", notificationResponse);
+        }
+      } catch (notificationError) {
+        console.error(
+          "Error sending request to the notifications API:",
+          notificationError
+        );
+      }
+
+      // Send a notification to the Student about the status change
     } catch (error) {
       console.error("Error updating justification status:", error);
     }

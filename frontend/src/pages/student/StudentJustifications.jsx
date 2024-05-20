@@ -115,9 +115,9 @@ function StudentJustifications() {
           // Send Notification to the Student that the justification was created and uploaded successfully
           const notification = {
             recipient: id,
-            content: `Justificación creada y subida con éxito. ID: ${justificationId}`,
+            content: `Justificationb created and uploaded to our system succesfully. ID: ${justificationId}`,
             type: "success",
-            subject: "Justificación Subida",
+            subject: "Justification Created and Uploaded",
           };
 
           try {
