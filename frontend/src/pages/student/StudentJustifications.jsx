@@ -117,7 +117,7 @@ function StudentJustifications() {
             recipient: id,
             content: `Justificación creada y subida con éxito. ID: ${justificationId}`,
             type: "success",
-            subject: "Justificación",
+            subject: "Justificación Subida",
           };
 
           try {
@@ -129,6 +129,33 @@ function StudentJustifications() {
 
             if (notificationResponse.status === 201) {
               console.log("Notification created:", notificationResponse.data);
+              try {
+                // Get the id of the notification created
+                const notificationId = notificationResponse.data.data._id;
+                const notificationSentResponse = await axios.post(
+                  "http://127.0.0.1:9090/notifications",
+                  {
+                    id: notificationId,
+                  }
+                );
+
+                if (notificationSentResponse.status === 200) {
+                  console.log(
+                    "Notification sent:",
+                    notificationSentResponse.data
+                  );
+                } else {
+                  console.error(
+                    "Error creating notification:",
+                    notificationSentResponse
+                  );
+                }
+              } catch (notificationError) {
+                console.error(
+                  "Error sending request to the notifications API:",
+                  notificationError
+                );
+              }
             } else {
               console.error(
                 "Error creating notification:",
