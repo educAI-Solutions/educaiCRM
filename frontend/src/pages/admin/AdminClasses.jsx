@@ -88,6 +88,31 @@ function AdminClasses() {
     try {
       await axios.post("http://localhost:5050/api/classes/create", classForm);
       fetchClasses();
+
+      // Get the course object from the courses array
+      const course = courses.find((course) => course._id === classForm.course);
+      // create new notification to send to all students in the course for each student
+      for (const participant of course.participants) {
+        const notification = {
+          recipient: participant,
+          subject: `New class: ${classForm.name}`,
+          type: "info",
+          content: `A new class
+          ${classForm.name} has been created for the course ${course.name}.`,
+        };
+        const notificationResponse = await axios.post(
+          "http://localhost:5050/api/notifications",
+          notification
+        );
+        try {
+          const notificationId = notificationResponse.data.data._id;
+          await axios.post("http://localhost:9090/notifications", {
+            id: notificationId,
+          });
+        } catch (error) {
+          console.error("Error sending notification to student:", error);
+        }
+      }
     } catch (error) {
       console.error("Error creating class:", error);
     }
