@@ -7,6 +7,7 @@ import {
   Button,
   Pagination,
   Card,
+  Modal,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
@@ -17,7 +18,19 @@ const AdminPrograms = () => {
   const [newProgram, setNewProgram] = useState({});
   const [courses, setCourses] = useState([]);
   const [participants, setParticipants] = useState([]);
+  const [showEditParticipantModal, setShowEditParticipantModal] =
+    useState(false);
+  const [showEditCourseModal, setShowEditCourseModal] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState(null);
   const { t } = useTranslation();
+
+  const handleOpenEditParticipantModal = () =>
+    setShowEditParticipantModal(true);
+  const handleCloseEditParticipantModal = () =>
+    setShowEditParticipantModal(false);
+
+  const handleOpenEditCourseModal = () => setShowEditCourseModal(true);
+  const handleCloseEditCourseModal = () => setShowEditCourseModal(false);
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -141,14 +154,6 @@ const AdminPrograms = () => {
     }
   };
 
-  const handleEditCourses = (programId) => {
-    console.log("Edit courses for program:", programId);
-  };
-
-  const handleEditParticipants = (programId) => {
-    console.log("Edit participants for program:", programId);
-  };
-
   return (
     <Container>
       <Row className="mb-3 text-center">
@@ -165,14 +170,8 @@ const AdminPrograms = () => {
                   <h5>{program.name}</h5>
                   <p>{program.description}</p>
                   <Button
-                    variant="primary"
-                    onClick={() => handleEditCourses(program._id)}
-                  >
-                    {t("adminDashboard.programManagement.editCourses")}
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={() => handleEditParticipants(program._id)}
+                    variant="success"
+                    onClick={handleOpenEditParticipantModal}
                   >
                     {t("adminDashboard.programManagement.editParticipants")}
                   </Button>
@@ -277,6 +276,23 @@ const AdminPrograms = () => {
           </Card.Body>
         </Card>
       </Row>
+      <Modal
+        show={showEditParticipantModal}
+        onHide={handleCloseEditParticipantModal}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Participants</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h1>Hola</h1>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseEditParticipantModal}>
+            Close
+          </Button>
+          <Button variant="primary">Save Changes</Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
