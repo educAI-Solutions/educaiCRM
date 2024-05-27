@@ -60,6 +60,10 @@ function TeacherClasses() {
     console.log("Delete class:", classId);
   };
 
+  const qrcode = (classId) => {
+    console.log("Delete class:", classId);
+  };
+
   return (
     <div>
       <h2>{t("teacherDashboard.classManagement.teacherClassesPage")}</h2>
@@ -79,6 +83,7 @@ function TeacherClasses() {
               <th>{t("teacherDashboard.classManagement.date")}</th>
               <th>{t("teacherDashboard.classManagement.time")}</th>
               <th>{t("teacherDashboard.classManagement.actions")}</th>
+              <th>{t("Generate QRCODE")}</th>
             </tr>
           </thead>
           <tbody>
@@ -100,6 +105,11 @@ function TeacherClasses() {
                   </Button>{" "}
                   <Button variant="danger" onClick={() => deleteClass(cls._id)}>
                     {t("teacherDashboard.classManagement.deleteClass")}
+                  </Button>
+                </td>
+                <td>
+                  <Button variant="primary" onClick={() => qrcode(cls._id)}>
+                    {t("teacherDashboard.classManagement.qrcode")}
                   </Button>
                 </td>
               </tr>

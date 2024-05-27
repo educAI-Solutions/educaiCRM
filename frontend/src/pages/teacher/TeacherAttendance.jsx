@@ -209,12 +209,6 @@ function TeacherAttendance() {
           {statusMessage}
         </div>
       )}
-      <div className="mt-3 d-flex justify-content-center">
-        Hola
-      </div>
-      <div className="mt-3 d-flex justify-content-center">
-        <button className="btn btn-primary" style={{ marginLeft: '10px' }}>Generate QR</button>
-      </div>
     </div>
   );
 }
