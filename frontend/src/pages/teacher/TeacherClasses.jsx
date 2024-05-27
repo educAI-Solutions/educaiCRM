@@ -83,7 +83,7 @@ function TeacherClasses() {
               <th>{t("teacherDashboard.classManagement.date")}</th>
               <th>{t("teacherDashboard.classManagement.time")}</th>
               <th>{t("teacherDashboard.classManagement.actions")}</th>
-              <th>{t("Generate QRCODE")}</th>
+              <th>{t("teacherDashboard.classManagement.generatorqr")}</th>
             </tr>
           </thead>
           <tbody>
@@ -107,9 +107,9 @@ function TeacherClasses() {
                     {t("teacherDashboard.classManagement.deleteClass")}
                   </Button>
                 </td>
-                <td>
+                <td style={{ textAlign: 'center' }}> {/* Aplica estilo para centrar */}
                   <Button variant="primary" onClick={() => qrcode(cls._id)}>
-                    {t("teacherDashboard.classManagement.qrcode")}
+                    {t("teacherDashboard.classManagement.generateQR")}
                   </Button>
                 </td>
               </tr>

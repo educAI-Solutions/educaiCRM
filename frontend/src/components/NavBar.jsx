@@ -100,6 +100,12 @@ function Navbar() {
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Item style={{ color: "black" }} className="d-block">
+                    <Link to={"/teacher/faq"} style={{ color: "black" }}>
+                      <FaBell style={{ marginRight: "5px" }} />
+                      PRUEBA
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item style={{ color: "black" }} className="d-block">
                     <Link to={"/contact"} style={{ color: "black" }}>
                       <FaEnvelope style={{ marginRight: "5px" }} />
                       {t("navbar.contact")}
