@@ -4,6 +4,7 @@ import { Table, Button } from "react-bootstrap";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
 import { UserContext } from "../../App";
+import QRCode from 'qrcode.react';
 
 function TeacherClasses() {
   const { t } = useTranslation();
@@ -11,10 +12,11 @@ function TeacherClasses() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [classes, setClasses] = useState([]);
   const { id } = useContext(UserContext);
+  const [qrCodes, setQrCodes] = useState({});
 
   useEffect(() => {
     fetchCourses();
-  });
+  }, [id]);
 
   const fetchCourses = async () => {
     try {
@@ -40,6 +42,7 @@ function TeacherClasses() {
           `http://localhost:5050/api/courses/get/${selectedOption.value}`
         );
         setClasses(response.data.data.classes);
+        setQrCodes({});
       } catch (error) {
         console.error("Error fetching classes:", error);
       }
@@ -60,8 +63,11 @@ function TeacherClasses() {
     console.log("Delete class:", classId);
   };
 
-  const qrcode = (classId) => {
-    console.log("Delete class:", classId);
+  const toggleQRCode = (classId) => {
+    setQrCodes((prevQrCodes) => ({
+      ...prevQrCodes,
+      [classId]: prevQrCodes[classId] ? null : Math.random().toString(36).substring(7),
+    }));
   };
 
   return (
@@ -83,7 +89,9 @@ function TeacherClasses() {
               <th>{t("teacherDashboard.classManagement.date")}</th>
               <th>{t("teacherDashboard.classManagement.time")}</th>
               <th>{t("teacherDashboard.classManagement.actions")}</th>
-              <th>{t("teacherDashboard.classManagement.generatorqr")}</th>
+              <th>
+                {t("teacherDashboard.classManagement.generatorqr")}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -107,10 +115,20 @@ function TeacherClasses() {
                     {t("teacherDashboard.classManagement.deleteClass")}
                   </Button>
                 </td>
-                <td style={{ textAlign: 'center' }}> {/* Aplica estilo para centrar */}
-                  <Button variant="primary" onClick={() => qrcode(cls._id)}>
-                    {t("teacherDashboard.classManagement.generateQR")}
-                  </Button>
+                <td style={{ textAlign: 'center' }}>
+                  {qrCodes[cls._id] ? (
+                    <>
+                      <QRCode value={qrCodes[cls._id]} />
+                      <hr />
+                      <Button variant="danger" onClick={() => toggleQRCode(cls._id)}>
+                        {t("teacherDashboard.classManagement.closeQR")}
+                      </Button>
+                    </>
+                  ) : (
+                    <Button variant="primary" onClick={() => toggleQRCode(cls._id)}>
+                      {t("teacherDashboard.classManagement.generateQR")}
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}

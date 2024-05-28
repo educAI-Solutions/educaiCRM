@@ -245,7 +245,8 @@
       "editAttendance": "Editar Asistencia",
       "deleteClass": "Eliminar Clase",
       "generateQR": "Generar código QR",
-      "generatorqr": "Generador de Código QR"
+      "generatorqr": "Generador de Código QR",
+      "closeQR": "Cerrar Código QR"
 
     },
     "courseManagement": {

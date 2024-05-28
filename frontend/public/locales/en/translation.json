@@ -237,7 +237,8 @@
       "editAttendance": "Edit Attendance",
       "deleteClass": "Delete Class",
       "generateQR": "Generate QR Code",
-      "generatorqr": "QR Code Generator"
+      "generatorqr": "QR Code Generator",
+      "closeQR": "Close QR Code"
     },
     "courseManagement": {
       "teacherCoursesPage": "Teacher Courses Page",
