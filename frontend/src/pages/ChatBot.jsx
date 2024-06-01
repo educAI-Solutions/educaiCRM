@@ -11,9 +11,11 @@ import {
 } from "react-bootstrap";
 import "../chatbot.css"; // Import your CSS file
 import smoothscroll from "smoothscroll-polyfill";
+import axios from "axios";
 
 const ChatBot = () => {
   const [message, setMessage] = useState("");
+  const [chat_id, setChatId] = useState(null);
 
   const [messages, setMessages] = useState([
     { _id: 1, message: "Hello, how can I help you?", sender: "bot" },
@@ -30,17 +32,17 @@ const ChatBot = () => {
     }
   }, [messages]);
 
-  const presetBotResponses = [
-    "I'm still learning, but I can try my best!",
-    "That's an interesting question. Let me think...",
-    "I'm here to assist you in any way I can.",
-    "Feel free to ask me anything you'd like to know.",
-  ];
-
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission (and reload)
     sendMessage();
   };
+
+  useEffect(() => {
+    // Clear chatId when component unmounts
+    return () => {
+      setChatId(null);
+    };
+  }, []);
 
   const sendMessage = async () => {
     // Add the user's message
@@ -48,18 +50,31 @@ const ChatBot = () => {
     setMessages([...messages, newMessage]);
     setMessage("");
 
-    // Get a random preset response from the array
-    const randomIndex = Math.floor(Math.random() * presetBotResponses.length);
-    const botReply = {
-      _id: messages.length + 2,
-      message: presetBotResponses[randomIndex],
-      sender: "bot",
-    };
+    try {
+      // Send user's message to the backend API
+      const response = await axios.post("http://127.0.0.1:2020/chat", {
+        message,
+        chat_id,
+      });
+      const botReply = {
+        _id: messages.length + 2,
+        message: response.data.reply,
+        sender: "bot",
+      };
 
-    // Simulate a delay for the bot's response (optional)
-    setTimeout(() => {
-      setMessages([...messages, newMessage, botReply]);
-    }, 750);
+      // Update chat_id if it's not set
+      if (!chat_id) {
+        setChatId(response.data.chat_id);
+      }
+
+      // Simulate a delay for the bot's response (optional)
+      setTimeout(() => {
+        setMessages([...messages, newMessage, botReply]);
+      }, 300);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      // Handle error here, display error message, etc.
+    }
   };
 
   return (
