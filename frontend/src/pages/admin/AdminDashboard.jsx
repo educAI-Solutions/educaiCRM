@@ -62,7 +62,7 @@ function AdminDashboard() {
       className="p-0"
       style={{ fontFamily: "Montserrat, sans-serif" }}
     >
-      <Row className="mb-3">
+      <Row className="mb-3 pb-2">
         <Col>
           <Card className="position-relative">
             <Card.Img
