@@ -235,7 +235,10 @@
       "actions": "Actions",
       "editTimes": "Edit Times",
       "editAttendance": "Edit Attendance",
-      "deleteClass": "Delete Class"
+      "deleteClass": "Delete Class",
+      "generateQR": "Generate QR Code",
+      "generatorqr": "QR Code Generator",
+      "closeQR": "Close QR Code"
     },
     "courseManagement": {
       "teacherCoursesPage": "Teacher Courses Page",

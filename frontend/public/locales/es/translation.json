@@ -243,7 +243,11 @@
       "actions": "Acciones",
       "editTimes": "Editar Horarios",
       "editAttendance": "Editar Asistencia",
-      "deleteClass": "Eliminar Clase"
+      "deleteClass": "Eliminar Clase",
+      "generateQR": "Generar código QR",
+      "generatorqr": "Generador de Código QR",
+      "closeQR": "Cerrar Código QR"
+
     },
     "courseManagement": {
       "teacherCoursesPage": "Página de Cursos del Profesor",

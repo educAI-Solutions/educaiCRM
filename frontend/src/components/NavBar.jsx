@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import BurguerButton from "./BurguerButton";
@@ -23,7 +23,10 @@ function Navbar() {
   const { t, i18n } = useTranslation();
   const [clicked, setClicked] = useState(false);
   const { username, role, isLoggedIn } = useContext(UserContext);
-  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
+
+  // Verificar si el idioma inicial está en el objeto languages
+  const initialLanguage = languages[i18n.language] ? i18n.language : "en";
+  const [selectedLanguage, setSelectedLanguage] = useState(initialLanguage);
 
   const handleLanguageChange = (langCode) => {
     setSelectedLanguage(langCode);
@@ -94,6 +97,12 @@ function Navbar() {
                     <Link to={"/notifications"} style={{ color: "black" }}>
                       <FaBell style={{ marginRight: "5px" }} />
                       {t("navbar.notifications")}
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item style={{ color: "black" }} className="d-block">
+                    <Link to={"/teacher/faq"} style={{ color: "black" }}>
+                      <FaBell style={{ marginRight: "5px" }} />
+                      PRUEBA
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Item style={{ color: "black" }} className="d-block">
