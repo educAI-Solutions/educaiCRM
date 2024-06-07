@@ -30,6 +30,9 @@ import StudentConfiguration from "./pages/student/StudentConfiguration";
 import TestPage from "./pages/TestPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import ChatBot from "./pages/ChatBot";
+import TeacherSurvey from "./pages/surveys/TeacherSurvey";
+import FoodSurvey from "./pages/surveys/FoodSurvey";
+import AttendanceSurvey from "./pages/surveys/AttendanceSurvey";
 
 export const UserContext = createContext();
 
@@ -305,6 +308,33 @@ function App() {
                 }
               ></Route>
               <Route path="*" element={<PageNotFound />} />
+
+              <Route
+                path="/teacher-survey/:courseId/:userId"
+                element={
+                  // <ProtectedRoute requiredRole="student">
+                  <TeacherSurvey />
+                  // </ProtectedRoute>
+                }
+              ></Route>
+
+              <Route
+                path="/food-survey/:courseId/:userId"
+                element={
+                  // <ProtectedRoute requiredRole="student">
+                  <FoodSurvey />
+                  // </ProtectedRoute>
+                }
+              ></Route>
+
+              <Route
+                path="/attendance-survey/:courseId/:userId"
+                element={
+                  // <ProtectedRoute requiredRole="student">
+                  <AttendanceSurvey />
+                  // </ProtectedRoute>
+                }
+              ></Route>
             </Routes>
           </main>
           <div className="p-5"></div>
