@@ -183,7 +183,14 @@
       "pending": "Pendiente",
       "rejected": "Rechazado",
       "active": "Activo",
-      "inactive": "Inactivo"
+      "inactive": "Inactivo",
+      "surveyResults": "Resultados de Encuestas",
+      "completed": "Completado",
+      "notCompleted": "No Completado",
+      "averageTeacherRating": "Promedio de Evaluación de Profesores",
+      "studentAttendance": "Asistencia de Estudiantes",
+      "inPerson": "Presencial",
+      "online": "En Línea"
     },
     "justificationsManagement": {
       "title": "Gestión de Justificaciones",
@@ -247,7 +254,6 @@
       "generateQR": "Generar código QR",
       "generatorqr": "Generador de Código QR",
       "closeQR": "Cerrar Código QR"
-
     },
     "courseManagement": {
       "teacherCoursesPage": "Página de Cursos del Profesor",

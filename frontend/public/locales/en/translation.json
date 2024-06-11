@@ -175,7 +175,14 @@
       "pending": "Pending",
       "rejected": "Rejected",
       "active": "Active",
-      "inactive": "Inactive"
+      "inactive": "Inactive",
+      "surveyResults": "Resultados de Encuestas",
+      "completed": "Completed",
+      "notCompleted": "Not Completed",
+      "averageTeacherRating": "Average Teacher Rating",
+      "studentAttendance": "Student Attendance",
+      "inPerson": "In Person",
+      "online": "Online"
     },
     "justificationsManagement": {
       "title": "Justification Management",
