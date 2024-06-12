@@ -8,6 +8,8 @@ import {
   Pagination,
   Card,
   Modal,
+  ListGroup,
+  InputGroup,
 } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
@@ -18,19 +20,55 @@ const AdminPrograms = () => {
   const [newProgram, setNewProgram] = useState({});
   const [courses, setCourses] = useState([]);
   const [participants, setParticipants] = useState([]);
+  const [selectedProgram, setSelectedProgram] = useState(null);
   const [showEditParticipantModal, setShowEditParticipantModal] =
     useState(false);
-  const [showEditCourseModal, setShowEditCourseModal] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
   const { t } = useTranslation();
 
-  const handleOpenEditParticipantModal = () =>
+  const handleOpenEditParticipantModal = (program) => {
+    setSelectedProgram(program);
     setShowEditParticipantModal(true);
-  const handleCloseEditParticipantModal = () =>
+  };
+  const handleCloseEditParticipantModal = () => {
     setShowEditParticipantModal(false);
+    setSelectedProgram(null);
+  };
 
-  const handleOpenEditCourseModal = () => setShowEditCourseModal(true);
-  const handleCloseEditCourseModal = () => setShowEditCourseModal(false);
+  const handleParticipantRemove = (participantId) => {
+    setSelectedProgram({
+      ...selectedProgram,
+      participants: selectedProgram.participants.filter(
+        (p) => p._id !== participantId
+      ),
+    });
+  };
+
+  const handleParticipantAdd = (participant) => {
+    if (!selectedProgram.participants.some((p) => p._id === participant._id)) {
+      setSelectedProgram({
+        ...selectedProgram,
+        participants: [...selectedProgram.participants, participant],
+      });
+    }
+  };
+
+  const handleSearch = async (event) => {
+    const query = event.target.value;
+    if (query) {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:5050/api/user/get/${query}`
+        );
+        console.log(response.data.data);
+        setSearchResults(response.data.data);
+      } catch (error) {
+        console.error("Error searching students:", error);
+      }
+    } else {
+      setSearchResults([]);
+    }
+  };
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -153,7 +191,6 @@ const AdminPrograms = () => {
       console.error("Error creating program:", error);
     }
   };
-
   return (
     <Container>
       <Row className="mb-3 text-center">
@@ -165,13 +202,13 @@ const AdminPrograms = () => {
         <Card className="shadow">
           <Card.Body>
             {currentPrograms.map((program) => (
-              <Card className="justify-content-center">
+              <Card className="justify-content-center" key={program._id}>
                 <Card.Body>
                   <h5>{program.name}</h5>
                   <p>{program.description}</p>
                   <Button
                     variant="success"
-                    onClick={handleOpenEditParticipantModal}
+                    onClick={() => handleOpenEditParticipantModal(program)}
                   >
                     {t("adminDashboard.programManagement.editParticipants")}
                   </Button>
@@ -284,7 +321,47 @@ const AdminPrograms = () => {
           <Modal.Title>Edit Participants</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h1>Hola</h1>
+          {selectedProgram && (
+            <>
+              <h5>Current Participants</h5>
+              <ListGroup>
+                {selectedProgram.participants.map((participant) => (
+                  <ListGroup.Item key={participant._id}>
+                    {participant.username}
+                    <Button
+                      variant="danger"
+                      className="float-right"
+                      onClick={() => handleParticipantRemove(participant._id)}
+                    >
+                      Remove
+                    </Button>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+              <h5 className="mt-3">Add Participants</h5>
+              <InputGroup className="mb-3">
+                <Form.Control
+                  placeholder="Search students"
+                  onChange={handleSearch}
+                />
+              </InputGroup>
+              <ListGroup>
+                <ListGroup.Item key={searchResults._id}>
+                  {searchResults.username} ({searchResults.email})
+                  <Button
+                    variant="success"
+                    className="float-right"
+                    onClick={() => handleParticipantAdd(searchResults)}
+                    disabled={selectedProgram.participants.some(
+                      (p) => p._id === searchResults._id
+                    )}
+                  >
+                    Add
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+            </>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseEditParticipantModal}>
