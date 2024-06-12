@@ -60,7 +60,16 @@ const AdminPrograms = () => {
         const response = await axios.get(
           `http://127.0.0.1:5050/api/user/get/${query}`
         );
-        console.log(response.data.data);
+        // Check that the student is not already in the program
+        if (
+          selectedProgram.participants.some(
+            (p) => p._id === response.data.data._id
+          )
+        ) {
+          setSearchResults([]);
+          return;
+        }
+
         setSearchResults(response.data.data);
       } catch (error) {
         console.error("Error searching students:", error);
