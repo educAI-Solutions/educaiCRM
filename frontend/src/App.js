@@ -319,7 +319,7 @@ function App() {
               ></Route>
 
               <Route
-                path="/food-survey/:courseId/:userId"
+                path="/food-survey/:classId/:userId"
                 element={
                   // <ProtectedRoute requiredRole="student">
                   <FoodSurvey />
@@ -328,7 +328,7 @@ function App() {
               ></Route>
 
               <Route
-                path="/attendance-survey/:courseId/:userId"
+                path="/attendance-survey/:classId"
                 element={
                   // <ProtectedRoute requiredRole="student">
                   <AttendanceSurvey />

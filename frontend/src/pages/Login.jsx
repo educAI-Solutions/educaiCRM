@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import axios from "axios"; // Import Axios for making HTTP requests
 import { jwtDecode } from "jwt-decode"; // Import jwt-decode to decode JWT tokens
 
+const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS; // Get backend address from environment variable
+
 const Login = ({ onLogin }) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
@@ -21,9 +23,9 @@ const Login = ({ onLogin }) => {
       const hash = await window.crypto.subtle.digest("SHA-256", data);
       const base64Hash = btoa(String.fromCharCode(...new Uint8Array(hash)));
       console.log("Base64 hash:", base64Hash);
-
+      console.log(BACKEND_ADDRESS);
       const response = await axios.post(
-        "http://127.0.0.1:5050/api/auth/login",
+        `http://localhost:5050/api/auth/login`,
         { identifier, password: base64Hash }
       ); // Make POST request to backend login endpoint
       const { token } = response.data; // Assuming backend sends back a token upon successful login

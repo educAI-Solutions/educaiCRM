@@ -1,43 +1,69 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AttendanceSurvey = () => {
-  const { classId, userId } = useParams();
+  const { classId } = useParams();
   const navigate = useNavigate();
   const [attending, setAttending] = useState(null);
+  const [email, setEmail] = useState("");
+
+  // Function to handle email change
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
 
   const handleAttendanceChange = (event) => {
     setAttending(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    fetch(`/api/attendance-survey`, {
-      method: "POST",
-      body: JSON.stringify({
-        userId,
-        classId,
-        surveyData: Object.fromEntries(formData.entries()),
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // handle success
-        if (formData.get("mode") === "in-person") {
-          navigate(`/dietary-survey/${classId}/${userId}`);
-        }
-      })
-      .catch((error) => {
-        // handle error
-        console.error(error);
-      });
+    console.log("Form data:", Object.fromEntries(formData.entries()));
+    console.log("Class ID:", classId);
+    console.log("Email:", email);
+
+    // Get the user ID from email provided with a get request to the mongo api
+    let userId = null;
+    try {
+      const response = await axios.get(
+        `http://localhost:5050/api/user/get/${email}`
+      );
+      // Save the user ID
+      userId = response.data.data._id;
+    } catch (error) {
+      console.error("Error getting user: ", error);
+    }
+
+    console.log("User ID:", userId);
+    if (!userId) {
+      console.error("User not found");
+      return;
+    }
+    try {
+      const response_survey = await axios
+        .post("http://localhost:5050/api/survey/attendance-survey", {
+          userId, // make sure userId is defined or retrieved appropriately
+          classId,
+          surveyData: Object.fromEntries(formData.entries()),
+        })
+        .then((response) => {
+          console.log("Survey submitted response:", response.data);
+          if (formData.get("mode") === "in-person") {
+            navigate(`/food-survey/${classId}/${userId}`);
+          }
+        })
+        .catch((error) => {
+          // handle error
+          console.error(error);
+        });
+    } catch (error) {
+      console.error("Error submitting survey answer: ", error);
+    }
   };
 
   return (
@@ -81,6 +107,17 @@ const AttendanceSurvey = () => {
                 </div>
               </Form.Group>
             )}
+
+            <Form.Group className="mb-3">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={handleEmailChange}
+                required
+              />
+            </Form.Group>
             <Button variant="primary" type="submit">
               Submit
             </Button>
