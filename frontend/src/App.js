@@ -33,6 +33,7 @@ import ChatBot from "./pages/ChatBot";
 import TeacherSurvey from "./pages/surveys/TeacherSurvey";
 import FoodSurvey from "./pages/surveys/FoodSurvey";
 import AttendanceSurvey from "./pages/surveys/AttendanceSurvey";
+import ClassSurvey from "./pages/surveys/ClassSurvey";
 
 export const UserContext = createContext();
 
@@ -332,6 +333,15 @@ function App() {
                 element={
                   // <ProtectedRoute requiredRole="student">
                   <AttendanceSurvey />
+                  // </ProtectedRoute>
+                }
+              ></Route>
+
+              <Route
+                path="/class-survey/:classId"
+                element={
+                  // <ProtectedRoute requiredRole="student">
+                  <ClassSurvey />
                   // </ProtectedRoute>
                 }
               ></Route>

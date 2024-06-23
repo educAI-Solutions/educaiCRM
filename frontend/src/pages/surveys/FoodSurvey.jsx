@@ -1,11 +1,13 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const FoodSurvey = () => {
   const { classId, userId } = useParams();
+  const navigate = useNavigate();
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,6 +24,10 @@ const FoodSurvey = () => {
       );
       // handle success
       console.log(response.data.data);
+      setSuccess(true);
+      setTimeout(() => {
+        navigate(`/dashboard`);
+      }, 2000); // Redirect after 2 seconds
     } catch (error) {
       // handle error
       console.error(error);
@@ -57,6 +63,11 @@ const FoodSurvey = () => {
       <Row className="justify-content-md-center">
         <Col md={8}>
           <h1 className="mt-5">Food Survey</h1>
+          {success && (
+            <Alert variant="success" className="mt-3">
+              Survey submitted successfully! Redirecting to your dashboard...
+            </Alert>
+          )}
           <Form onSubmit={handleSubmit} className="mt-3">
             {questions.map((question, index) => (
               <Form.Group key={index} className="mb-3">
