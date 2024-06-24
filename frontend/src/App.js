@@ -44,6 +44,8 @@ function App() {
   const [id, setId] = useState("");
   const [expDate, setExpDate] = useState("");
 
+  console.log("Address:", process.env.REACT_APP_BACKEND_ADDRESS);
+
   const onLogin = (token, username, role, id, exp) => {
     setIsLoggedIn(true);
     setUsername(username);
