@@ -18,7 +18,6 @@ function TeacherAttendance() {
 
   useEffect(() => {
     const fetchCourses = async () => {
-      // Cleaner function within useEffect
       setIsLoading(true);
       try {
         const response = await axios.get(
@@ -36,7 +35,7 @@ function TeacherAttendance() {
     };
 
     fetchCourses();
-  });
+  }, []); // Empty dep
 
   const handleCourseChange = async (e) => {
     setSelectedClassId(null); // Reset class selection when the course changes
