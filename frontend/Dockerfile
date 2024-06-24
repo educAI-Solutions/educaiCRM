@@ -13,9 +13,6 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build your React app
-RUN npm run build
-
 # Set environment variable
 ENV PORT=3000
 
