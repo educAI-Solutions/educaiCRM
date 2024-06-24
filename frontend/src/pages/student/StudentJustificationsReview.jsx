@@ -16,7 +16,7 @@ function StudentJustificationsReview() {
   const fetchJustifications = async () => {
     // Send a GET request to the API
     const response = await fetch(
-      `http://localhost:5050/api/justifications/get-all/student/${id}`
+      `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/justifications/get-all/student/${id}`
     );
 
     if (response.ok) {

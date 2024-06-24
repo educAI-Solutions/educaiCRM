@@ -29,16 +29,19 @@ const AttendanceSurvey = () => {
     try {
       // Get the user ID from email provided with a GET request to the API
       const response = await axios.get(
-        `http://localhost:5050/api/user/get/${email}`
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/user/get/${email}`
       );
       const userId = response.data.data._id;
 
       // Submit the attendance survey
-      await axios.post("http://localhost:5050/api/survey/attendance-survey", {
-        userId,
-        classId,
-        surveyData: { attending },
-      });
+      await axios.post(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/survey/attendance-survey`,
+        {
+          userId,
+          classId,
+          surveyData: { attending },
+        }
+      );
 
       setSuccess(true);
       setError(null);

@@ -11,7 +11,7 @@ function AdminAttendance() {
 
   const fetchCourses = async () => {
     const response = await axios.get(
-      "http://127.0.0.1:5050/api/courses/get-all"
+      `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get-all`
     );
     setCourses(response.data.data);
   };

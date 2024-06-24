@@ -52,10 +52,13 @@ const ChatBot = () => {
 
     try {
       // Send user's message to the backend API
-      const response = await axios.post("http://127.0.0.1:2020/chat", {
-        message,
-        chat_id,
-      });
+      const response = await axios.post(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:2020/chat`,
+        {
+          message,
+          chat_id,
+        }
+      );
       const botReply = {
         _id: messages.length + 2,
         message: response.data.reply,

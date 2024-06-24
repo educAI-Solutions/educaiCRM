@@ -22,7 +22,7 @@ function TeacherAttendance() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:5050/api/courses/get/instructor/${id}`
+          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get/instructor/${id}`
         );
         setCourses(response.data.data);
       } catch (error) {
@@ -45,7 +45,7 @@ function TeacherAttendance() {
       const courseId = e.target.value;
       setSelectedCourseId(courseId);
       const response = await axios.get(
-        `http://localhost:5050/api/courses/get/${courseId}`
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get/${courseId}`
       );
       setClasses(response.data.data.classes);
     } catch (error) {
@@ -79,7 +79,7 @@ function TeacherAttendance() {
     try {
       // Send the file for parsing first
       const parseResponse = await axios.post(
-        `http://localhost:5050/api/attendance/upload/${selectedClassId}`,
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/attendance/upload/${selectedClassId}`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -87,7 +87,7 @@ function TeacherAttendance() {
       if (parseResponse.data.success) {
         formData.append("classId", selectedClassId);
         const uploadResponse = await axios.post(
-          "http://localhost:7070/storage/upload/attendance",
+          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:7070/storage/upload/attendance`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -114,7 +114,7 @@ function TeacherAttendance() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/attendance/generate/${selectedClassId}`,
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/attendance/generate/${selectedClassId}`,
         { responseType: "arraybuffer" }
       );
 

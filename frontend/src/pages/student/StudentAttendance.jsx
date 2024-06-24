@@ -21,7 +21,7 @@ function StudentAttendance() {
   const fetchCoursesAttendance = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/attendance/student/${id}`
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/attendance/student/${id}`
       );
       setCoursesAttendance(response.data.data);
     } catch (error) {
@@ -32,7 +32,7 @@ function StudentAttendance() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/courses/get/participant/${id}`
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get/participant/${id}`
       );
       setCourses(response.data.data);
     } catch (error) {
@@ -45,7 +45,7 @@ function StudentAttendance() {
     if (selectedOption) {
       try {
         const response = await axios.get(
-          `http://localhost:5050/api/courses/get/${selectedOption.value}`
+          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get/${selectedOption.value}`
         );
         setClasses(response.data.data.classes);
       } catch (error) {

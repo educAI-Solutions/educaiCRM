@@ -14,7 +14,7 @@ function RecentUsers() {
     try {
       const fetchUsers = async () => {
         const response = await axios.get(
-          "http://127.0.0.1:5050/api/user/get-recent"
+          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/user/get-recent`
         );
         // setUsers with the response data, specifically the accounts key
         setUsers(response.data.data);
@@ -29,7 +29,9 @@ function RecentUsers() {
   const deleteUser = async (userId) => {
     try {
       // Make an API call to delete the user
-      await axios.delete(`http://localhost:5050/api/auth/delete/${userId}`);
+      await axios.delete(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/auth/delete/${userId}`
+      );
 
       // Update the users state by filtering out the deleted user
       setUsers(users.filter((user) => user._id !== userId));
@@ -45,7 +47,7 @@ function RecentUsers() {
     try {
       // Make an API call to update the user role
       await axios.put(
-        `http://localhost:5050/api/auth/updateRole/${editingUser._id}`,
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/auth/updateRole/${editingUser._id}`,
         updatedUser
       );
 

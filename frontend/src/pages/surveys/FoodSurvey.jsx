@@ -15,7 +15,7 @@ const FoodSurvey = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5050/api/survey/food-survey",
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/survey/food-survey`,
         {
           userId,
           classId,

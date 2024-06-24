@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
       console.log("Base64 hash:", base64Hash);
       console.log(BACKEND_ADDRESS);
       const response = await axios.post(
-        `http://localhost:5050/api/auth/login`,
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/auth/login`,
         { identifier, password: base64Hash }
       ); // Make POST request to backend login endpoint
       const { token } = response.data; // Assuming backend sends back a token upon successful login

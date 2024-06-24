@@ -32,7 +32,7 @@ const ClassSurvey = () => {
     let userId = null;
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/user/get/${email}`
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/user/get/${email}`
       );
       // Save the user ID
       userId = response.data.data._id;
@@ -47,11 +47,14 @@ const ClassSurvey = () => {
     }
     try {
       const response_survey = await axios
-        .post("http://localhost:5050/api/survey/class-survey", {
-          userId, // make sure userId is defined or retrieved appropriately
-          classId,
-          surveyData: Object.fromEntries(formData.entries()),
-        })
+        .post(
+          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/survey/class-survey`,
+          {
+            userId, // make sure userId is defined or retrieved appropriately
+            classId,
+            surveyData: Object.fromEntries(formData.entries()),
+          }
+        )
         .then((response) => {
           console.log("Survey submitted response:", response.data);
           if (formData.get("mode") === "online") {

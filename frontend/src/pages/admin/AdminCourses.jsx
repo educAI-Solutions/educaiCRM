@@ -45,7 +45,7 @@ function AdminCourses() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/courses/get-all"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get-all`
       );
       setCourses(response.data.data);
     } catch (error) {
@@ -56,7 +56,7 @@ function AdminCourses() {
   const fetchPrograms = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/programs/get-all"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/programs/get-all`
       );
       if (Array.isArray(response.data.data)) {
         setPrograms(response.data.data);
@@ -73,7 +73,7 @@ function AdminCourses() {
   const fetchInstructors = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/user/get-teachers"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/user/get-teachers`
       );
       if (Array.isArray(response.data.data)) {
         setInstructors(response.data.data);
@@ -108,7 +108,10 @@ function AdminCourses() {
   const handleCreateCourse = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:5050/api/courses/create", courseForm);
+      await axios.post(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/create`,
+        courseForm
+      );
       fetchCourses();
     } catch (error) {
       console.error("Error creating course:", error);
@@ -118,7 +121,7 @@ function AdminCourses() {
   const handleDeleteCourse = async (courseId) => {
     try {
       await axios.delete(
-        `http://localhost:5050/api/courses/delete/${courseId}`
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/delete/${courseId}`
       );
       fetchCourses();
     } catch (error) {

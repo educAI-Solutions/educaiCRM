@@ -58,7 +58,7 @@ const AdminPrograms = () => {
     if (query) {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5050/api/user/get/${query}`
+          `http://${process.env.REACT_APP_BACKEND_ADDRESS}/api/user/get/${query}`
         );
         // Check that the student is not already in the program
         if (
@@ -98,7 +98,7 @@ const AdminPrograms = () => {
   const fetchPrograms = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/programs/get-all"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/programs/get-all`
       );
       if (response.data.success && Array.isArray(response.data.data)) {
         setPrograms(response.data.data);
@@ -115,7 +115,7 @@ const AdminPrograms = () => {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/courses/get-all"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get-all`
       );
       if (Array.isArray(response.data.data)) {
         const coursesWithoutProgram = response.data.data.filter(
@@ -135,7 +135,7 @@ const AdminPrograms = () => {
   const fetchParticipants = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/user/get-students"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/user/get-students`
       );
       if (Array.isArray(response.data.data)) {
         setParticipants(response.data.data);
@@ -182,7 +182,7 @@ const AdminPrograms = () => {
   const handleDelete = async (programId) => {
     try {
       await axios.delete(
-        `http://localhost:5050/api/programs/delete/${programId}`
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/programs/delete/${programId}`
       );
       fetchPrograms();
     } catch (error) {
@@ -193,7 +193,10 @@ const AdminPrograms = () => {
   const handleCreate = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:5050/api/programs/create", newProgram);
+      await axios.post(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/programs/create`,
+        newProgram
+      );
       setNewProgram({});
       fetchPrograms();
     } catch (error) {

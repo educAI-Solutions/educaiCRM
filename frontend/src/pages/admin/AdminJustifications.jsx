@@ -15,7 +15,7 @@ function AdminJustifications() {
   const fetchJustifications = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/justifications/get-all"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/justifications/get-all`
       );
       setJustifications(response.data.data);
     } catch (error) {
@@ -26,7 +26,7 @@ function AdminJustifications() {
   const handleStatusChange = async (justificationId, newState) => {
     try {
       await axios.put(
-        `http://localhost:5050/api/justifications/update/review/${justificationId}`,
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/justifications/update/review/${justificationId}`,
         {
           state: newState,
         }
@@ -50,7 +50,7 @@ function AdminJustifications() {
       try {
         // Send a POST request to create a new notification
         const notificationResponse = await axios.post(
-          "http://localhost:5050/api/notifications",
+          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/notifications`,
           notification
         );
 
@@ -60,7 +60,7 @@ function AdminJustifications() {
             // Get the id of the notification created
             const notificationId = notificationResponse.data.data._id;
             const notificationSentResponse = await axios.post(
-              "http://127.0.0.1:9090/notifications",
+              `http://${process.env.REACT_APP_BACKEND_ADDRESS}:9090/notifications`,
               {
                 id: notificationId,
               }
@@ -99,7 +99,7 @@ function AdminJustifications() {
   const handleDownload = async (justificationId, fileExtension) => {
     try {
       const response = await axios.get(
-        `http://localhost:7070/storage/download/justifications/${justificationId}/${fileExtension}`,
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:7070/storage/download/justifications/${justificationId}/${fileExtension}`,
         { responseType: "blob" }
       );
 

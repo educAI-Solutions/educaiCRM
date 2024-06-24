@@ -42,7 +42,7 @@ function AdminClasses() {
   const fetchClasses = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/classes/get-all"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/classes/get-all`
       );
       if (!Array.isArray(response.data.data)) {
         console.error("Error: received non-array response data");
@@ -58,7 +58,7 @@ function AdminClasses() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/courses/get-all"
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get-all`
       );
       if (Array.isArray(response.data.data)) {
         setCourses(response.data.data);
@@ -86,7 +86,10 @@ function AdminClasses() {
   const handleCreateClass = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:5050/api/classes/create", classForm);
+      await axios.post(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/classes/create`,
+        classForm
+      );
       fetchClasses();
 
       // Get the course object from the courses array
@@ -101,14 +104,17 @@ function AdminClasses() {
           ${classForm.name} has been created for the course ${course.name}.`,
         };
         const notificationResponse = await axios.post(
-          "http://localhost:5050/api/notifications",
+          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/notifications`,
           notification
         );
         try {
           const notificationId = notificationResponse.data.data._id;
-          await axios.post("http://localhost:9090/notifications", {
-            id: notificationId,
-          });
+          await axios.post(
+            `http://${process.env.REACT_APP_BACKEND_ADDRESS}:9090/notifications`,
+            {
+              id: notificationId,
+            }
+          );
         } catch (error) {
           console.error("Error sending notification to student:", error);
         }
@@ -124,7 +130,9 @@ function AdminClasses() {
 
   const handleDeleteClass = async (classId) => {
     try {
-      await axios.delete(`http://localhost:5050/api/classes/delete/${classId}`);
+      await axios.delete(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/classes/delete/${classId}`
+      );
       fetchClasses();
     } catch (error) {
       console.error("Error deleting class:", error);

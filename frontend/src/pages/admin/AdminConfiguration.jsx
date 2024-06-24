@@ -16,7 +16,9 @@ function AdminConfiguration() {
 
   const fetchDocuments = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:2525/documents");
+      const response = await axios.get(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:2525/documents`
+      );
       setDocuments(response.data.documents);
     } catch (error) {
       console.error("Error fetching documents:", error);
@@ -37,7 +39,7 @@ function AdminConfiguration() {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
-    let uploadUrl = "http://127.0.0.1:2525/upload";
+    let uploadUrl = `http://${process.env.REACT_APP_BACKEND_ADDRESS}:2525/upload`;
     if (selectedFile.type === "application/pdf") {
       uploadUrl += "/pdf";
     } else if (
@@ -67,7 +69,9 @@ function AdminConfiguration() {
 
   const handleDeleteAll = async () => {
     try {
-      const response = await axios.delete("http://127.0.0.1:2525/delete");
+      const response = await axios.delete(
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:2525/delete`
+      );
       setDeleteMessage(response.data.message);
       fetchDocuments();
     } catch (error) {
@@ -79,7 +83,7 @@ function AdminConfiguration() {
   const handleDeleteDocument = async (docId) => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:2525/delete/${docId}`
+        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:2525/delete/${docId}`
       );
       setDeleteMessage(response.data.message);
       fetchDocuments();
