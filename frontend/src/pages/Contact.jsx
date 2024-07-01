@@ -19,7 +19,7 @@ const Contact = ({ isLoggedIn }) => {
 
     try {
       const response = await axios.post(
-        `https://www.educaiapis.online/mongo_api/api/contact/create`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/contact/create`,
         formData
       );
 

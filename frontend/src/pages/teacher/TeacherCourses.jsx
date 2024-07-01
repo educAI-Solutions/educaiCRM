@@ -16,7 +16,7 @@ function TeacherCourses() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/courses/get/instructor/${id}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get/instructor/${id}`
       );
       setCourses(response.data.data);
     } catch (error) {

@@ -15,7 +15,7 @@ class DownloadButton extends React.Component {
 
       // Make a GET request to your Express storage API
       const response = await axios.get(
-        `https://www.educaiapis.online/storage_api/storage/download/eeaaba50-f291-11ee-a467-e70e32699475calendario-2024-uai-final.pdf`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_STORAGE}/storage/download/eeaaba50-f291-11ee-a467-e70e32699475calendario-2024-uai-final.pdf`,
         { responseType: "blob" }
       ); // Replace with your API endpoint
       console.log(response);

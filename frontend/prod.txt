@@ -1,0 +1,7 @@
+REACT_APP_BACKEND_ADDRESS_MONGO="https://www.educaiapis.online/mongo_api"
+REACT_APP_BACKEND_ADDRESS_STORAGE="https://www.educaiapis.online/storage_api"
+REACT_APP_BACKEND_ADDRESS_NOTIFICATIONS="https://www.educaiapis.online/notifications_api"
+REACT_APP_BACKEND_ADDRESS_CHROMA="https://www.educaiapis.online/chroma_api"
+REACT_APP_BACKEND_ADDRESS_LANGCHAIN="https://www.educaiapis.online/langchain_api"
+REACT_APP_BACKEND_ADDRESS_SCHEDULER="https://www.educaiapis.online/scheduler_api"
+REACT_APP_BACKEND_ADDRESS_SURVEY="https://www.educaiapis.online/survey_api"

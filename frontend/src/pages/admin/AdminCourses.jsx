@@ -45,7 +45,7 @@ function AdminCourses() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/courses/get-all`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get-all`
       );
       setCourses(response.data.data);
     } catch (error) {
@@ -56,7 +56,7 @@ function AdminCourses() {
   const fetchPrograms = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/programs/get-all`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/programs/get-all`
       );
       if (Array.isArray(response.data.data)) {
         setPrograms(response.data.data);
@@ -73,7 +73,7 @@ function AdminCourses() {
   const fetchInstructors = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/user/get-teachers`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/user/get-teachers`
       );
       if (Array.isArray(response.data.data)) {
         setInstructors(response.data.data);
@@ -109,7 +109,7 @@ function AdminCourses() {
     event.preventDefault();
     try {
       await axios.post(
-        `https://www.educaiapis.online/mongo_api/api/courses/create`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/create`,
         courseForm
       );
       fetchCourses();
@@ -121,7 +121,7 @@ function AdminCourses() {
   const handleDeleteCourse = async (courseId) => {
     try {
       await axios.delete(
-        `https://www.educaiapis.online/mongo_api/api/courses/delete/${courseId}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/delete/${courseId}`
       );
       fetchCourses();
     } catch (error) {

@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
       console.log("Base64 hash:", base64Hash);
       console.log(BACKEND_ADDRESS);
       const response = await axios.post(
-        `https://www.educaiapis.online/mongo_api/api/auth/login`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/auth/login`,
         { identifier, password: base64Hash }
       ); // Make POST request to backend login endpoint
       const { token } = response.data; // Assuming backend sends back a token upon successful login

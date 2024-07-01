@@ -29,7 +29,7 @@ const RegisterUser = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        `https://www.educaiapis.online/mongo_api/api/auth/register`, // Make POST request to backend register endpoint
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/auth/register`, // Make POST request to backend register endpoint
         { email, username, password: base64Hash, role },
         {
           headers: {

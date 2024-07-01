@@ -17,7 +17,7 @@ function AdminConfiguration() {
   const fetchDocuments = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/chroma_api/documents`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/documents`
       );
       setDocuments(response.data.documents);
     } catch (error) {
@@ -39,7 +39,7 @@ function AdminConfiguration() {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
-    let uploadUrl = `https://www.educaiapis.online/chroma_api/upload`;
+    let uploadUrl = `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/upload`;
     if (selectedFile.type === "application/pdf") {
       uploadUrl += "/pdf";
     } else if (
@@ -70,7 +70,7 @@ function AdminConfiguration() {
   const handleDeleteAll = async () => {
     try {
       const response = await axios.delete(
-        `https://www.educaiapis.online/chroma_api/delete`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROM}/delete`
       );
       setDeleteMessage(response.data.message);
       fetchDocuments();
@@ -83,7 +83,7 @@ function AdminConfiguration() {
   const handleDeleteDocument = async (docId) => {
     try {
       const response = await axios.delete(
-        `https://www.educaiapis.online/chroma_api/delete/${docId}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/delete/${docId}`
       );
       setDeleteMessage(response.data.message);
       fetchDocuments();

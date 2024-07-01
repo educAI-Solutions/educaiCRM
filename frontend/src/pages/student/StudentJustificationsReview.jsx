@@ -16,7 +16,7 @@ function StudentJustificationsReview() {
   const fetchJustifications = async () => {
     // Send a GET request to the API
     const response = await fetch(
-      `https://www.educaiapis.online/mongo_api/api/justifications/get-all/student/${id}`
+      `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/justifications/get-all/student/${id}`
     );
 
     if (response.ok) {

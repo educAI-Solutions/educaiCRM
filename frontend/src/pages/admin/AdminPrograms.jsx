@@ -58,7 +58,7 @@ const AdminPrograms = () => {
     if (query) {
       try {
         const response = await axios.get(
-          `https://www.educaiapis.online/api/user/get/${query}`
+          `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/user/get/${query}`
         );
         // Check that the student is not already in the program
         if (
@@ -98,7 +98,7 @@ const AdminPrograms = () => {
   const fetchPrograms = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/programs/get-all`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/programs/get-all`
       );
       if (response.data.success && Array.isArray(response.data.data)) {
         setPrograms(response.data.data);
@@ -115,7 +115,7 @@ const AdminPrograms = () => {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/courses/get-all`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get-all`
       );
       if (Array.isArray(response.data.data)) {
         const coursesWithoutProgram = response.data.data.filter(
@@ -135,7 +135,7 @@ const AdminPrograms = () => {
   const fetchParticipants = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/user/get-students`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/user/get-students`
       );
       if (Array.isArray(response.data.data)) {
         setParticipants(response.data.data);
@@ -182,7 +182,7 @@ const AdminPrograms = () => {
   const handleDelete = async (programId) => {
     try {
       await axios.delete(
-        `https://www.educaiapis.online/mongo_api/api/programs/delete/${programId}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/programs/delete/${programId}`
       );
       fetchPrograms();
     } catch (error) {
@@ -194,7 +194,7 @@ const AdminPrograms = () => {
     event.preventDefault();
     try {
       await axios.post(
-        `https://www.educaiapis.online/mongo_api/api/programs/create`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/programs/create`,
         newProgram
       );
       setNewProgram({});

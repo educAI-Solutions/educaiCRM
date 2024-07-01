@@ -21,7 +21,7 @@ function TeacherAttendance() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://www.educaiapis.online/mongo_api/api/courses/get/instructor/${id}`
+          `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get/instructor/${id}`
         );
         setCourses(response.data.data);
       } catch (error) {
@@ -44,7 +44,7 @@ function TeacherAttendance() {
       const courseId = e.target.value;
       setSelectedCourseId(courseId);
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/courses/get/${courseId}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_API}/api/courses/get/${courseId}`
       );
       setClasses(response.data.data.classes);
     } catch (error) {
@@ -78,7 +78,7 @@ function TeacherAttendance() {
     try {
       // Send the file for parsing first
       const parseResponse = await axios.post(
-        `https://www.educaiapis.online/mongo_api/api/attendance/upload/${selectedClassId}`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/attendance/upload/${selectedClassId}`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -86,7 +86,7 @@ function TeacherAttendance() {
       if (parseResponse.data.success) {
         formData.append("classId", selectedClassId);
         const uploadResponse = await axios.post(
-          `https://www.educaiapis.online/storage_api/storage/upload/attendance`,
+          `${process.env.REACT_APP_BACKEND_ADDRESS_STORAGE}/storage/upload/attendance`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -113,7 +113,7 @@ function TeacherAttendance() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/attendance/generate/${selectedClassId}`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/attendance/generate/${selectedClassId}`,
         { responseType: "arraybuffer" }
       );
 

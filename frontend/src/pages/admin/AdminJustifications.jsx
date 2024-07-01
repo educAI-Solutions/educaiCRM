@@ -15,7 +15,7 @@ function AdminJustifications() {
   const fetchJustifications = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/justifications/get-all`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/justifications/get-all`
       );
       setJustifications(response.data.data);
     } catch (error) {
@@ -26,7 +26,7 @@ function AdminJustifications() {
   const handleStatusChange = async (justificationId, newState) => {
     try {
       await axios.put(
-        `https://www.educaiapis.online/mongo_api/api/justifications/update/review/${justificationId}`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/justifications/update/review/${justificationId}`,
         {
           state: newState,
         }
@@ -50,7 +50,7 @@ function AdminJustifications() {
       try {
         // Send a POST request to create a new notification
         const notificationResponse = await axios.post(
-          `https://www.educaiapis.online/mongo_api/api/notifications`,
+          `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/notifications`,
           notification
         );
 
@@ -60,7 +60,7 @@ function AdminJustifications() {
             // Get the id of the notification created
             const notificationId = notificationResponse.data.data._id;
             const notificationSentResponse = await axios.post(
-              `https://www.educaiapis.online/notifications_api/notifications`,
+              `${process.env.REACT_APP_BACKEND_ADDRESS_NOTIFICATIONS}/notifications`,
               {
                 id: notificationId,
               }
@@ -99,7 +99,7 @@ function AdminJustifications() {
   const handleDownload = async (justificationId, fileExtension) => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/storage_api/storage/download/justifications/${justificationId}/${fileExtension}`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_STORAGE}/storage/download/justifications/${justificationId}/${fileExtension}`,
         { responseType: "blob" }
       );
 

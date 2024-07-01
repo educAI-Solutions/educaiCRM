@@ -14,7 +14,7 @@ function FileUpload() {
 
     try {
       const response = await axios.post(
-        `https://www.educaiapis.online/storage_api/storage/upload/rules`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_STORAGE}/storage/upload/rules`,
         formData
       );
       console.log(response.data);

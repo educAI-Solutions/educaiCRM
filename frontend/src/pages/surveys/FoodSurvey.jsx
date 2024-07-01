@@ -15,7 +15,7 @@ const FoodSurvey = () => {
 
     try {
       const response = await axios.post(
-        `https://www.educaiapis.online/mongo_api/api/survey/food-survey`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/survey/food-survey`,
         {
           userId,
           classId,

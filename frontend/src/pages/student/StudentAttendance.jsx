@@ -21,7 +21,7 @@ function StudentAttendance() {
   const fetchCoursesAttendance = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/attendance/student/${id}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/attendance/student/${id}`
       );
       setCoursesAttendance(response.data.data);
     } catch (error) {
@@ -32,7 +32,7 @@ function StudentAttendance() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/courses/get/participant/${id}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get/participant/${id}`
       );
       setCourses(response.data.data);
     } catch (error) {
@@ -45,7 +45,7 @@ function StudentAttendance() {
     if (selectedOption) {
       try {
         const response = await axios.get(
-          `https://www.educaiapis.online/mongo_api/api/courses/get/${selectedOption.value}`
+          `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get/${selectedOption.value}`
         );
         setClasses(response.data.data.classes);
       } catch (error) {

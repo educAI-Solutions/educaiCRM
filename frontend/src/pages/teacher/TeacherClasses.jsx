@@ -21,7 +21,7 @@ function TeacherClasses() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/courses/get/instructor/${id}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get/instructor/${id}`
       );
       setCourses(
         response.data.data.map((course) => ({
@@ -39,7 +39,7 @@ function TeacherClasses() {
     if (selectedOption) {
       try {
         const response = await axios.get(
-          `https://www.educaiapis.online/mongo_api/api/courses/get/${selectedOption.value}`
+          `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get/${selectedOption.value}`
         );
         setClasses(response.data.data.classes);
         setQrCodes({});

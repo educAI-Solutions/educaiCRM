@@ -11,7 +11,7 @@ function AdminAttendance() {
 
   const fetchCourses = async () => {
     const response = await axios.get(
-      `https://www.educaiapis.online/mongo_api/api/courses/get-all`
+      `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get-all`
     );
     setCourses(response.data.data);
   };

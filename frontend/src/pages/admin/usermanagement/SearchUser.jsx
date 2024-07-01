@@ -23,7 +23,7 @@ function SearchUser() {
     // Fetch the users from your API here based on the searchTerm and set the users state
     try {
       const response = await axios.get(
-        `https://www.educaiapis.online/mongo_api/api/user/get/${searchTerm}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/user/get/${searchTerm}`
       );
       setUser(response.data.data);
     } catch (error) {
@@ -37,7 +37,7 @@ function SearchUser() {
     try {
       // Make an API call to delete the user
       await axios.delete(
-        `https://www.educaiapis.online/mongo_api/api/auth/delete/${userId}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/auth/delete/${userId}`
       );
 
       // Update the users state by filtering out the deleted user
@@ -54,7 +54,7 @@ function SearchUser() {
     try {
       // Make an API call to update the user role
       await axios.put(
-        `https://www.educaiapis.online/mongo_api/api/auth/updateRole/${editingUser._id}`,
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/auth/updateRole/${editingUser._id}`,
         updatedUser
       );
 
