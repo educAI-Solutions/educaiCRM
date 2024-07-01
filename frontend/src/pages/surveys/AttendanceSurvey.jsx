@@ -29,13 +29,13 @@ const AttendanceSurvey = () => {
     try {
       // Get the user ID from email provided with a GET request to the API
       const response = await axios.get(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/user/get/${email}`
+        `https://www.educaiapis.online/mongo_api/api/user/get/${email}`
       );
       const userId = response.data.data._id;
 
       // Submit the attendance survey
       await axios.post(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/survey/attendance-survey`,
+        `https://www.educaiapis.online/mongo_api/api/survey/attendance-survey`,
         {
           userId,
           classId,

@@ -14,7 +14,7 @@ function RecentUsers() {
     try {
       const fetchUsers = async () => {
         const response = await axios.get(
-          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/user/get-recent`
+          `https://www.educaiapis.online/mongo_api/api/user/get-recent`
         );
         // setUsers with the response data, specifically the accounts key
         setUsers(response.data.data);
@@ -30,7 +30,7 @@ function RecentUsers() {
     try {
       // Make an API call to delete the user
       await axios.delete(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/auth/delete/${userId}`
+        `https://www.educaiapis.online/mongo_api/api/auth/delete/${userId}`
       );
 
       // Update the users state by filtering out the deleted user
@@ -47,7 +47,7 @@ function RecentUsers() {
     try {
       // Make an API call to update the user role
       await axios.put(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/auth/updateRole/${editingUser._id}`,
+        `https://www.educaiapis.online/mongo_api/api/auth/updateRole/${editingUser._id}`,
         updatedUser
       );
 

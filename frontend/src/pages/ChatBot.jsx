@@ -53,7 +53,7 @@ const ChatBot = () => {
     try {
       // Send user's message to the backend API
       const response = await axios.post(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:2020/chat`,
+        `https://www.educaiapis.online/langchain_api/chat`,
         {
           message,
           chat_id,

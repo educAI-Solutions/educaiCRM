@@ -15,7 +15,7 @@ const TeacherSurvey = () => {
 
     try {
       const response = await axios.post(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/survey/teacher-survey`,
+        `https://www.educaiapis.online/mongo_api/api/survey/teacher-survey`,
         {
           userId,
           courseId,

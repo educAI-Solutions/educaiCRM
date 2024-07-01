@@ -42,7 +42,7 @@ function AdminClasses() {
   const fetchClasses = async () => {
     try {
       const response = await axios.get(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/classes/get-all`
+        `https://www.educaiapis.online/mongo_api/api/classes/get-all`
       );
       if (!Array.isArray(response.data.data)) {
         console.error("Error: received non-array response data");
@@ -58,7 +58,7 @@ function AdminClasses() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/courses/get-all`
+        `https://www.educaiapis.online/mongo_api/api/courses/get-all`
       );
       if (Array.isArray(response.data.data)) {
         setCourses(response.data.data);
@@ -87,7 +87,7 @@ function AdminClasses() {
     event.preventDefault();
     try {
       await axios.post(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/classes/create`,
+        `https://www.educaiapis.online/mongo_api/api/classes/create`,
         classForm
       );
       fetchClasses();
@@ -104,13 +104,13 @@ function AdminClasses() {
           ${classForm.name} has been created for the course ${course.name}.`,
         };
         const notificationResponse = await axios.post(
-          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/notifications`,
+          `https://www.educaiapis.online/mongo_api/api/notifications`,
           notification
         );
         try {
           const notificationId = notificationResponse.data.data._id;
           await axios.post(
-            `http://${process.env.REACT_APP_BACKEND_ADDRESS}:9090/notifications`,
+            `https://www.educaiapis.online/notifications_api/notifications`,
             {
               id: notificationId,
             }
@@ -131,7 +131,7 @@ function AdminClasses() {
   const handleDeleteClass = async (classId) => {
     try {
       await axios.delete(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/classes/delete/${classId}`
+        `https://www.educaiapis.online/mongo_api/api/classes/delete/${classId}`
       );
       fetchClasses();
     } catch (error) {

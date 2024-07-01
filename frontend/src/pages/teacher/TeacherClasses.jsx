@@ -4,7 +4,7 @@ import { Table, Button } from "react-bootstrap";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
 import { UserContext } from "../../App";
-import QRCode from 'qrcode.react';
+import QRCode from "qrcode.react";
 
 function TeacherClasses() {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ function TeacherClasses() {
   const fetchCourses = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/courses/get/instructor/${id}`
+        `https://www.educaiapis.online/mongo_api/api/courses/get/instructor/${id}`
       );
       setCourses(
         response.data.data.map((course) => ({
@@ -39,7 +39,7 @@ function TeacherClasses() {
     if (selectedOption) {
       try {
         const response = await axios.get(
-          `http://localhost:5050/api/courses/get/${selectedOption.value}`
+          `https://www.educaiapis.online/mongo_api/api/courses/get/${selectedOption.value}`
         );
         setClasses(response.data.data.classes);
         setQrCodes({});
@@ -66,7 +66,9 @@ function TeacherClasses() {
   const toggleQRCode = (classId) => {
     setQrCodes((prevQrCodes) => ({
       ...prevQrCodes,
-      [classId]: prevQrCodes[classId] ? null : Math.random().toString(36).substring(7),
+      [classId]: prevQrCodes[classId]
+        ? null
+        : Math.random().toString(36).substring(7),
     }));
   };
 
@@ -89,9 +91,7 @@ function TeacherClasses() {
               <th>{t("teacherDashboard.classManagement.date")}</th>
               <th>{t("teacherDashboard.classManagement.time")}</th>
               <th>{t("teacherDashboard.classManagement.actions")}</th>
-              <th>
-                {t("teacherDashboard.classManagement.generatorqr")}
-              </th>
+              <th>{t("teacherDashboard.classManagement.generatorqr")}</th>
             </tr>
           </thead>
           <tbody>
@@ -115,17 +115,23 @@ function TeacherClasses() {
                     {t("teacherDashboard.classManagement.deleteClass")}
                   </Button>
                 </td>
-                <td style={{ textAlign: 'center' }}>
+                <td style={{ textAlign: "center" }}>
                   {qrCodes[cls._id] ? (
                     <>
                       <QRCode value={qrCodes[cls._id]} />
                       <hr />
-                      <Button variant="danger" onClick={() => toggleQRCode(cls._id)}>
+                      <Button
+                        variant="danger"
+                        onClick={() => toggleQRCode(cls._id)}
+                      >
                         {t("teacherDashboard.classManagement.closeQR")}
                       </Button>
                     </>
                   ) : (
-                    <Button variant="primary" onClick={() => toggleQRCode(cls._id)}>
+                    <Button
+                      variant="primary"
+                      onClick={() => toggleQRCode(cls._id)}
+                    >
                       {t("teacherDashboard.classManagement.generateQR")}
                     </Button>
                   )}

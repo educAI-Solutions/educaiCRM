@@ -32,7 +32,7 @@ const ClassSurvey = () => {
     let userId = null;
     try {
       const response = await axios.get(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/user/get/${email}`
+        `https://www.educaiapis.online/mongo_api/api/user/get/${email}`
       );
       // Save the user ID
       userId = response.data.data._id;
@@ -48,7 +48,7 @@ const ClassSurvey = () => {
     try {
       const response_survey = await axios
         .post(
-          `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/survey/class-survey`,
+          `https://www.educaiapis.online/mongo_api/api/survey/class-survey`,
           {
             userId, // make sure userId is defined or retrieved appropriately
             classId,

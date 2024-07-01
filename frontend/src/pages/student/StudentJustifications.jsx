@@ -27,7 +27,7 @@ function StudentJustifications() {
     try {
       // Send a GET request to the API
       const response = await axios.get(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/classes/get/student/${id}`
+        `https://www.educaiapis.online/mongo_api/api/classes/get/student/${id}`
       );
 
       if (response.status === 200) {
@@ -80,7 +80,7 @@ function StudentJustifications() {
     try {
       // Send a POST request to create a new justification and make it wait for the response
       const response = await axios.post(
-        `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/justifications/create`,
+        `https://www.educaiapis.online/mongo_api/api/justifications/create`,
         formData
       );
 
@@ -97,7 +97,7 @@ function StudentJustifications() {
         try {
           // Send a POST request to the storage API
           const storageResponse = await axios.post(
-            `http://${process.env.REACT_APP_BACKEND_ADDRESS}:7070/storage/upload/justifications`,
+            `https://www.educaiapis.online/storage_api/storage/upload/justifications`,
             newFormData,
             {
               headers: {
@@ -123,7 +123,7 @@ function StudentJustifications() {
           try {
             // Send a POST request to create a new notification
             const notificationResponse = await axios.post(
-              `http://${process.env.REACT_APP_BACKEND_ADDRESS}:5050/api/notifications`,
+              `https://www.educaiapis.online/mongo_api/api/notifications`,
               notification
             );
 
@@ -133,7 +133,7 @@ function StudentJustifications() {
                 // Get the id of the notification created
                 const notificationId = notificationResponse.data.data._id;
                 const notificationSentResponse = await axios.post(
-                  `http://${process.env.REACT_APP_BACKEND_ADDRESS}:9090/notifications`,
+                  `https://www.educaiapis.online/notifications_api/notifications`,
                   {
                     id: notificationId,
                   }
