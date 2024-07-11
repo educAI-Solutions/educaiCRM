@@ -211,6 +211,40 @@
       "checkAttendance": "Check Attendance",
       "studentName": "Student Name",
       "attendance": "Attendance"
+    },
+    "adminTeachers": {
+      "title": "Teacher Management",
+      "searchPlaceholder": "Search for a teacher by their Full Name or Username",
+      "searchButton": "Search",
+      "fullName": "Full Name",
+      "username": "Username",
+      "email": "Email",
+      "actions": "Actions",
+      "delete": "Delete",
+      "edit": "Edit"
+    },
+    "adminStudents": {
+      "title": "Admin Students",
+      "searchPlaceholder": "Search",
+      "searchButton": "Search",
+      "fullName": "Full Name",
+      "username": "Username",
+      "email": "Email",
+      "actions": "Actions",
+      "delete": "Delete",
+      "edit": "Edit"
+    },
+    "adminConfiguration": {
+      "title": "Document Management",
+      "uploadLabel": "Upload Document (PDF or DOCX)",
+      "uploadButton": "Upload",
+      "selectFileMessage": "Please select a file to upload.",
+      "unsupportedFormatMessage": "Unsupported file format.",
+      "uploadFailMessage": "Failed to upload file.",
+      "deleteButton": "Delete",
+      "deleteAllButton": "Delete All Documents",
+      "deleteAllFailMessage": "Failed to delete all documents.",
+      "deleteFailMessage": "Failed to delete document."
     }
   },
   "teacherDashboard": {

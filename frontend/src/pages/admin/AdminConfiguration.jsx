@@ -32,7 +32,7 @@ function AdminConfiguration() {
   const handleUpload = async (event) => {
     event.preventDefault();
     if (!selectedFile) {
-      setUploadMessage("Please select a file to upload.");
+      setUploadMessage(t("adminDashboard.adminConfiguration.selectFileMessage"));
       return;
     }
 
@@ -48,7 +48,7 @@ function AdminConfiguration() {
     ) {
       uploadUrl += "/docx";
     } else {
-      setUploadMessage("Unsupported file format.");
+      setUploadMessage(t("adminDashboard.adminConfiguration.unsupportedFormatMessage"));
       return;
     }
 
@@ -63,20 +63,20 @@ function AdminConfiguration() {
       setSelectedFile(null);
     } catch (error) {
       console.error("Error uploading file:", error);
-      setUploadMessage("Failed to upload file.");
+      setUploadMessage(t("adminDashboard.adminConfiguration.uploadFailMessage"));
     }
   };
 
   const handleDeleteAll = async () => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROM}/delete`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/delete`
       );
       setDeleteMessage(response.data.message);
       fetchDocuments();
     } catch (error) {
       console.error("Error deleting all documents:", error);
-      setDeleteMessage("Failed to delete all documents.");
+      setDeleteMessage(t("adminDashboard.adminConfiguration.deleteAllFailMessage"));
     }
   };
 
@@ -89,7 +89,7 @@ function AdminConfiguration() {
       fetchDocuments();
     } catch (error) {
       console.error("Error deleting document:", error);
-      setDeleteMessage("Failed to delete document.");
+      setDeleteMessage(t("adminDashboard.adminConfiguration.deleteFailMessage"));
     }
   };
 
@@ -100,14 +100,14 @@ function AdminConfiguration() {
     >
       <Card style={{ width: "60rem" }} className="shadow">
         <Card.Body>
-          <h2>Document Management</h2>
+          <h2>{t("adminDashboard.adminConfiguration.title")}</h2>
           <Form onSubmit={handleUpload}>
             <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Upload Document (PDF or DOCX)</Form.Label>
+              <Form.Label>{t("adminDashboard.adminConfiguration.uploadLabel")}</Form.Label>
               <Form.Control type="file" onChange={handleFileChange} />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Upload
+              {t("adminDashboard.adminConfiguration.uploadButton")}
             </Button>
           </Form>
 
@@ -125,14 +125,14 @@ function AdminConfiguration() {
                   className="float-end"
                   onClick={() => handleDeleteDocument(doc._id)}
                 >
-                  Delete
+                  {t("adminDashboard.adminConfiguration.deleteButton")}
                 </Button>
               </ListGroup.Item>
             ))}
           </ListGroup>
 
           <Button variant="danger" className="mt-3" onClick={handleDeleteAll}>
-            Delete All Documents
+            {t("adminDashboard.adminConfiguration.deleteAllButton")}
           </Button>
         </Card.Body>
       </Card>

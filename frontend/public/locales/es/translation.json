@@ -202,7 +202,7 @@
       "buttonDownload": "Descargar",
       "tableActions": "Acciones",
       "buttonApprove": "Aprobar",
-      "buttonReject": "Rechazar",
+      "buttonReject": "Rechazar", 
       "buttonQuestion": "Preguntar",
       "buttonPending": "Pendiente"
     },
@@ -219,6 +219,40 @@
       "checkAttendance": "Verificar Asistencia",
       "studentName": "Nombre del Estudiante",
       "attendance": "Asistencia"
+    },
+    "adminTeachers": {
+      "title": "Gestión de Profesores",
+      "searchPlaceholder": "Buscar una justificación por su título o ID",
+      "searchButton": "Buscador",
+      "fullName": "Nombre y Apellido",
+      "username": "Nombre de Usuario",
+      "email": "Correo Electrónico",
+      "actions": "Acciones",
+      "delete": "Borrar",
+      "edit": "Editar Rol"
+    },
+    "adminStudents": {
+      "title": "Gestión de Estudiantes",
+      "searchPlaceholder": "Buscar un estudiante por su nombre o ID",
+      "searchButton": "Buscador",
+      "fullName": "Nombre y Apellido",
+      "username": "Nombre de Usuario",
+      "email": "Correo Electrónico",
+      "actions": "Acciones",
+      "delete": "Borrar",
+      "edit": "Editar Rol"
+    },
+    "adminConfiguration": {
+      "title": "Gestión de Documentos",
+      "uploadLabel": "Subir Documento PDF o DOCS",
+      "uploadButton": "Subir",
+      "selectFileMessage": "Selecciona un archivo PDF o DOCX",
+      "unsupportedFormatMessage": "Formato de archivo no soportado. Por favor, sube un archivo PDF o DOCX.",
+      "uploadFailMessage": "Error al subir el documento. Por favor, inténtalo de nuevo.",
+      "deleteButton": "Eliminar Documento",
+      "deleteAllButton": "Eliminar Todos los Documentos",
+      "deleteAllFailMessage": "Error al eliminar todos los documentos. Por favor, inténtalo de nuevo.",
+      "deleteFailMessage": "Error al eliminar el documento. Por favor, inténtalo de nuevo."
     }
   },
   "teacherDashboard": {

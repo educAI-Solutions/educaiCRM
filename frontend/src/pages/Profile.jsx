@@ -9,7 +9,7 @@ function Profile() {
   return (
     <div
       className="d-flex justify-content-center align-items-center"
-      style={{ height: "90vh" }}
+      style={{ height: "100vh" }}
     >
       <Row className="gx-5">
         <Col>

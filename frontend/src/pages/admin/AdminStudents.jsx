@@ -8,24 +8,27 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const AdminStudents = () => {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <Row className="mb-3">
         <Col>
-          <h1>AdminStudents</h1>
+          <h1>{t("adminDashboard.adminStudents.title")}</h1>
         </Col>
       </Row>
       <Row>
         <Col>
           <InputGroup className="mb-3">
             <FormControl
-              placeholder="Search"
-              aria-label="Search"
+              placeholder={t("adminDashboard.adminStudents.searchPlaceholder")}
+              aria-label={t("adminDashboard.adminStudents.searchPlaceholder")}
               aria-describedby="basic-addon1"
             />
-            <Button variant="outline-secondary">Search</Button>
+            <Button variant="outline-secondary">{t("adminDashboard.adminStudents.searchButton")}</Button>
           </InputGroup>
         </Col>
       </Row>
@@ -34,10 +37,10 @@ const AdminStudents = () => {
           <Table responsive>
             <thead>
               <tr>
-                <th>Full Name</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Actions</th>
+                <th>{t("adminDashboard.adminStudents.fullName")}</th>
+                <th>{t("adminDashboard.adminStudents.username")}</th>
+                <th>{t("adminDashboard.adminStudents.email")}</th>
+                <th>{t("adminDashboard.adminStudents.actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -46,8 +49,8 @@ const AdminStudents = () => {
                 <td>johndoe</td>
                 <td>john@doe.com</td>
                 <td>
-                  <Button variant="danger">Delete</Button>
-                  <Button variant="primary">Edit</Button>
+                  <Button variant="danger">{t("adminDashboard.adminStudents.delete")}</Button>
+                  <Button variant="primary">{t("adminDashboard.adminStudents.edit")}</Button>
                 </td>
               </tr>
               <tr>
@@ -55,8 +58,8 @@ const AdminStudents = () => {
                 <td>janedoe</td>
                 <td>jane@doe.com</td>
                 <td>
-                  <Button variant="danger">Delete</Button>
-                  <Button variant="primary">Edit</Button>
+                  <Button variant="danger">{t("adminDashboard.adminStudents.delete")}</Button>
+                  <Button variant="primary">{t("adminDashboard.adminStudents.edit")}</Button>
                 </td>
               </tr>
             </tbody>
