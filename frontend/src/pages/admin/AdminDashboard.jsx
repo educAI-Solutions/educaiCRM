@@ -11,7 +11,6 @@ import {
   FaCog,
   FaListAlt,
   FaIdBadge,
-  FaUserGraduate,
 } from "react-icons/fa";
 import AdminJustifications from "./AdminJustifications";
 import AdminUsers from "./AdminUsers";
@@ -21,8 +20,7 @@ import AdminAttendance from "./AdminAttendance";
 import AdminClasses from "./AdminClasses";
 import AdminConfiguration from "./AdminConfiguration";
 import AdminPrograms from "./AdminPrograms";
-import AdminTeachers from "./AdminTeachers";
-import AdminStudents from "./AdminStudents";
+import Chatbot from "../ChatBot";
 import Background from "../../img/fondo-biblioteca.jpg";
 
 function AdminDashboard() {
@@ -47,10 +45,8 @@ function AdminDashboard() {
         return <AdminConfiguration />;
       case "programs":
         return <AdminPrograms />;
-      case "teachers":
-        return <AdminTeachers />;
-      case "students":
-        return <AdminStudents />;
+      case "chatbot":
+        return <Chatbot />;
       default:
         return <></>;
     }
@@ -170,24 +166,12 @@ function AdminDashboard() {
         <Col md={3} lg={2}>
           <Card
             className={`mb-2 cardDashboard ${
-              selectedItem === "teachers" ? "bg-primary text-white" : ""
+              selectedItem === "chatbot" ? "bg-primary text-white" : ""
             }`}
-            onClick={() => setSelectedItem("teachers")}
+            onClick={() => setSelectedItem("chatbot")}
           >
             <Card.Body>
-              <FaIdBadge className="m-2" /> {t("adminDashboard.teachers")}
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={3} lg={2}>
-          <Card
-            className={`mb-2 cardDashboard ${
-              selectedItem === "students" ? "bg-primary text-white" : ""
-            }`}
-            onClick={() => setSelectedItem("students")}
-          >
-            <Card.Body>
-              <FaUserGraduate className="m-2" /> {t("adminDashboard.students")}
+              <FaIdBadge className="m-2" /> {t("adminDashboard.chatbot")}
             </Card.Body>
           </Card>
         </Col>

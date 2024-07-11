@@ -153,7 +153,7 @@ function StudentDashboard() {
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} className="mb-2">
           <Card className="text-center shadow mb-3 h-100 cardDashboard">
-            <Link to="/student/faq" className="text-decoration-none text-dark">
+            <Link to="/chat" className="text-decoration-none text-dark">
               <Card.Body>
                 <FaQuestionCircle className="dashboard-icon" />
                 <Card.Title className="mt-3">

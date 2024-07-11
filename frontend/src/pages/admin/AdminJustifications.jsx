@@ -173,43 +173,48 @@ function AdminJustifications() {
                     </Button>
                   </td>
                   <td>
-                    <Button
-                      onClick={() =>
-                        handleStatusChange(justification._id, "approved")
-                      }
-                    >
-                      {t(
-                        "adminDashboard.justificationsManagement.buttonApprove"
-                      )}
-                    </Button>
-                    <Button
-                      onClick={() =>
-                        handleStatusChange(justification._id, "rejected")
-                      }
-                    >
-                      {t(
-                        "adminDashboard.justificationsManagement.buttonReject"
-                      )}
-                    </Button>
-                    <Button
-                      onClick={() =>
-                        handleStatusChange(justification._id, "questioned")
-                      }
-                    >
-                      {t(
-                        "adminDashboard.justificationsManagement.buttonQuestion"
-                      )}
-                    </Button>
-                    <Button
-                      onClick={() =>
-                        handleStatusChange(justification._id, "pending")
-                      }
-                    >
-                      {t(
-                        "adminDashboard.justificationsManagement.buttonPending"
-                      )}
-                    </Button>
+  <Button
+    style={{ marginRight: "2mm" }}
+    onClick={() =>
+      handleStatusChange(justification._id, "approved")
+    }
+  >
+    {t(
+      "adminDashboard.justificationsManagement.buttonApprove"
+    )}
+  </Button>
+  <Button
+    style={{ marginRight: "2mm" }}
+    onClick={() =>
+      handleStatusChange(justification._id, "rejected")
+    }
+  >
+    {t(
+      "adminDashboard.justificationsManagement.buttonReject"
+    )}
+  </Button>
+  <Button
+    style={{ marginRight: "2mm" }}
+    onClick={() =>
+      handleStatusChange(justification._id, "questioned")
+    }
+  >
+    {t(
+      "adminDashboard.justificationsManagement.buttonQuestion"
+    )}
+  </Button>
+  <Button
+    style={{ marginRight: "2mm" }}
+    onClick={() =>
+      handleStatusChange(justification._id, "pending")
+    }
+  >
+    {t(
+      "adminDashboard.justificationsManagement.buttonPending"
+    )}
+  </Button>
                   </td>
+
                 </tr>
               ))}
             </tbody>

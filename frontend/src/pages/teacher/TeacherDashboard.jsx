@@ -133,6 +133,26 @@ function TeacherDashboard() {
             </Card>
           </Col>
         </Row>
+        <Row className="justify-content-center" style={{ marginTop: '10px' }}>
+          <Col xs={12} sm={6} md={4} lg={3}>
+            <Card className="text-center shadow mb-3 h-100 cardDashboard">
+              <Link
+                to="/chat"
+                className="text-decoration-none text-dark"
+              >
+                <Card.Body>
+                  <FaBook className="dashboard-icon" />
+                  <Card.Title className="mt-3">
+                    {t("adminDashboard.chatbot")}
+                  </Card.Title>
+                  <Card.Text>
+                    {t("studentDashboard.faqDescription")}
+                  </Card.Text>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     </div>
   );
