@@ -96,7 +96,7 @@ function AdminConfiguration() {
   return (
     <div
       className="d-flex justify-content-center align-items-center pt-4"
-      style={{ height: "60vh" }}
+      style={{ height: "70vh" }}
     >
       <Card style={{ width: "60rem" }} className="shadow">
         <Card.Body>
