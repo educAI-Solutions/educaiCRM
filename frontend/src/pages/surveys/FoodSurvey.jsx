@@ -5,7 +5,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const FoodSurvey = () => {
-  const { classId, userId } = useParams();
+  const { classId, userId, surveyId } = useParams();
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
 
@@ -20,6 +20,7 @@ const FoodSurvey = () => {
           userId,
           classId,
           surveyData: Object.fromEntries(formData.entries()),
+          surveyId,
         }
       );
       // handle success

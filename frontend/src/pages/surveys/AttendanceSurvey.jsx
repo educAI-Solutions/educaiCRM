@@ -5,7 +5,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AttendanceSurvey = () => {
-  const { classId } = useParams();
+  const { classId, surveyId } = useParams();
   const navigate = useNavigate();
   const [attending, setAttending] = useState(null);
   const [email, setEmail] = useState("");
@@ -40,6 +40,7 @@ const AttendanceSurvey = () => {
           userId,
           classId,
           surveyData: { attending },
+          surveyId,
         }
       );
 

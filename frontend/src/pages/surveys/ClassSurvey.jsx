@@ -5,7 +5,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ClassSurvey = () => {
-  const { classId } = useParams();
+  const { classId, surveyId, foodId } = useParams();
   const navigate = useNavigate();
   const [attending, setAttending] = useState(null);
   const [email, setEmail] = useState("");
@@ -53,6 +53,7 @@ const ClassSurvey = () => {
             userId, // make sure userId is defined or retrieved appropriately
             classId,
             surveyData: Object.fromEntries(formData.entries()),
+            surveyId,
           }
         )
         .then((response) => {
@@ -63,7 +64,7 @@ const ClassSurvey = () => {
               navigate(`/`);
             }, 2000); // Redirect after 2 seconds
           } else if (formData.get("mode") === "in-person") {
-            navigate(`/food-survey/${classId}/${userId}`);
+            navigate(`/food-survey/${classId}/${userId}/${foodId}`);
           }
         })
         .catch((error) => {

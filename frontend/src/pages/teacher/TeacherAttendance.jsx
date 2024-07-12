@@ -44,7 +44,7 @@ function TeacherAttendance() {
       const courseId = e.target.value;
       setSelectedCourseId(courseId);
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_ADDRESS_API}/api/courses/get/${courseId}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/courses/get/${courseId}`
       );
       setClasses(response.data.data.classes);
     } catch (error) {

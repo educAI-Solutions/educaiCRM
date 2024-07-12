@@ -313,7 +313,7 @@ function App() {
               <Route path="*" element={<PageNotFound />} />
 
               <Route
-                path="/teacher-survey/:courseId/:userId"
+                path="/teacher-survey/:courseId/:userId/:surveyId"
                 element={
                   // <ProtectedRoute requiredRole="student">
                   <TeacherSurvey />
@@ -322,7 +322,7 @@ function App() {
               ></Route>
 
               <Route
-                path="/food-survey/:classId/:userId"
+                path="/food-survey/:classId/:userId/:surveyId"
                 element={
                   // <ProtectedRoute requiredRole="student">
                   <FoodSurvey />
@@ -331,7 +331,7 @@ function App() {
               ></Route>
 
               <Route
-                path="/attendance-survey/:classId"
+                path="/attendance-survey/:classId/:surveyId"
                 element={
                   // <ProtectedRoute requiredRole="student">
                   <AttendanceSurvey />
@@ -340,7 +340,7 @@ function App() {
               ></Route>
 
               <Route
-                path="/class-survey/:classId"
+                path="/class-survey/:classId/:surveyId/:foodId"
                 element={
                   // <ProtectedRoute requiredRole="student">
                   <ClassSurvey />
