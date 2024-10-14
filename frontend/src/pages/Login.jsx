@@ -34,10 +34,26 @@ const Login = ({ onLogin }) => {
       // Decoded token brings username, role, iat and exp
       const decodedToken = jwtDecode(token);
       const { username, role, id, exp } = decodedToken;
+
+      const responseProgram = await axios.get(
+        `${process.env.REACT_APP_BACKEND_ADDRESS_MONGO}/api/auth/program/${id}`
+      );
+      
+
+      let programId = null;
+      // get program from response if it exists
+      if (!responseProgram.data.program) {
+        programId = "general";
+      }
+      else {
+        programId = responseProgram.data.program._id;
+      }
+
+      console.log("Program response:", programId);
       // Verify the token and decode it
       setIsSubmitted(true);
       setError("");
-      onLogin(token, username, role, id, exp); // Call onLogin function to update authentication state
+      onLogin(token, username, role, id, exp, programId); // Call onLogin function to update authentication state
       navigate("/"); // Redirect to the home page after successful login
     } catch (error) {
       console.error("Login error:", error);

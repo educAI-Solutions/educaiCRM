@@ -239,6 +239,8 @@
       "uploadLabel": "Upload Document (PDF or DOCX)",
       "uploadButton": "Upload",
       "selectFileMessage": "Please select a file to upload.",
+      "selectProgram": "Select a program",
+      "selectProgramOption": "Select...",
       "unsupportedFormatMessage": "Unsupported file format.",
       "uploadFailMessage": "Failed to upload file.",
       "deleteButton": "Delete",

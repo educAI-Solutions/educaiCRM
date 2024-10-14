@@ -43,16 +43,19 @@ function App() {
   const [role, setRole] = useState("");
   const [id, setId] = useState("");
   const [expDate, setExpDate] = useState("");
+  const [programId, setProgramId] = useState("");
 
   console.log("Address:", process.env.REACT_APP_BACKEND_ADDRESS_MONGO);
 
-  const onLogin = (token, username, role, id, exp) => {
+  const onLogin = (token, username, role, id, exp, programId) => {
     setIsLoggedIn(true);
     setUsername(username);
     setRole(role);
     setExpDate(exp);
     setId(id);
+    setProgramId(programId);
     localStorage.setItem("token", token);
+    localStorage.setItem("programId", programId);
     console.log("Logged in successfully as", username);
   };
 
@@ -61,13 +64,17 @@ function App() {
     setUsername("");
     setRole("");
     setId("");
+    setExpDate("");
+    setProgramId("");
     localStorage.removeItem("token");
+    localStorage.removeItem("programId");
     console.log("Logged out successfully");
   };
 
   // Check if there's a token in local storage
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const programId = localStorage.getItem("programId");
     if (token) {
       const decodedToken = jwtDecode(token);
       const { username, role, id, exp } = decodedToken;
@@ -76,7 +83,7 @@ function App() {
         onLogout();
       } else {
         console.log("Token still valid");
-        onLogin(token, username, role, id, exp);
+        onLogin(token, username, role, id, exp, programId);
       }
     }
   }, []);
@@ -94,7 +101,7 @@ function App() {
 
   return (
     <UserContext.Provider
-      value={{ isLoggedIn, onLogin, onLogout, username, role, id }}
+      value={{ isLoggedIn, onLogin, onLogout, username, role, id, programId }}
     >
       <BrowserRouter>
         <div

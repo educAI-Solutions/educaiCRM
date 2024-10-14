@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   Button,
   Form,
@@ -12,11 +12,14 @@ import {
 import "../chatbot.css"; // Import your CSS file
 import smoothscroll from "smoothscroll-polyfill";
 import axios from "axios";
+import { UserContext } from "../App";
+import { motion } from "framer-motion";
+import { FaPaperPlane } from "react-icons/fa"; // For send button icon
 
 const ChatBot = () => {
   const [message, setMessage] = useState("");
   const [chat_id, setChatId] = useState(null);
-
+  const { id, programId } = useContext(UserContext);
   const [messages, setMessages] = useState([
     { _id: 1, message: "Hello, how can I help you?", sender: "bot" },
   ]);
@@ -38,25 +41,23 @@ const ChatBot = () => {
   };
 
   useEffect(() => {
-    // Clear chatId when component unmounts
     return () => {
       setChatId(null);
     };
-  }, []);
+  }, [id, programId]);
 
   const sendMessage = async () => {
-    // Add the user's message
     const newMessage = { _id: messages.length + 1, message, sender: "user" };
     setMessages([...messages, newMessage]);
     setMessage("");
 
     try {
-      // Send user's message to the backend API
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_ADDRESS_LANGCHAIN}/chat`,
         {
           message,
           chat_id,
+          programId,
         }
       );
       const botReply = {
@@ -65,50 +66,60 @@ const ChatBot = () => {
         sender: "bot",
       };
 
-      // Update chat_id if it's not set
       if (!chat_id) {
         setChatId(response.data.chat_id);
       }
 
-      // Simulate a delay for the bot's response (optional)
       setTimeout(() => {
         setMessages([...messages, newMessage, botReply]);
       }, 300);
     } catch (error) {
       console.error("Error sending message:", error);
-      // Handle error here, display error message, etc.
     }
   };
 
   return (
     <Container className="mt-4">
-      <Card>
-        <Card.Header>ChatBot</Card.Header>
-        <Card.Body className="chat-container">
+      <Card className="shadow-lg rounded">
+        <Card.Header className="bg-primary text-white">ChatBot</Card.Header>
+        <Card.Body className="chat-container" style={{ maxHeight: "500px", overflowY: "auto" }}>
           <div className="message-list-container">
             <ListGroup className="message-list" ref={messageListRef}>
               {messages.map((msg) => (
-                <Alert
+                <motion.div
                   key={msg._id}
-                  variant={msg.sender === "bot" ? "success" : "primary"} // Use Bootstrap variants for colors
-                  className={`message ${
-                    msg.sender === "bot" ? "text-start" : "text-end"
-                  }`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {msg.message}
-                </Alert>
+                  <Alert
+                    variant={msg.sender === "bot" ? "success" : "primary"}
+                    className={`message rounded-pill shadow-sm ${
+                      msg.sender === "bot" ? "text-start" : "text-end"
+                    }`}
+                  >
+                    {msg.message}
+                  </Alert>
+                </motion.div>
               ))}
             </ListGroup>
           </div>
-          <Form className="message-form" onSubmit={handleSubmit}>
-            <InputGroup>
+          <Form className="message-form mt-3" onSubmit={handleSubmit}>
+            <InputGroup className="shadow-sm rounded-pill">
               <FormControl
                 placeholder="Type your message..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                className="border-0"
+                style={{ borderRadius: "30px 0 0 30px" }}
               />
-              <Button variant="primary" onClick={sendMessage}>
-                Send
+              <Button
+                variant="primary"
+                onClick={sendMessage}
+                className="border-0"
+                style={{ borderRadius: "0 30px 30px 0" }}
+              >
+                <FaPaperPlane />
               </Button>
             </InputGroup>
           </Form>

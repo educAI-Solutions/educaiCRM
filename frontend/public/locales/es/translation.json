@@ -247,6 +247,8 @@
       "uploadLabel": "Subir Documento PDF o DOCS",
       "uploadButton": "Subir",
       "selectFileMessage": "Selecciona un archivo PDF o DOCX",
+      "selectProgram": "Selecciona un programa",
+      "selectProgramOption": "Selecciona...",
       "unsupportedFormatMessage": "Formato de archivo no soportado. Por favor, sube un archivo PDF o DOCX.",
       "uploadFailMessage": "Error al subir el documento. Por favor, inténtalo de nuevo.",
       "deleteButton": "Eliminar Documento",

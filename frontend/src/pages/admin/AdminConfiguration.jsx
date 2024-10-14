@@ -9,15 +9,30 @@ function AdminConfiguration() {
   const [uploadMessage, setUploadMessage] = useState("");
   const [deleteMessage, setDeleteMessage] = useState("");
   const [documents, setDocuments] = useState([]);
+  const [programUuid, setProgramUuid] = useState(""); // State to hold selected program_uuid
+  const [programs, setPrograms] = useState([]); // State to hold the list of programs
 
   useEffect(() => {
     fetchDocuments();
-  }, []);
+    fetchPrograms(); // Fetch available programs
+  }, [programUuid]); // Refetch documents when the program_uuid changes
 
-  const fetchDocuments = async () => {
+  const fetchPrograms = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/documents`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/programs`
+      );
+      setPrograms(response.data.programs);
+    } catch (error) {
+      console.error("Error fetching programs:", error);
+    }
+  };
+
+  const fetchDocuments = async () => {
+    if (!programUuid) return; // Ensure a program is selected
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/documents?program_id=${programUuid}`
       );
       setDocuments(response.data.documents);
     } catch (error) {
@@ -31,13 +46,20 @@ function AdminConfiguration() {
 
   const handleUpload = async (event) => {
     event.preventDefault();
-    if (!selectedFile) {
+    if (!selectedFile || !programUuid) {
       setUploadMessage(t("adminDashboard.adminConfiguration.selectFileMessage"));
       return;
     }
 
     const formData = new FormData();
     formData.append("file", selectedFile);
+    formData.append("program_id", programUuid); // Add program_uuid to the form data
+    
+    
+      // Log FormData contents
+    for (let pair of formData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);  // Explicitly log the FormData entries
+    }
 
     let uploadUrl = `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/upload`;
     if (selectedFile.type === "application/pdf") {
@@ -57,6 +79,7 @@ function AdminConfiguration() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+
       });
       setUploadMessage(response.data.message);
       fetchDocuments();
@@ -68,9 +91,10 @@ function AdminConfiguration() {
   };
 
   const handleDeleteAll = async () => {
+    if (!programUuid) return; // Ensure a program is selected
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/delete`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/delete?program_uuid=${programUuid}`
       );
       setDeleteMessage(response.data.message);
       fetchDocuments();
@@ -83,7 +107,7 @@ function AdminConfiguration() {
   const handleDeleteDocument = async (docId) => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/delete/${docId}`
+        `${process.env.REACT_APP_BACKEND_ADDRESS_CHROMA}/delete/${docId}?program_uuid=${programUuid}`
       );
       setDeleteMessage(response.data.message);
       fetchDocuments();
@@ -101,18 +125,35 @@ function AdminConfiguration() {
       <Card style={{ width: "60rem" }} className="shadow">
         <Card.Body>
           <h2>{t("adminDashboard.adminConfiguration.title")}</h2>
+          
+          {/* Dropdown to select program_uuid */}
+          <Form.Group controlId="programSelect" className="mb-3">
+            <Form.Label>{t("adminDashboard.adminConfiguration.selectProgram")}</Form.Label>
+            <Form.Control
+              as="select"
+              value={programUuid}
+              onChange={(e) => setProgramUuid(e.target.value)}
+            >
+              <option value="">{t("adminDashboard.adminConfiguration.selectProgramOption")}</option>
+              {programs.map((program) => (
+                <option key={program.program_id} value={program.program_id}>
+                  {program.program_id} 
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+
           <Form onSubmit={handleUpload}>
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>{t("adminDashboard.adminConfiguration.uploadLabel")}</Form.Label>
               <Form.Control type="file" onChange={handleFileChange} />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" disabled={!programUuid}>
               {t("adminDashboard.adminConfiguration.uploadButton")}
             </Button>
           </Form>
 
           {uploadMessage && <Alert className="mt-3">{uploadMessage}</Alert>}
-
           {deleteMessage && <Alert className="mt-3">{deleteMessage}</Alert>}
 
           <ListGroup className="mt-3">
@@ -131,7 +172,7 @@ function AdminConfiguration() {
             ))}
           </ListGroup>
 
-          <Button variant="danger" className="mt-3" onClick={handleDeleteAll}>
+          <Button variant="danger" className="mt-3" onClick={handleDeleteAll} disabled={!programUuid}>
             {t("adminDashboard.adminConfiguration.deleteAllButton")}
           </Button>
         </Card.Body>
