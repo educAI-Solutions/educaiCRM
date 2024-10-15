@@ -182,7 +182,21 @@
       "averageTeacherRating": "Average Teacher Rating",
       "studentAttendance": "Student Attendance",
       "inPerson": "In Person",
-      "online": "Online"
+      "online": "Online",
+      "conversationTypes": "Conversation Types",
+      "faq": "FAQ",
+      "support": "Support",
+      "other": "Other",
+      "conversationOutcomes": "Conversation Outcomes",
+      "resolved": "Resolved",
+      "unresolved": "Unresolved",
+      "transferredToHuman": "Transferred To Human",
+      "totalConversations": "Total Conversations",
+      "avgResponseTime": "Average Response Time",
+      "userSatisfaction": "User Satisfaction",
+      "satisfied": "Satisfied",
+      "neutral": "Neutral",
+      "dissatisfied": "Dissatisfied"
     },
     "justificationsManagement": {
       "title": "Justification Management",

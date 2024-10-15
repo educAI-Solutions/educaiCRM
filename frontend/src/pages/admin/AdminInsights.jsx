@@ -18,43 +18,41 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 function AdminInsights() {
   const { t } = useTranslation();
 
-  const attendanceData = [
-    { month: t("adminDashboard.insightsManagement.january"), attendance: 65 },
-    { month: t("adminDashboard.insightsManagement.february"), attendance: 59 },
-    { month: t("adminDashboard.insightsManagement.march"), attendance: 80 },
-    { month: t("adminDashboard.insightsManagement.april"), attendance: 81 },
-    { month: t("adminDashboard.insightsManagement.may"), attendance: 56 },
-    { month: t("adminDashboard.insightsManagement.june"), attendance: 55 },
+  // Simulated data for insightsManagement metrics
+  const conversationData = [
+    { month: t("adminDashboard.insightsManagement.january"), conversations: 150 },
+    { month: t("adminDashboard.insightsManagement.february"), conversations: 200 },
+    { month: t("adminDashboard.insightsManagement.march"), conversations: 180 },
+    { month: t("adminDashboard.insightsManagement.april"), conversations: 220 },
+    { month: t("adminDashboard.insightsManagement.may"), conversations: 170 },
+    { month: t("adminDashboard.insightsManagement.june"), conversations: 210 },
   ];
 
-  const justificationData = [
-    { name: t("adminDashboard.insightsManagement.approved"), value: 300 },
-    { name: t("adminDashboard.insightsManagement.pending"), value: 50 },
-    { name: t("adminDashboard.insightsManagement.rejected"), value: 100 },
+  const responseTimeData = [
+    { month: t("adminDashboard.insightsManagement.january"), responseTime: 2.3 },
+    { month: t("adminDashboard.insightsManagement.february"), responseTime: 2.1 },
+    { month: t("adminDashboard.insightsManagement.march"), responseTime: 1.9 },
+    { month: t("adminDashboard.insightsManagement.april"), responseTime: 2.5 },
+    { month: t("adminDashboard.insightsManagement.may"), responseTime: 2.0 },
+    { month: t("adminDashboard.insightsManagement.june"), responseTime: 2.2 },
   ];
 
-  const userData = [
-    { name: t("adminDashboard.insightsManagement.active"), value: 200 },
-    { name: t("adminDashboard.insightsManagement.inactive"), value: 50 },
+  const satisfactionData = [
+    { name: t("adminDashboard.insightsManagement.satisfied"), value: 300 },
+    { name: t("adminDashboard.insightsManagement.neutral"), value: 100 },
+    { name: t("adminDashboard.insightsManagement.dissatisfied"), value: 50 },
   ];
 
-  const surveyData = [
-    { name: t("adminDashboard.insightsManagement.completed"), value: 150 },
-    { name: t("adminDashboard.insightsManagement.notCompleted"), value: 50 },
+  const conversationOutcomeData = [
+    { name: t("adminDashboard.insightsManagement.resolved"), value: 400 },
+    { name: t("adminDashboard.insightsManagement.unresolved"), value: 100 },
+    { name: t("adminDashboard.insightsManagement.transferredToHuman"), value: 50 },
   ];
 
-  const teacherRatingData = [
-    { month: t("adminDashboard.insightsManagement.january"), rating: 4.5 },
-    { month: t("adminDashboard.insightsManagement.february"), rating: 4.6 },
-    { month: t("adminDashboard.insightsManagement.march"), rating: 4.4 },
-    { month: t("adminDashboard.insightsManagement.april"), rating: 4.8 },
-    { month: t("adminDashboard.insightsManagement.may"), rating: 4.7 },
-    { month: t("adminDashboard.insightsManagement.june"), rating: 4.9 },
-  ];
-
-  const inPersonData = [
-    { name: t("adminDashboard.insightsManagement.inPerson"), value: 70 },
-    { name: t("adminDashboard.insightsManagement.online"), value: 30 },
+  const conversationTypeData = [
+    { name: t("adminDashboard.insightsManagement.faq"), value: 250 },
+    { name: t("adminDashboard.insightsManagement.support"), value: 150 },
+    { name: t("adminDashboard.insightsManagement.other"), value: 50 },
   ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -65,18 +63,23 @@ function AdminInsights() {
         {t("adminDashboard.insightsManagement.insights")}
       </h1>
       <Row className="justify-content-around">
+        {/* Total Conversations Over Time */}
         <Col md={6} lg={4} className="mb-3">
           <Card className="shadow-sm h-100">
             <Card.Body>
               <Card.Title className="text-center">
-                {t("adminDashboard.insightsManagement.attendanceOverall")}
+                {t("adminDashboard.insightsManagement.totalConversations")}
               </Card.Title>
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={attendanceData}>
+                <LineChart data={conversationData}>
                   <XAxis dataKey="month" />
                   <YAxis />
                   <CartesianGrid stroke="#ccc" />
-                  <Line type="monotone" dataKey="attendance" stroke="#8884d8" />
+                  <Line
+                    type="monotone"
+                    dataKey="conversations"
+                    stroke="#8884d8"
+                  />
                   <Tooltip />
                   <Legend />
                 </LineChart>
@@ -84,100 +87,24 @@ function AdminInsights() {
             </Card.Body>
           </Card>
         </Col>
-        {/* Add spacing class mb-3 to each column */}
+
+        {/* Response Time Over Time */}
         <Col md={6} lg={4} className="mb-3">
           <Card className="shadow-sm h-100">
             <Card.Body>
               <Card.Title className="text-center">
-                {t("adminDashboard.insightsManagement.justifications")}
+                {t("adminDashboard.insightsManagement.avgResponseTime")}
               </Card.Title>
               <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={justificationData}
-                    dataKey="value"
-                    label={({ name }) => name}
-                  >
-                    {justificationData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={6} lg={4} className="mb-3">
-          <Card className="shadow-sm h-100">
-            <Card.Body>
-              <Card.Title className="text-center">
-                {t("adminDashboard.insightsManagement.users")}
-              </Card.Title>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={userData}
-                    dataKey="value"
-                    label={({ name }) => name}
-                  >
-                    {userData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={6} lg={4} className="mb-3">
-          <Card className="shadow-sm h-100">
-            <Card.Body>
-              <Card.Title className="text-center">
-                {t("adminDashboard.insightsManagement.surveyResults")}
-              </Card.Title>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={surveyData}
-                    dataKey="value"
-                    label={({ name }) => name}
-                  >
-                    {surveyData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={6} lg={4} className="mb-3">
-          <Card className="shadow-sm h-100">
-            <Card.Body>
-              <Card.Title className="text-center">
-                {t("adminDashboard.insightsManagement.averageTeacherRating")}
-              </Card.Title>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={teacherRatingData}>
+                <LineChart data={responseTimeData}>
                   <XAxis dataKey="month" />
                   <YAxis />
                   <CartesianGrid stroke="#ccc" />
-                  <Line type="monotone" dataKey="rating" stroke="#8884d8" />
+                  <Line
+                    type="monotone"
+                    dataKey="responseTime"
+                    stroke="#82ca9d"
+                  />
                   <Tooltip />
                   <Legend />
                 </LineChart>
@@ -185,20 +112,80 @@ function AdminInsights() {
             </Card.Body>
           </Card>
         </Col>
+
+        {/* User Satisfaction */}
         <Col md={6} lg={4} className="mb-3">
           <Card className="shadow-sm h-100">
             <Card.Body>
               <Card.Title className="text-center">
-                {t("adminDashboard.insightsManagement.studentAttendance")}
+                {t("adminDashboard.insightsManagement.userSatisfaction")}
               </Card.Title>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie
-                    data={inPersonData}
+                    data={satisfactionData}
                     dataKey="value"
                     label={({ name }) => name}
                   >
-                    {inPersonData.map((entry, index) => (
+                    {satisfactionData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        {/* Conversation Outcomes */}
+        <Col md={6} lg={4} className="mb-3">
+          <Card className="shadow-sm h-100">
+            <Card.Body>
+              <Card.Title className="text-center">
+                {t("adminDashboard.insightsManagement.conversationOutcomes")}
+              </Card.Title>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={conversationOutcomeData}
+                    dataKey="value"
+                    label={({ name }) => name}
+                  >
+                    {conversationOutcomeData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        {/* Conversation Types */}
+        <Col md={6} lg={4} className="mb-3">
+          <Card className="shadow-sm h-100">
+            <Card.Body>
+              <Card.Title className="text-center">
+                {t("adminDashboard.insightsManagement.conversationTypes")}
+              </Card.Title>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={conversationTypeData}
+                    dataKey="value"
+                    label={({ name }) => name}
+                  >
+                    {conversationTypeData.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
                         fill={COLORS[index % COLORS.length]}

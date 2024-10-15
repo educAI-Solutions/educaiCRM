@@ -190,7 +190,22 @@
       "averageTeacherRating": "Promedio de Evaluación de Profesores",
       "studentAttendance": "Asistencia de Estudiantes",
       "inPerson": "Presencial",
-      "online": "En Línea"
+      "online": "En Línea",
+      "conversationTypes": "Tipos de Conversación",
+      "faq": "FAQ",
+      "support": "Soporte",
+      "other": "Otro",
+      "conversationOutcomes": "Resultados Conversación ",
+      "resolved": "Resuelto",
+      "unresolved": "No Resuelto",
+      "transferredToHuman": "Transferido a un Humano",
+      "totalConversations": "Total de Conversaciones",
+      "avgResponseTime": "Tiempo de Respuesta Promedio",
+      "userSatisfaction": "Satisfacción de Usuario",
+      "satisfied": "Satisfecho",
+      "neutral": "Neutral",
+      "dissatisfied": "Insatisfecho"
+
     },
     "justificationsManagement": {
       "title": "Gestión de Justificaciones",
