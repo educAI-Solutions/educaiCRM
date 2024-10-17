@@ -135,11 +135,19 @@ function AdminConfiguration() {
               onChange={(e) => setProgramUuid(e.target.value)}
             >
               <option value="">{t("adminDashboard.adminConfiguration.selectProgramOption")}</option>
-              {programs.map((program) => (
-                <option key={program.program_id} value={program.program_id}>
-                  {program.program_id} 
-                </option>
-              ))}
+              {programs.map((program) => {
+                let displayName = program.program_id;
+                if (program.program_id === "670d483876af9aeb23a6c94c") {
+                  displayName = "Magister IA";
+                } else if (program.program_id === "670d485a76af9aeb23a6c951") {
+                  displayName = "Diplomado DMCA";
+                }
+                return (
+                  <option key={program.program_id} value={program.program_id}>
+                    {displayName}
+                  </option>
+                );
+              })}
             </Form.Control>
           </Form.Group>
 
